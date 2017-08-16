@@ -33,12 +33,12 @@ logging {
         category <string> { <string>; ... }; // may occur multiple times
         channel <string> {
                 buffered <boolean>;
-                file <quoted_string> [ versions ( "unlimited" | <integer> )
-                    ] [ size <size> ];
+                file <quoted_string> [ versions ( unlimited | <integer> ) ]
+                    [ size <size> ] [ suffix ( increment | timestamp ) ];
                 null;
                 print-category <boolean>;
                 print-severity <boolean>;
-                print-time <boolean>;
+                print-time ( iso8601 | iso8601-utc | local | <boolean> );
                 severity <log_severity>;
                 stderr;
                 syslog [ <syslog_facility> ];
@@ -64,10 +64,10 @@ masters <string> [ port <integer> ] [ dscp
     <integer> ] ) [ key <string> ]; ... }; // may occur multiple times
 
 options {
-        acache-cleaning-interval <integer>;
-        acache-enable <boolean>;
-        additional-from-auth <boolean>;
-        additional-from-cache <boolean>;
+        acache-cleaning-interval <integer>; // obsolete
+        acache-enable <boolean>; // obsolete
+        additional-from-auth <boolean>; // obsolete
+        additional-from-cache <boolean>; // obsolete
         allow-new-zones <boolean>;
         allow-notify { <address_match_element>; ... };
         allow-query { <address_match_element>; ... };
@@ -153,7 +153,10 @@ options {
             resolver ) [ ( query | response ) ]; ... }; // not configured
         dnstap-identity ( <quoted_string> | none |
             hostname ); // not configured
-        dnstap-output ( file | unix ) <quoted_string>; // not configured
+        dnstap-output ( file | unix ) <quoted_string> [
+            size ( unlimited | <size> ) ] [ versions (
+            unlimited | <integer> ) ] [ suffix ( increment
+            | timestamp ) ]; // not configured
         dnstap-version ( <quoted_string> | none ); // not configured
         dscp <integer>;
         dual-stack-servers [ port <integer> ] { ( <quoted_string> [ port
@@ -186,7 +189,8 @@ options {
         fstrm-set-output-queue-size <integer>; // not configured
         fstrm-set-reopen-interval <integer>; // not configured
         geoip-directory ( <quoted_string> | none ); // not configured
-        geoip-use-ecs ( <quoted_string> | none ); // not configured
+        geoip-use-ecs <boolean>; // not configured
+        glue-cache <boolean>;
         has-old-clients <boolean>; // obsolete
         heartbeat-interval <integer>;
         host-statistics <boolean>; // not implemented
@@ -211,12 +215,20 @@ options {
         masterfile-format ( map | raw | text );
         masterfile-style ( full | relative );
         match-mapped-addresses <boolean>;
+<<<<<<< HEAD
         max-acache-size ( unlimited | <sizeval> );
+=======
+        max-acache-size ( unlimited | <sizeval> ); // obsolete
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         max-cache-size ( default | unlimited | <sizeval> | <percentage> );
         max-cache-ttl <integer>;
         max-clients-per-query <integer>;
         max-ixfr-log-size ( default | unlimited | <sizeval> ); // obsolete
+<<<<<<< HEAD
         max-journal-size ( unlimited | <sizeval> );
+=======
+        max-journal-size ( default | unlimited | <sizeval> );
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         max-ncache-ttl <integer>;
         max-records <integer>;
         max-recursion-depth <integer>;
@@ -241,6 +253,7 @@ options {
         multi-master <boolean>;
         multiple-cnames <boolean>; // obsolete
         named-xfer <quoted_string>; // obsolete
+        new-zones-directory <quoted_string>;
         no-case-compress { <address_match_element>; ... };
         nocookie-udp-size <integer>;
         nosit-udp-size <integer>; // obsolete
@@ -298,11 +311,21 @@ options {
         require-server-cookie <boolean>;
         reserved-sockets <integer>;
         resolver-query-timeout <integer>;
+        response-padding { <address_match_element>; ... } block-size
+            <integer>;
         response-policy { zone <quoted_string> [ log <boolean> ] [
+<<<<<<< HEAD
             max-policy-ttl <integer> ] [ policy ( cname | disabled | drop |
             given | no-op | nodata | nxdomain | passthru | tcp-only
             <quoted_string> ) ] [ recursive-only <boolean> ]; ... } [
             break-dnssec <boolean> ] [ max-policy-ttl <integer> ] [
+=======
+            max-policy-ttl <integer> ] [ min-update-interval <integer> ] [
+            policy ( cname | disabled | drop | given | no-op | nodata |
+            nxdomain | passthru | tcp-only <quoted_string> ) ] [
+            recursive-only <boolean> ]; ... } [ break-dnssec <boolean> ] [
+            max-policy-ttl <integer> ] [ min-update-interval <integer> ] [
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             min-ns-dots <integer> ] [ nsip-wait-recurse <boolean> ] [
             qname-wait-recurse <boolean> ] [ recursive-only <boolean> ];
         rfc2308-type1 <boolean>; // not yet implemented
@@ -330,7 +353,11 @@ options {
         statistics-file <quoted_string>;
         statistics-interval <integer>; // not yet implemented
         suppress-initial-notify <boolean>; // not yet implemented
+        tcp-advertised-timeout <integer>;
         tcp-clients <integer>;
+        tcp-idle-timeout <integer>;
+        tcp-initial-timeout <integer>;
+        tcp-keepalive-timeout <integer>;
         tcp-listen-queue <integer>;
         tkey-dhkey <quoted_string> <integer>;
         tkey-domain <quoted_string>;
@@ -374,6 +401,7 @@ server <netprefix> {
             dscp <integer> ];
         notify-source-v6 ( <ipv6_address> | * ) [ port ( <integer> | * ) ]
             [ dscp <integer> ];
+        padding <integer>;
         provide-ixfr <boolean>;
         query-source ( ( [ address ] ( <ipv4_address> | * ) [ port (
             <integer> | * ) ] ) | ( [ [ address ] ( <ipv4_address> | * ) ]
@@ -387,6 +415,7 @@ server <netprefix> {
         request-sit <boolean>; // obsolete
         send-cookie <boolean>;
         support-ixfr <boolean>; // obsolete
+        tcp-keepalive <boolean>;
         tcp-only <boolean>;
         transfer-format ( many-answers | one-answer );
         transfer-source ( <ipv4_address> | * ) [ port ( <integer> | * ) ] [
@@ -407,10 +436,10 @@ trusted-keys { <string> <integer> <integer>
     <integer> <quoted_string>; ... }; // may occur multiple times
 
 view <string> [ <class> ] {
-        acache-cleaning-interval <integer>;
-        acache-enable <boolean>;
-        additional-from-auth <boolean>;
-        additional-from-cache <boolean>;
+        acache-cleaning-interval <integer>; // obsolete
+        acache-enable <boolean>; // obsolete
+        additional-from-auth <boolean>; // obsolete
+        additional-from-cache <boolean>; // obsolete
         allow-new-zones <boolean>;
         allow-notify { <address_match_element>; ... };
         allow-query { <address_match_element>; ... };
@@ -507,6 +536,7 @@ view <string> [ <class> ] {
         forward ( first | only );
         forwarders [ port <integer> ] [ dscp <integer> ] { ( <ipv4_address>
             | <ipv6_address> ) [ port <integer> ] [ dscp <integer> ]; ... };
+        glue-cache <boolean>;
         inline-signing <boolean>;
         ixfr-from-differences ( master | slave | <boolean> );
         key <string> {
@@ -525,12 +555,20 @@ view <string> [ <class> ] {
         match-clients { <address_match_element>; ... };
         match-destinations { <address_match_element>; ... };
         match-recursive-only <boolean>;
+<<<<<<< HEAD
         max-acache-size ( unlimited | <sizeval> );
+=======
+        max-acache-size ( unlimited | <sizeval> ); // obsolete
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         max-cache-size ( default | unlimited | <sizeval> | <percentage> );
         max-cache-ttl <integer>;
         max-clients-per-query <integer>;
         max-ixfr-log-size ( default | unlimited | <sizeval> ); // obsolete
+<<<<<<< HEAD
         max-journal-size ( unlimited | <sizeval> );
+=======
+        max-journal-size ( default | unlimited | <sizeval> );
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         max-ncache-ttl <integer>;
         max-records <integer>;
         max-recursion-depth <integer>;
@@ -550,6 +588,7 @@ view <string> [ <class> ] {
         minimal-any <boolean>;
         minimal-responses ( no-auth | no-auth-recursive | <boolean> );
         multi-master <boolean>;
+        new-zones-directory <quoted_string>;
         no-case-compress { <address_match_element>; ... };
         nocookie-udp-size <integer>;
         nosit-udp-size <integer>; // obsolete
@@ -599,11 +638,21 @@ view <string> [ <class> ] {
         request-sit <boolean>; // obsolete
         require-server-cookie <boolean>;
         resolver-query-timeout <integer>;
+        response-padding { <address_match_element>; ... } block-size
+            <integer>;
         response-policy { zone <quoted_string> [ log <boolean> ] [
+<<<<<<< HEAD
             max-policy-ttl <integer> ] [ policy ( cname | disabled | drop |
             given | no-op | nodata | nxdomain | passthru | tcp-only
             <quoted_string> ) ] [ recursive-only <boolean> ]; ... } [
             break-dnssec <boolean> ] [ max-policy-ttl <integer> ] [
+=======
+            max-policy-ttl <integer> ] [ min-update-interval <integer> ] [
+            policy ( cname | disabled | drop | given | no-op | nodata |
+            nxdomain | passthru | tcp-only <quoted_string> ) ] [
+            recursive-only <boolean> ]; ... } [ break-dnssec <boolean> ] [
+            max-policy-ttl <integer> ] [ min-update-interval <integer> ] [
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             min-ns-dots <integer> ] [ nsip-wait-recurse <boolean> ] [
             qname-wait-recurse <boolean> ] [ recursive-only <boolean> ];
         rfc2308-type1 <boolean>; // not yet implemented
@@ -623,6 +672,7 @@ view <string> [ <class> ] {
                     ) ] [ dscp <integer> ];
                 notify-source-v6 ( <ipv6_address> | * ) [ port ( <integer>
                     | * ) ] [ dscp <integer> ];
+                padding <integer>;
                 provide-ixfr <boolean>;
                 query-source ( ( [ address ] ( <ipv4_address> | * ) [ port
                     ( <integer> | * ) ] ) | ( [ [ address ] (
@@ -638,6 +688,7 @@ view <string> [ <class> ] {
                 request-sit <boolean>; // obsolete
                 send-cookie <boolean>;
                 support-ixfr <boolean>; // obsolete
+                tcp-keepalive <boolean>;
                 tcp-only <boolean>;
                 transfer-format ( many-answers | one-answer );
                 transfer-source ( <ipv4_address> | * ) [ port ( <integer> |
@@ -724,7 +775,11 @@ view <string> [ <class> ] {
                     port <integer> ] ) [ key <string> ]; ... };
                 max-ixfr-log-size ( default | unlimited |
                     <sizeval> ); // obsolete
+<<<<<<< HEAD
                 max-journal-size ( unlimited | <sizeval> );
+=======
+                max-journal-size ( default | unlimited | <sizeval> );
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                 max-records <integer>;
                 max-refresh-time <integer>;
                 max-retry-time <integer>;
@@ -828,7 +883,11 @@ zone <string> [ <class> ] {
             <ipv4_address> [ port <integer> ] | <ipv6_address> [ port
             <integer> ] ) [ key <string> ]; ... };
         max-ixfr-log-size ( default | unlimited | <sizeval> ); // obsolete
+<<<<<<< HEAD
         max-journal-size ( unlimited | <sizeval> );
+=======
+        max-journal-size ( default | unlimited | <sizeval> );
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         max-records <integer>;
         max-refresh-time <integer>;
         max-retry-time <integer>;

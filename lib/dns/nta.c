@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2014-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -298,7 +298,9 @@ settimer(dns_ntatable_t *ntatable, dns_nta_t *nta, isc_uint32_t lifetime) {
 }
 
 static isc_result_t
-nta_create(dns_ntatable_t *ntatable, dns_name_t *name, dns_nta_t **target) {
+nta_create(dns_ntatable_t *ntatable, const dns_name_t *name,
+	   dns_nta_t **target)
+{
 	isc_result_t result;
 	dns_nta_t *nta = NULL;
 	dns_view_t *view;
@@ -336,7 +338,7 @@ nta_create(dns_ntatable_t *ntatable, dns_name_t *name, dns_nta_t **target) {
 }
 
 isc_result_t
-dns_ntatable_add(dns_ntatable_t *ntatable, dns_name_t *name,
+dns_ntatable_add(dns_ntatable_t *ntatable, const dns_name_t *name,
 		 isc_boolean_t force, isc_stdtime_t now,
 		 isc_uint32_t lifetime)
 {
@@ -391,7 +393,7 @@ dns_ntatable_add(dns_ntatable_t *ntatable, dns_name_t *name,
  * Caller must hold a write lock on rwlock.
  */
 static isc_result_t
-delete(dns_ntatable_t *ntatable, dns_name_t *name) {
+deletenode(dns_ntatable_t *ntatable, const dns_name_t *name) {
 	isc_result_t result;
 	dns_rbtnode_t *node = NULL;
 
@@ -413,11 +415,11 @@ delete(dns_ntatable_t *ntatable, dns_name_t *name) {
 }
 
 isc_result_t
-dns_ntatable_delete(dns_ntatable_t *ntatable, dns_name_t *name) {
+dns_ntatable_delete(dns_ntatable_t *ntatable, const dns_name_t *name) {
 	isc_result_t result;
 
 	RWLOCK(&ntatable->rwlock, isc_rwlocktype_write);
-	result = delete(ntatable, name);
+	result = deletenode(ntatable, name);
 	RWUNLOCK(&ntatable->rwlock, isc_rwlocktype_write);
 
 	return (result);
@@ -425,7 +427,7 @@ dns_ntatable_delete(dns_ntatable_t *ntatable, dns_name_t *name) {
 
 isc_boolean_t
 dns_ntatable_covered(dns_ntatable_t *ntatable, isc_stdtime_t now,
-		     dns_name_t *name, dns_name_t *anchor)
+		     const dns_name_t *name, const dns_name_t *anchor)
 {
 	isc_result_t result;
 	dns_fixedname_t fn;
@@ -481,7 +483,7 @@ dns_ntatable_covered(dns_ntatable_t *ntatable, isc_stdtime_t now,
 			isc_timer_detach(&nta->timer);
 		}
 
-		result = delete(ntatable, foundname);
+		result = deletenode(ntatable, foundname);
 		if (result != ISC_R_SUCCESS) {
 			isc_log_write(dns_lctx, DNS_LOGCATEGORY_DNSSEC,
 				      DNS_LOGMODULE_NTA, ISC_LOG_INFO,

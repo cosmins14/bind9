@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2003-2007, 2009, 2011-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2001, 2003-2007, 2009, 2011-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -71,7 +71,7 @@ LIBDNS_EXTERNAL_DATA isc_logmodule_t dns_modules[] = {
 	{ "dns/sdb",		0 },
 	{ "dns/diff",		0 },
 	{ "dns/hints",		0 },
-	{ "dns/acache",		0 },
+	{ "dns/unused1",	0 },
 	{ "dns/dlz",		0 },
 	{ "dns/dnssec",		0 },
 	{ "dns/crypto",		0 },

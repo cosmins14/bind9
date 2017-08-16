@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001-2007, 2009-2012, 2014-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2001-2007, 2009-2012, 2014-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -65,6 +65,10 @@
 #define NS_COMMAND_MKEYS	"managed-keys"
 #define NS_COMMAND_DNSTAPREOPEN	"dnstap-reopen"
 #define NS_COMMAND_DNSTAP	"dnstap"
+<<<<<<< HEAD
+=======
+#define NS_COMMAND_TCPTIMEOUTS	"tcp-timeouts"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 isc_result_t
 ns_controls_create(ns_server_t *server, ns_controls_t **ctrlsp);

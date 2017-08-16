@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009, 2011-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2009, 2011-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -60,6 +60,7 @@
 #include <isc/queue.h>
 
 #include <dns/db.h>
+#include <dns/ecs.h>
 #include <dns/fixedname.h>
 #include <dns/name.h>
 #include <dns/rdataclass.h>
@@ -135,9 +136,7 @@ struct ns_client {
 	isc_boolean_t		peeraddr_valid;
 	isc_netaddr_t		destaddr;
 
-	isc_netaddr_t		ecs_addr;	/*%< EDNS client subnet */
-	isc_uint8_t		ecs_addrlen;
-	isc_uint8_t		ecs_scope;
+	dns_ecs_t		ecs;   /*%< EDNS client subnet sent by client */
 
 	struct in6_pktinfo	pktinfo;
 	isc_dscp_t		dscp;
@@ -187,8 +186,10 @@ typedef ISC_LIST(ns_client_t) client_list_t;
 #define NS_CLIENTATTR_HAVEEXPIRE	0x1000 /*%< return seconds to expire */
 #define NS_CLIENTATTR_WANTOPT		0x2000 /*%< add opt to reply */
 #define NS_CLIENTATTR_HAVEECS		0x4000 /*%< received an ECS option */
+#define NS_CLIENTATTR_WANTPAD		0x8000 /*%< pad reply */
+#define NS_CLIENTATTR_USEKEEPALIVE    0x10000 /*%< use TCP keepalive */
 
-#define NS_CLIENTATTR_NOSETFC		0x8000 /*%< don't set servfail cache */
+#define NS_CLIENTATTR_NOSETFC	       0x20000 /*%< don't set servfail cache */
 
 /*
  * Flag to use with the SERVFAIL cache to indicate
@@ -361,7 +362,7 @@ ns_client_logv(ns_client_t *client, isc_logcategory_t *category,
 	       isc_logmodule_t *module, int level, const char *fmt, va_list ap) ISC_FORMAT_PRINTF(5, 0);
 
 void
-ns_client_aclmsg(const char *msg, dns_name_t *name, dns_rdatatype_t type,
+ns_client_aclmsg(const char *msg, const dns_name_t *name, dns_rdatatype_t type,
 		 dns_rdataclass_t rdclass, char *buf, size_t len);
 
 #define NS_CLIENT_ACLMSGSIZE(x) \
@@ -394,7 +395,7 @@ ns_client_qnamereplace(ns_client_t *client, dns_name_t *name);
 
 isc_boolean_t
 ns_client_isself(dns_view_t *myview, dns_tsigkey_t *mykey,
-		 isc_sockaddr_t *srcaddr, isc_sockaddr_t *destaddr,
+		 const isc_sockaddr_t *srcaddr, const isc_sockaddr_t *destaddr,
 		 dns_rdataclass_t rdclass, void *arg);
 /*%
  * Isself callback.

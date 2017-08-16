@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1998-2001, 2003-2005, 2007, 2009, 2011, 2012, 2015, 2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1998-2001, 2003-2005, 2007, 2009, 2011, 2012, 2015-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -50,6 +50,24 @@ isc__rwlock_lock(isc_rwlock_t *rwl, isc_rwlocktype_t type);
 
 static void
 print_lock(const char *operation, isc_rwlock_t *rwl, isc_rwlocktype_t type) {
+#if defined(ISC_PLATFORM_HAVEXADD) && defined(ISC_PLATFORM_HAVECMPXCHG)
+	fprintf(stderr,
+		isc_msgcat_get(isc_msgcat, ISC_MSGSET_RWLOCK,
+			       ISC_MSG_PRINTLOCK2,
+			       "rwlock %p thread %lu %s(%s): "
+			       "write_requests=%u, write_completions=%u, "
+			       "cnt_and_flag=0x%x, readers_waiting=%u, "
+			       "write_granted=%u, write_quota=%u\n"),
+		rwl, isc_thread_self(), operation,
+		(type == isc_rwlocktype_read ?
+		 isc_msgcat_get(isc_msgcat, ISC_MSGSET_RWLOCK,
+				ISC_MSG_READ, "read") :
+		 isc_msgcat_get(isc_msgcat, ISC_MSGSET_RWLOCK,
+				ISC_MSG_WRITE, "write")),
+		rwl->write_requests, rwl->write_completions,
+		rwl->cnt_and_flag, rwl->readers_waiting,
+		rwl->write_granted, rwl->write_quota);
+#else
 	fprintf(stderr,
 		isc_msgcat_get(isc_msgcat, ISC_MSGSET_RWLOCK,
 			       ISC_MSG_PRINTLOCK,
@@ -66,10 +84,11 @@ print_lock(const char *operation, isc_rwlock_t *rwl, isc_rwlocktype_t type) {
 				ISC_MSG_READING, "reading") :
 		 isc_msgcat_get(isc_msgcat, ISC_MSGSET_RWLOCK,
 				ISC_MSG_WRITING, "writing")),
-		rwl->active, rwl->granted, rwl->readers_waiting,
-		rwl->writers_waiting);
-}
+		rwl->active, rwl->granted,
+		rwl->readers_waiting, rwl->writers_waiting);
 #endif
+}
+#endif /* ISC_RWLOCK_TRACE */
 
 isc_result_t
 isc_rwlock_init(isc_rwlock_t *rwl, unsigned int read_quota,

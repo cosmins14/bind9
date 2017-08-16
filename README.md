@@ -12,7 +12,11 @@
 1. [Introduction](#intro)
 1. [Reporting bugs and getting help](#help)
 1. [Contributing to BIND](#contrib)
+<<<<<<< HEAD
 1. [BIND 9.11 features](#features)
+=======
+1. [BIND 9.12 features](#features)
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 1. [Building BIND](#build)
 1. [Compile-time options](#opts)
 1. [Automated testing](#testing)
@@ -101,6 +105,7 @@ If your patch introduces a new feature in BIND, please submit it to
 [bind-suggest@isc.org](mailto:bind-suggest@isc.org); if it fixes a bug,
 please submit it to [bind9-bugs@isc.org](mailto:bind9-bugs@isc.org).
 
+<<<<<<< HEAD
 ### <a name="features"/> BIND 9.11 features
 
 BIND 9.11.0 includes a number of changes from BIND 9.10 and earlier
@@ -240,6 +245,26 @@ BIND 9.11.2 is a maintenance release, and addresses the security flaws
 disclosed in CVE-2017-3140, CVE-2017-3141, CVE-2017-3142 and CVE-2017-3143.
 It also addresses several bugs related to the use of an LMDB database to
 store data related to zones added via `rndc addzone` or catalog zones.
+=======
+### <a name="features"/> BIND 9.12 features
+
+BIND 9.12.0 is the newest development branch of BIND 9. It includes a
+number of changes from BIND 9.11 and earlier releases.  New features
+include:
+
+* `dnstap-read -x` prints a hex dump of the wire format of each logged
+  DNS message.
+* The query handling code has been substantially refactored for improved
+  readability, maintainability and testability .
+* `dnstap` output files can now be configured to roll automatically when
+  reaching a given size.
+* Log file timestamps can now also be formatted in ISO 8601 (local) or ISO
+  8601 (UTC) formats.
+* Logging channels and `dnstap` output files can now be configured to use a
+  timestamp as the suffix when rolling to a new file.
+* `named-checkconf -l` lists zones found in `named.conf`.
+* Added support for the EDNS Padding and Keepalive options.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 ### <a name="build"/> Building BIND
 

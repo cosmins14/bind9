@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1998-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1998-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -132,6 +132,8 @@
 	{ DNS_KEYALG_ECCGOST, "ECCGOST", 0 }, \
 	{ DNS_KEYALG_ECDSA256, "ECDSAP256SHA256", 0 }, \
 	{ DNS_KEYALG_ECDSA384, "ECDSAP384SHA384", 0 }, \
+	{ DNS_KEYALG_ED25519, "ED25519", 0 }, \
+	{ DNS_KEYALG_ED448, "ED448", 0 }, \
 	{ DNS_KEYALG_INDIRECT, "INDIRECT", 0 }, \
 	{ DNS_KEYALG_PRIVATEDNS, "PRIVATEDNS", 0 }, \
 	{ DNS_KEYALG_PRIVATEOID, "PRIVATEOID", 0 }, \

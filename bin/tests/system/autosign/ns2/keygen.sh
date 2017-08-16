@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# Copyright (C) 2009-2012, 2014-2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2009-2012, 2014-2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31,9 +31,19 @@ $DSFROMKEY $kskname.key > dsset-${zone}$TP
 zone=private.secure.example
 zonefile="${zone}.db"
 infile="${zonefile}.in"
-cp $infile $zonefile
-$KEYGEN -3 -q -r $RANDFILE -fk $zone > /dev/null
+ksk=`$KEYGEN -3 -q -r $RANDFILE -fk $zone`
 $KEYGEN -3 -q -r $RANDFILE $zone > /dev/null
+cat $ksk.key | grep -v '^; ' | $PERL -n -e '
+local ($dn, $class, $type, $flags, $proto, $alg, @rest) = split;
+local $key = join("", @rest);
+print <<EOF
+trusted-keys {
+    "$dn" $flags $proto $alg "$key";
+};
+EOF
+' > private.conf
+cp private.conf ../ns4/private.conf
+$SIGNER -S -3 beef -A -o $zone -f $zonefile $infile > /dev/null 2>&1
 
 # Extract saved keys for the revoke-to-duplicate-key test
 zone=bar

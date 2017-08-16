@@ -48,7 +48,11 @@
   <refsynopsisdiv>
     <cmdsynopsis sepchar=" ">
       <command>named-checkconf</command>
+<<<<<<< HEAD
       <arg choice="opt" rep="norepeat"><option>-hjvz</option></arg>
+=======
+      <arg choice="opt" rep="norepeat"><option>-hjlvz</option></arg>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
       <arg choice="opt" rep="norepeat"><option>-p</option>
 	<arg choice="opt" rep="norepeat"><option>-x</option>
       </arg></arg>
@@ -100,9 +104,31 @@
       </varlistentry>
 
       <varlistentry>
+<<<<<<< HEAD
         <term>-p</term>
         <listitem>
           <para>
+	    Print out the <filename>named.conf</filename> and included files
+	    in canonical form if no errors were detected.
+            See also the <option>-x</option> option.
+=======
+        <term>-l</term>
+        <listitem>
+          <para>
+            List all the configured zones. Each line of output
+            contains the zone name, class (e.g. IN), view, and type
+            (e.g. master or slave).
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>-t <replaceable class="parameter">directory</replaceable></term>
+        <listitem>
+          <para>
+<<<<<<< HEAD
+=======
 	    Print out the <filename>named.conf</filename> and included files
 	    in canonical form if no errors were detected.
             See also the <option>-x</option> option.
@@ -114,6 +140,7 @@
         <term>-t <replaceable class="parameter">directory</replaceable></term>
         <listitem>
           <para>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             Chroot to <filename>directory</filename> so that include
             directives in the configuration file are processed as if
             run by a similarly chrooted <command>named</command>.

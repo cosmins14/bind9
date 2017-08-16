@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl -w
 #
-# Copyright (C) 1998-2001, 2003-2007, 2009-2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 1998-2001, 2003-2007, 2009-2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -113,6 +113,8 @@ while (<CHANGES>) {
 	    $file_types{$_} = "X";
 	} elsif ($base =~ /\.bat$/i) {
 	    $file_types{$_} = "BAT";
+	} elsif ($base =~ /\.(key|private)$/i) {
+	    $file_types{$_} = "X";
 	} elsif ($base =~ /\/named\.args$/i) {
 	    $file_types{$_} = "X";
 	} elsif ($base =~ /\/named\.port$/i) {

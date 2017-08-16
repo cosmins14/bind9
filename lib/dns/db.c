@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2003-2005, 2007-2009, 2011-2013, 2015, 2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2001, 2003-2005, 2007-2009, 2011-2013, 2015-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -101,7 +101,7 @@ impfind(const char *name) {
  ***/
 
 isc_result_t
-dns_db_create(isc_mem_t *mctx, const char *db_type, dns_name_t *origin,
+dns_db_create(isc_mem_t *mctx, const char *db_type, const dns_name_t *origin,
 	      dns_dbtype_t type, dns_rdataclass_t rdclass,
 	      unsigned int argc, char *argv[], dns_db_t **dbp)
 {
@@ -469,7 +469,7 @@ dns_db_closeversion(dns_db_t *db, dns_dbversion_t **versionp,
  ***/
 
 isc_result_t
-dns_db_findnode(dns_db_t *db, dns_name_t *name,
+dns_db_findnode(dns_db_t *db, const dns_name_t *name,
 		isc_boolean_t create, dns_dbnode_t **nodep)
 {
 
@@ -488,7 +488,7 @@ dns_db_findnode(dns_db_t *db, dns_name_t *name,
 }
 
 isc_result_t
-dns_db_findnodeext(dns_db_t *db, dns_name_t *name,
+dns_db_findnodeext(dns_db_t *db, const dns_name_t *name,
 		   isc_boolean_t create, dns_clientinfomethods_t *methods,
 		   dns_clientinfo_t *clientinfo, dns_dbnode_t **nodep)
 {
@@ -508,7 +508,7 @@ dns_db_findnodeext(dns_db_t *db, dns_name_t *name,
 }
 
 isc_result_t
-dns_db_findnsec3node(dns_db_t *db, dns_name_t *name,
+dns_db_findnsec3node(dns_db_t *db, const dns_name_t *name,
 		     isc_boolean_t create, dns_dbnode_t **nodep)
 {
 
@@ -523,7 +523,7 @@ dns_db_findnsec3node(dns_db_t *db, dns_name_t *name,
 }
 
 isc_result_t
-dns_db_find(dns_db_t *db, dns_name_t *name, dns_dbversion_t *version,
+dns_db_find(dns_db_t *db, const dns_name_t *name, dns_dbversion_t *version,
 	    dns_rdatatype_t type, unsigned int options, isc_stdtime_t now,
 	    dns_dbnode_t **nodep, dns_name_t *foundname,
 	    dns_rdataset_t *rdataset, dns_rdataset_t *sigrdataset)
@@ -556,7 +556,7 @@ dns_db_find(dns_db_t *db, dns_name_t *name, dns_dbversion_t *version,
 }
 
 isc_result_t
-dns_db_findext(dns_db_t *db, dns_name_t *name, dns_dbversion_t *version,
+dns_db_findext(dns_db_t *db, const dns_name_t *name, dns_dbversion_t *version,
 	       dns_rdatatype_t type, unsigned int options, isc_stdtime_t now,
 	       dns_dbnode_t **nodep, dns_name_t *foundname,
 	       dns_clientinfomethods_t *methods, dns_clientinfo_t *clientinfo,
@@ -591,7 +591,7 @@ dns_db_findext(dns_db_t *db, dns_name_t *name, dns_dbversion_t *version,
 }
 
 isc_result_t
-dns_db_findzonecut(dns_db_t *db, dns_name_t *name,
+dns_db_findzonecut(dns_db_t *db, const dns_name_t *name,
 		   unsigned int options, isc_stdtime_t now,
 		   dns_dbnode_t **nodep, dns_name_t *foundname,
 		   dns_rdataset_t *rdataset, dns_rdataset_t *sigrdataset)
@@ -1026,7 +1026,8 @@ dns_db_setsigningtime(dns_db_t *db, dns_rdataset_t *rdataset,
 }
 
 isc_result_t
-dns_db_getsigningtime(dns_db_t *db, dns_rdataset_t *rdataset, dns_name_t *name)
+dns_db_getsigningtime(dns_db_t *db, dns_rdataset_t *rdataset,
+		      dns_name_t *name)
 {
 	if (db->methods->getsigningtime != NULL)
 		return ((db->methods->getsigningtime)(db, rdataset, name));
@@ -1047,7 +1048,7 @@ dns_db_resigned(dns_db_t *db, dns_rdataset_t *rdataset,
  * it is dealing with a database that understands response policy zones.
  */
 void
-dns_db_rpz_attach(dns_db_t *db, dns_rpz_zones_t *rpzs, dns_rpz_num_t rpz_num) {
+dns_db_rpz_attach(dns_db_t *db, void *rpzs, isc_uint8_t rpz_num) {
 	REQUIRE(db->methods->rpz_attach != NULL);
 	(db->methods->rpz_attach)(db, rpzs, rpz_num);
 }

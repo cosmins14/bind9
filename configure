@@ -821,6 +821,7 @@ NZDTARGETS
 NZDSRCS
 NZD_TOOLS
 PKCS11_TEST
+PKCS11_ED25519
 PKCS11_GOST
 PKCS11_ECDSA
 CRYPTO
@@ -843,11 +844,14 @@ ISC_OPENSSL_INC
 ISC_PLATFORM_OPENSSLHASH
 ISC_PLATFORM_WANTAES
 OPENSSL_GOST
+OPENSSL_ED25519
 OPENSSL_ECDSA
 OPENSSLLINKSRCS
 OPENSSLLINKOBJS
 OPENSSLGOSTLINKSRCS
 OPENSSLGOSTLINKOBJS
+OPENSSLEDDSALINKSRCS
+OPENSSLEDDSALINKOBJS
 DST_OPENSSL_INC
 INSTALL_LIBRARY
 ISC_THREAD_DIR
@@ -1016,6 +1020,7 @@ with_openssl
 with_pkcs11
 with_ecdsa
 with_gost
+with_eddsa
 with_aes
 enable_openssl_hash
 with_cc_alg
@@ -1748,6 +1753,7 @@ Optional Packages:
 			  (PATH is for the PKCS11 provider)
   --with-ecdsa            Crypto ECDSA
   --with-gost             Crypto GOST yes|no|raw|asn1.
+  --with-eddsa            Crypto EDDSA yes|all|no.
   --with-aes              Crypto AES
   --with-cc-alg=ALG      choose the algorithm for Client Cookie [aes|sha1|sha256]
   --with-lmdb=PATH        build with LMDB library yes|no|path
@@ -15668,7 +15674,12 @@ done
 
 	for ac_header in pthread_np.h
 do :
+<<<<<<< HEAD
   ac_fn_c_check_header_mongrel "$LINENO" "pthread_np.h" "ac_cv_header_pthread_np_h" "$ac_includes_default"
+=======
+  ac_fn_c_check_header_compile "$LINENO" "pthread_np.h" "ac_cv_header_pthread_np_h" "#include <pthread.h>
+"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 if test "x$ac_cv_header_pthread_np_h" = xyes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_PTHREAD_NP_H 1
@@ -15792,7 +15803,7 @@ fi
 
 
 #
-# were --with-ecdsa, --with-gost, --with-aes specified
+# were --with-ecdsa, --with-gost, --with-eddsa, --with-aes specified
 #
 
 # Check whether --with-ecdsa was given.
@@ -15808,6 +15819,14 @@ if test "${with_gost+set}" = set; then :
   withval=$with_gost; with_gost="$withval"
 else
   with_gost="auto"
+fi
+
+
+# Check whether --with-eddsa was given.
+if test "${with_eddsa+set}" = set; then :
+  withval=$with_eddsa; with_eddsa="$withval"
+else
+  with_eddsa="auto"
 fi
 
 
@@ -15850,20 +15869,20 @@ case $with_cc_alg in
 		with_cc_alg="sha256"
 		;;
 	auto)
-		if test "$with_aes" != "no"
+		if test "no" != "$with_aes"
 		then
 			with_aes="yes"
 		fi
 		;;
 	*)
 		with_cc_alg="aes"
-		if test "$with_aes" != "no"
+		if test "no" != "$with_aes"
 		then
 			with_aes="yes"
 		fi
 		;;
 esac
-if test "with_aes" = "checkcc"
+if test "checkcc" = "with_aes"
 then
 	with_aes="no"
 fi
@@ -15892,6 +15911,7 @@ then
 fi
 OPENSSL_ECDSA=""
 OPENSSL_GOST=""
+OPENSSL_ED25519=""
 gosttype="raw"
 case "$with_gost" in
 	raw)
@@ -15917,6 +15937,8 @@ case "$use_openssl" in
 $as_echo "disabled because of native PKCS11" >&6; }
 		DST_OPENSSL_INC=""
 		CRYPTO="-DPKCS11CRYPTO"
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -15927,6 +15949,8 @@ $as_echo "disabled because of native PKCS11" >&6; }
 $as_echo "no" >&6; }
 		DST_OPENSSL_INC=""
 		CRYPTO=""
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -15935,6 +15959,8 @@ $as_echo "no" >&6; }
 	auto)
 		DST_OPENSSL_INC=""
 		CRYPTO=""
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -16348,6 +16374,133 @@ $as_echo "#define HAVE_OPENSSL_GOST 1" >>confdefs.h
 		;;
 	esac
 
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OpenSSL Ed25519 support" >&5
+$as_echo_n "checking for OpenSSL Ed25519 support... " >&6; }
+	have_ed25519=""
+	have_ed448=""
+	if test "$cross_compiling" = yes; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: using --with-eddsa" >&5
+$as_echo "using --with-eddsa" >&6; }
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <openssl/evp.h>
+#include <openssl/objects.h>
+int main() {
+<<<<<<< HEAD
+	const EVP_CIPHER *aes128, *aes192, *aes256;
+=======
+	EVP_PKEY_CTX *ctx;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+
+	ctx = EVP_PKEY_CTX_new_id(NID_ED25519, NULL);
+	if (ctx == NULL)
+		return (2);
+	return (0);
+}
+
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	have_ed25519="yes"
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	have_ed25519="no"
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+	case "$with_eddsa" in
+	yes|all)
+	    case "$have_ed25519" in
+	    no)  as_fn_error $? "eddsa not supported" "$LINENO" 5 ;;
+	    *)  have_ed25519=yes ;;
+	    esac
+	    ;;
+	no)
+	    have_ed25519=no ;;
+	*)
+	    case "$have_ed25519" in
+	    yes|no) ;;
+	    *) as_fn_error $? "need --with-eddsa=[yes, all or no]" "$LINENO" 5 ;;
+	    esac
+	    ;;
+	esac
+	case $have_ed25519 in
+	yes)
+		OPENSSL_ED25519="yes"
+		OPENSSLEDDSALINKOBJS='${OPENSSLEDDSALINKOBJS}'
+		OPENSSLEDDSALINKSRCS='${OPENSSLEDDSALINKSRCS}'
+
+<<<<<<< HEAD
+	ISC_OPENSSL_INC=""
+	ISC_OPENSSL_LIBS=""
+	if test "yes" = "$with_aes"
+	then
+		case "$have_aes" in
+		evp)
+=======
+$as_echo "#define HAVE_OPENSSL_ED25519 1" >>confdefs.h
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OpenSSL Ed448 support" >&5
+$as_echo_n "checking for OpenSSL Ed448 support... " >&6; }
+		if test "$cross_compiling" = yes; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: using --with-eddsa" >&5
+$as_echo "using --with-eddsa" >&6; }
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <openssl/evp.h>
+#include <openssl/objects.h>
+int main() {
+	EVP_PKEY_CTX *ctx;
+
+	ctx = EVP_PKEY_CTX_new_id(NID_ED448, NULL);
+	if (ctx == NULL)
+		return (2);
+	return (0);
+}
+
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+		have_ed448="yes"
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+		have_ed448="no"
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+		case $with_eddsa in
+		all)
+			have_ed448=yes ;;
+		*)
+			;;
+		esac
+		case $have_ed448 in
+		yes)
+
+$as_echo "#define HAVE_OPENSSL_ED448 1" >>confdefs.h
+],
+			;;
+		*)
+			;;
+		esac
+		;;
+	*)
+		;;
+	esac
+
 	have_aes="no"
 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for OpenSSL AES support" >&5
 $as_echo_n "checking for OpenSSL AES support... " >&6; }
@@ -16440,6 +16593,9 @@ esac
 
 
 
+
+
+
 DNS_CRYPTO_LIBS="$DNS_CRYPTO_LIBS $DST_OPENSSL_LIBS"
 
 ISC_PLATFORM_WANTAES="#undef ISC_PLATFORM_WANTAES"
@@ -16503,7 +16659,7 @@ $as_echo "#define HMAC_SHA256_CC 1" >>confdefs.h
 	aes)
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: aes" >&5
 $as_echo "aes" >&6; }
-		if test "$with_aes" != "yes"
+		if test "yes" != "$with_aes"
 		then
 			as_fn_error $? "\"Client Cookie wants to use unavailable AES\"" "$LINENO" 5;
 		fi
@@ -16694,6 +16850,10 @@ esac
 
 PKCS11_ECDSA=""
 PKCS11_GOST=""
+<<<<<<< HEAD
+=======
+PKCS11_ED25519=""
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 set_pk11_flavor="no"
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for native PKCS11" >&5
 $as_echo_n "checking for native PKCS11... " >&6; }
@@ -16737,6 +16897,40 @@ $as_echo "#define HAVE_PKCS11_GOST 1" >>confdefs.h
 $as_echo "disabled" >&6; }
 			;;
 		esac
+<<<<<<< HEAD
+=======
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for PKCS11 Ed25519" >&5
+$as_echo_n "checking for PKCS11 Ed25519... " >&6; }
+		case "$with_eddsa" in
+		yes|all)
+			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: enabled" >&5
+$as_echo "enabled" >&6; }
+			PKCS11_ED25519="yes"
+
+$as_echo "#define HAVE_PKCS11_ED25519 1" >>confdefs.h
+
+			{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for PKCS11 Ed448" >&5
+$as_echo_n "checking for PKCS11 Ed448... " >&6; }
+			case "$with_eddsa" in
+			all)
+				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: enabled" >&5
+$as_echo "enabled" >&6; }
+
+$as_echo "#define HAVE_PKCS11_ED448 1" >>confdefs.h
+
+				;;
+			*)
+				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: disabled" >&5
+$as_echo "disabled" >&6; }
+				;;
+			esac
+			;;
+		*)
+			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: disabled" >&5
+$as_echo "disabled" >&6; }
+			;;
+		esac
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for PKCS11 flavor" >&5
 $as_echo_n "checking for PKCS11 flavor... " >&6; }
 		case "$PKCS11_PROVIDER" in
@@ -16797,6 +16991,7 @@ esac
 
 
 
+
 # for PKCS11 benchmarks
 
 have_clock_gt=no
@@ -16848,7 +17043,7 @@ fi
 
 fi
 
-if test "$have_clock_gt" != "no"; then
+if test "no" != "$have_clock_gt"; then
 
 $as_echo "#define HAVE_CLOCK_GETTIME 1" >>confdefs.h
 
@@ -16860,6 +17055,8 @@ fi
 
 #
 # was --with-lmdb specified?
+<<<<<<< HEAD
+=======
 #
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for lmdb library" >&5
 $as_echo_n "checking for lmdb library... " >&6; }
@@ -16888,6 +17085,156 @@ case "$use_lmdb" in
 					LIBS="$LIBS -L${d}/lib"
 				fi
 				have_lmdb="yes"
+			fi
+		done
+		;;
+	*)
+		if test -f "${use_lmdb}/include/lmdb.h"
+		then
+			lmdb_cflags="-I${use_lmdb}/include"
+			LIBS="$LIBS -L${use_lmdb}/lib"
+			have_lmdb="yes"
+		else
+			as_fn_error $? "$use_lmdb/include/lmdb.h not found." "$LINENO" 5
+		fi
+		;;
+esac
+
+if test "X${have_lmdb}" != "X"
+then
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing mdb_env_create" >&5
+$as_echo_n "checking for library containing mdb_env_create... " >&6; }
+if ${ac_cv_search_mdb_env_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char mdb_env_create ();
+int
+main ()
+{
+return mdb_env_create ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' lmdb; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_mdb_env_create=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_mdb_env_create+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_mdb_env_create+:} false; then :
+
+else
+  ac_cv_search_mdb_env_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_mdb_env_create" >&5
+$as_echo "$ac_cv_search_mdb_env_create" >&6; }
+ac_res=$ac_cv_search_mdb_env_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "found lmdb include but not library." "$LINENO" 5
+			have_lmdb=""
+fi
+
+elif test "X$use_lmdb" = Xyes
+then
+	as_fn_error $? "include/lmdb.h not found." "$LINENO" 5
+else
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+NZD_TOOLS=""
+NZDSRCS=
+NZDTARGETS=
+if test "X${have_lmdb}" != "X"
+then
+	CFLAGS="$CFLAGS $lmdb_cflags"
+
+$as_echo "#define HAVE_LMDB 1" >>confdefs.h
+
+	NZD_TOOLS="nzd"
+        NZDSRCS='${NZDSRCS}'
+        NZDTARGETS='${NZDTARGETS}'
+fi
+
+
+
+
+#
+# was --with-libxml2 specified?
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+#
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for lmdb library" >&5
+$as_echo_n "checking for lmdb library... " >&6; }
+
+# Check whether --with-lmdb was given.
+if test "${with_lmdb+set}" = set; then :
+  withval=$with_lmdb; use_lmdb="$withval"
+else
+  use_lmdb="auto"
+fi
+
+
+have_lmdb=""
+case "$use_lmdb" in
+	no)
+		lmdb_libs=""
+		;;
+	auto|yes)
+<<<<<<< HEAD
+		for d in /usr /usr/local /opt/local
+		do
+			if test -f "${d}/include/lmdb.h"
+			then
+				if test ${d} != /usr
+				then
+					lmdb_cflags="-I ${d}/include"
+					LIBS="$LIBS -L${d}/lib"
+				fi
+				have_lmdb="yes"
+=======
+		case X`(xml2-config --version) 2>/dev/null` in
+		X2.[6789].*)
+			libxml2_libs=`xml2-config --libs`
+			libxml2_cflags=`xml2-config --cflags`
+			;;
+		*)
+			if test "yes" = "$use_libxml2" ; then
+				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+				as_fn_error $? "required libxml2 version not available" "$LINENO" 5
+			else
+				libxml2_libs=
+				libxml2_cflags=
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 			fi
 		done
 		;;
@@ -17789,7 +18136,7 @@ $as_echo "no" >&6; }
 		PURIFY=""
 		;;
 	*)
-		if test -f $purify_path || test $purify_path = purify; then
+		if test -f "$purify_path" || test purify = "$purify_path"; then
 			{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $purify_path" >&5
 $as_echo "$purify_path" >&6; }
 			PURIFYFLAGS="`echo $PURIFYOPTIONS`"
@@ -17900,12 +18247,12 @@ $as_echo "$as_me: WARNING: Internal symbol table does not work with libtool.  Di
 		case $host_os in
 		freebsd*|netbsd*|openbsd*|linux*|solaris*|darwin*)
 			MKSYMTBL_PROGRAM="$PERL"
-			if test $want_symtable = all; then
+			if test "all" = "$want_symtable"; then
 				ALWAYS_MAKE_SYMTABLE="yes"
 			fi
 			;;
 		*)
-			if test $want_symtable = yes -o $want_symtable = all
+			if test "yes" = "$want_symtable" -o "all" = "$want_symtable"
 			then
 				{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: this system is not known to generate internal symbol table safely; disabling it" >&5
 $as_echo "$as_me: WARNING: this system is not known to generate internal symbol table safely; disabling it" >&2;}
@@ -19234,7 +19581,11 @@ done
 			break
 		fi
 	done
+<<<<<<< HEAD
 	if test "$use_readline" != "auto" &&
+=======
+	if test "auto" != "$use_readline" &&
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	   test "X$READLINE_LIB" = "X"
 	then
 		as_fn_error $? "The readline library was not found." "$LINENO" 5
@@ -19242,11 +19593,22 @@ done
 	LIBS="$saved_LIBS"
 	;;
 esac
+<<<<<<< HEAD
 if test yes = "$ac_cv_func_readline"
+=======
+if test "yes" = "$ac_cv_func_readline"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 then
 	case "$READLINE_LIB" in
 	*edit*)
 		for ac_header in editline/readline.h
+<<<<<<< HEAD
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "editline/readline.h" "ac_cv_header_editline_readline_h" "$ac_includes_default"
+if test "x$ac_cv_header_editline_readline_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_EDITLINE_READLINE_H 1
+=======
 do :
   ac_fn_c_check_header_mongrel "$LINENO" "editline/readline.h" "ac_cv_header_editline_readline_h" "$ac_includes_default"
 if test "x$ac_cv_header_editline_readline_h" = xyes; then :
@@ -19290,6 +19652,55 @@ do :
 if test "x$ac_cv_header_readline_readline_h" = xyes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_READLINE_READLINE_H 1
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+_ACEOF
+
+fi
+
+done
+
+<<<<<<< HEAD
+		for ac_header in edit/readline/readline.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "edit/readline/readline.h" "ac_cv_header_edit_readline_readline_h" "$ac_includes_default"
+if test "x$ac_cv_header_edit_readline_readline_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_EDIT_READLINE_READLINE_H 1
+=======
+	for ac_header in readline/history.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "readline/history.h" "ac_cv_header_readline_history_h" "$ac_includes_default"
+if test "x$ac_cv_header_readline_history_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_READLINE_HISTORY_H 1
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+_ACEOF
+
+fi
+
+done
+
+<<<<<<< HEAD
+		for ac_header in edit/readline/history.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "edit/readline/history.h" "ac_cv_header_edit_readline_history_h" "$ac_includes_default"
+if test "x$ac_cv_header_edit_readline_history_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_EDIT_READLINE_HISTORY_H 1
+_ACEOF
+
+fi
+
+done
+
+		;;
+	esac
+	for ac_header in readline/readline.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "readline/readline.h" "ac_cv_header_readline_readline_h" "$ac_includes_default"
+if test "x$ac_cv_header_readline_readline_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_READLINE_READLINE_H 1
 _ACEOF
 
 fi
@@ -19308,6 +19719,8 @@ fi
 
 done
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 fi
 
 ISC_PRINT_OBJS=
@@ -21978,12 +22391,12 @@ if test "yes" = "$idnlib"; then
 fi
 
 IDNLIBS=
-if test "$use_idn" != no; then
+if test "no" != "$use_idn"; then
 
 $as_echo "#define WITH_IDN 1" >>confdefs.h
 
 	STD_CINCLUDES="$STD_CINCLUDES -I$idn_path/include"
-	if test "$idnlib" != no; then
+	if test "no" != "$idnlib"; then
 		IDNLIBS="$idnlib $iconvlib"
 	else
 		IDNLIBS="-L$idn_path/lib -lidnkit $iconvlib"
@@ -22002,7 +22415,11 @@ else
   atf="no"
 fi
 
+<<<<<<< HEAD
 if test yes = "$atf"; then
+=======
+if test "yes" = "$atf"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	atf=`pwd`/unit/atf
 	ATFBUILD=atf-src
 
@@ -22013,7 +22430,7 @@ $as_echo "building ATF from bind9/unit/atf-src" >&6; }
 fi
 
 ATFLIBS=
-if test "$atf" != no; then
+if test "no" != "$atf"; then
 
 $as_echo "#define ATF_TEST 1" >>confdefs.h
 
@@ -25870,9 +26287,13 @@ fi
 
 case "$make_clean" in
 yes)
-	if test "$no_create" != "yes"
+	if test "yes" != "$no_create"
 	then
+<<<<<<< HEAD
 		if test "$silent" = "yes"
+=======
+		if test "yes" = "$silent"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		then
                         make clean > /dev/null
                 else
@@ -25904,7 +26325,11 @@ report() {
             echo "    Allow 'dnstap' packet logging (--enable-dnstap)"
     test "no" = "$use_geoip" || echo "    GeoIP access control (--with-geoip)"
     test "no" = "$use_gssapi" || echo "    GSS-API (--with-gssapi)"
+<<<<<<< HEAD
     if test "yes" = "$enable_full_report" -o "$with_cc_alg" != "aes"; then
+=======
+    if test "yes" = "$enable_full_report" -o "aes" != "$with_cc_alg"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "        Algorithm: $with_cc_alg"
     fi
 
@@ -25921,7 +26346,11 @@ report() {
         test "X$NZD_TOOLS" = "X" || echo "    LMDB database to store configuration for 'addzone' zones (--with-lmdb)"
     fi
 
+<<<<<<< HEAD
     if test "$use_pkcs11" != "no"; then
+=======
+    if test "no" != "$use_pkcs11"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         if test "yes" = "$want_native_pkcs11"; then
             echo "    Native PKCS#11/Cryptoki support (--enable-native-pkcs11)"
         else
@@ -25934,6 +26363,11 @@ report() {
     fi
     test "yes" = "$OPENSSL_ECDSA" -o "$PKCS11_ECDSA" && \
         echo "    ECDSA algorithm support (--with-ecdsa)"
+<<<<<<< HEAD
+=======
+    test "yes" = "$OPENSSL_ED25519" -o "$PKCS11_ED25519" && \
+        echo "    EDDSA algorithm support (--with-eddsa)"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
     test "yes" = "$enable_fixed" && \
         echo "    Allow 'fixed' rrset-order (--enable-fixed-rrset)"
     test "yes" = "$enable_filter" && \
@@ -25995,8 +26429,15 @@ report() {
         echo "    GOST algorithm support (--with-gost)"
     test "X$CRYPTO" = "X" -o "yes" = "$OPENSSL_ECDSA" -o "yes" = "$PKCS11_ECDSA" || \
         echo "    ECDSA algorithm support (--with-ecdsa)"
+<<<<<<< HEAD
 
     test "yess" = "$enable_seccomp" || \
+=======
+    test "X$CRYPTO" = "X" -o "yes" = "$OPENSSL_ED25519" -o "yes" = "$PKCS11_ED25519" || \
+        echo "    EDDSA algorithm support (--with-eddsa)"
+
+    test "yes" = "$enable_seccomp" || \
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "    Use libseccomp system call filtering (--enable-seccomp)"
     test "yes" = "$want_backtrace" || \
         echo "    Print backtrace on crash (--enable-backtrace)"
@@ -26017,14 +26458,22 @@ report() {
         echo "Unrecognized options:"
         echo "    $ac_unrecognized_opts"
     fi
+<<<<<<< HEAD
     if test "$enable_full_report" != "yes"; then
+=======
+    if test "yes" != "$enable_full_report"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "-------------------------------------------------------------------------------"
         echo "For more detail, use --enable-full-report."
     fi
     echo "==============================================================================="
 }
 
+<<<<<<< HEAD
 if test "$silent" != "yes"; then
+=======
+if test "yes" != "$silent"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         report
 fi
 

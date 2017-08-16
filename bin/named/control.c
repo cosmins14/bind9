@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001-2007, 2009-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2001-2007, 2009-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -275,6 +275,11 @@ ns_control_docommand(isccc_sexpr_t *message, isc_boolean_t readonly,
 	} else if (command_compare(command, NS_COMMAND_DNSTAP) ||
 		   command_compare(command, NS_COMMAND_DNSTAPREOPEN)) {
 		result = ns_server_dnstap(ns_g_server, lex, text);
+<<<<<<< HEAD
+=======
+	} else if (command_compare(command, NS_COMMAND_TCPTIMEOUTS)) {
+		result = ns_server_tcptimeouts(lex, text);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	} else {
 		isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
 			      NS_LOGMODULE_CONTROL, ISC_LOG_WARNING,

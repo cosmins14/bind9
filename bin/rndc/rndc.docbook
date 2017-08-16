@@ -242,12 +242,14 @@
 	  </para>
 	  <para>
 	    The configuration is saved in a file called
-	    <filename><replaceable>name</replaceable>.nzf</filename>,
-	    where <replaceable>name</replaceable> is the
-	    name of the view, or if it contains characters
-	    that are incompatible with use as a file name, a
-	    cryptographic hash generated from the name
-	    of the view.
+	    <filename><replaceable>viewname</replaceable>.nzf</filename>
+	    (or, if <command>named</command> is compiled with
+	    liblmdb, an LMDB database file called
+	    <filename><replaceable>viewname</replaceable>.nzd</filename>).
+	    <replaceable>viewname</replaceable> is the
+	    name of the view, unless the view name contains characters
+	    that are incompatible with use as a file name, in which case
+	    a cryptographic hash of the view name is used instead.
 	    When <command>named</command> is
 	    restarted, the file will be loaded into the view
 	    configuration, so that zones that were added
@@ -867,6 +869,24 @@
       </varlistentry>
 
       <varlistentry>
+	<term><userinput>tcp-timeouts <optional><replaceable>initial</replaceable> <replaceable>idle</replaceable> <replaceable>keepalive</replaceable> <replaceable>advertised</replaceable></optional></userinput></term>
+	<listitem>
+	  <para>
+	    When called without arguments, display the current
+            values of the <command>tcp-initial-timeout</command>,
+	    <command>tcp-idle-timeout</command>,
+	    <command>tcp-keepalive-timeout</command> and
+	    <command>tcp-advertised-timeout</command> options.
+            When called with arguments, update these values. This
+            allows an administrator to make rapid adjustments when
+            under a denial of service attack.  See the descriptions of
+            these options in the BIND 9 Administrator Reference Manual
+            for details of their use.
+	  </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
 	<term><userinput>thaw <optional><replaceable>zone</replaceable> <optional><replaceable>class</replaceable> <optional><replaceable>view</replaceable></optional></optional></optional></userinput></term>
 	<listitem>
 	  <para>
@@ -967,6 +987,19 @@
       </varlistentry>
 
     </variablelist>
+
+    <para>
+      <command>rndc</command> commands that specify zone names,
+      such as <command>reload</command>, <command>retransfer</command>
+      or <command>zonestatus</command>, can be ambiguous when applied
+      to zones of type <option>redirect</option>. Redirect zones are
+      always called ".", and can be confused with zones of type
+      <option>hint</option> or with slaved copies of the root zone.
+      To specify a redirect zone, use the special zone name
+      <userinput>-redirect</userinput>, without a trailing period.
+      (With a trailing period, this would specify a zone called
+      "-redirect".)
+    </para>
   </refsection>
 
   <refsection><info><title>LIMITATIONS</title></info>

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2009, 2011-2014, 2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2009, 2011-2014, 2016, 2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,7 +14,7 @@ SYSTEMTESTTOP=..
 pzone=parent.nil pfile=parent.db
 czone=child.parent.nil cfile=child.db
 status=0
-n=0
+n=1
 
 echo "I:setting key timers"
 $SETTIME -A now+15s `cat rolling.key` > /dev/null
@@ -28,7 +28,11 @@ rolling=`sed 's/^K'${czone}'.+005+0*\([0-9]\)/\1/' < rolling.key`
 standby=`sed 's/^K'${czone}'.+005+0*\([0-9]\)/\1/' < standby.key`
 zsk=`sed 's/^K'${czone}'.+005+0*\([0-9]\)/\1/' < zsk.key`
 
+<<<<<<< HEAD
 $GENRANDOM 400 $RANDFILE
+=======
+$GENRANDOM 800 $RANDFILE
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 echo "I:signing zones"
 $SIGNER -Sg -o $czone $cfile > /dev/null 2>&1
@@ -137,18 +141,30 @@ if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
 echo "I:checking warning about permissions change on key with dnssec-settime ($n)"
+<<<<<<< HEAD
 if [ `uname -o` == Cygwin ]; then
+=======
+uname=`uname -o 2> /dev/null`
+if [ Cygwin == "$uname"  ]; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	echo "I: Cygwin detected, skipping"
 else
 	ret=0
 	# settime should print a warning about changing the permissions
 	chmod 644 `cat oldstyle.key`.private
+<<<<<<< HEAD
 	$SETTIME -P none `cat oldstyle.key` > tmp.out 2>&1 || ret=1
 	grep "warning" tmp.out > /dev/null 2>&1 || ret=1
 	cat tmp.out
 	$SETTIME -P none `cat oldstyle.key` > tmp.out 2>&1 || ret=1
 	grep "warning" tmp.out > /dev/null 2>&1 && ret=1
 	cat tmp.out
+=======
+	$SETTIME -P none `cat oldstyle.key` > settime1.test$n 2>&1 || ret=1
+	grep "warning: Permissions on the file.*have changed" settime1.test$n > /dev/null 2>&1 || ret=1
+	$SETTIME -P none `cat oldstyle.key` > settime2.test$n 2>&1 || ret=1
+	grep "warning: Permissions on the file.*have changed" settime2.test$n > /dev/null 2>&1 && ret=1
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	n=`expr $n + 1`
 	if [ $ret != 0 ]; then echo "I:failed"; fi
 	status=`expr $status + $ret`

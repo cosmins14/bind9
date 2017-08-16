@@ -20,5 +20,8 @@ Some of these settings are:
 |`-DCHECK_SIBLING=0`|Don't check sibling glue in `named-checkzone`|
 |`-DCHECK_LOCAL=0`|Don't check out-of-zone addresses in `named-checkzone`|
 |`-DNS_RUN_PID_DIR=0`|Create default PID files in `${localstatedir}/run` rather than `${localstatedir}/run/{named,lwresd}/`|
+<<<<<<< HEAD
 |`-DDIG_SIGCHASE=1`|Enable DNSSEC signature chasing support in `dig`.  (Note: This feature is deprecated. Use `delv` instead.)|
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971

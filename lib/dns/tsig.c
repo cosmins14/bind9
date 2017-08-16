@@ -82,7 +82,11 @@ static dns_name_t hmacmd5 = {
 	{NULL, NULL}
 };
 
+<<<<<<< HEAD
 dns_name_t *dns_tsig_hmacmd5_name = &hmacmd5;
+=======
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacmd5_name = &hmacmd5;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 #endif
 
 static unsigned char gsstsig_ndata[] = "\010gss-tsig";
@@ -95,7 +99,7 @@ static dns_name_t gsstsig = {
 	{(void *)-1, (void *)-1},
 	{NULL, NULL}
 };
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_gssapi_name = &gsstsig;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_gssapi_name = &gsstsig;
 
 /*
  * Since Microsoft doesn't follow its own standard, we will use this
@@ -111,7 +115,7 @@ static dns_name_t gsstsigms = {
 	{(void *)-1, (void *)-1},
 	{NULL, NULL}
 };
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_gssapims_name = &gsstsigms;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_gssapims_name = &gsstsigms;
 
 static unsigned char hmacsha1_ndata[] = "\011hmac-sha1";
 static unsigned char hmacsha1_offsets[] = { 0, 10 };
@@ -125,7 +129,7 @@ static dns_name_t  hmacsha1 = {
 	{NULL, NULL}
 };
 
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_hmacsha1_name = &hmacsha1;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacsha1_name = &hmacsha1;
 
 static unsigned char hmacsha224_ndata[] = "\013hmac-sha224";
 static unsigned char hmacsha224_offsets[] = { 0, 12 };
@@ -139,7 +143,7 @@ static dns_name_t hmacsha224 = {
 	{NULL, NULL}
 };
 
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_hmacsha224_name = &hmacsha224;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacsha224_name = &hmacsha224;
 
 static unsigned char hmacsha256_ndata[] = "\013hmac-sha256";
 static unsigned char hmacsha256_offsets[] = { 0, 12 };
@@ -153,7 +157,7 @@ static dns_name_t hmacsha256 = {
 	{NULL, NULL}
 };
 
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_hmacsha256_name = &hmacsha256;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacsha256_name = &hmacsha256;
 
 static unsigned char hmacsha384_ndata[] = "\013hmac-sha384";
 static unsigned char hmacsha384_offsets[] = { 0, 12 };
@@ -167,7 +171,7 @@ static dns_name_t hmacsha384 = {
 	{NULL, NULL}
 };
 
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_hmacsha384_name = &hmacsha384;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacsha384_name = &hmacsha384;
 
 static unsigned char hmacsha512_ndata[] = "\013hmac-sha512";
 static unsigned char hmacsha512_offsets[] = { 0, 12 };
@@ -181,7 +185,7 @@ static dns_name_t hmacsha512 = {
 	{NULL, NULL}
 };
 
-LIBDNS_EXTERNAL_DATA dns_name_t *dns_tsig_hmacsha512_name = &hmacsha512;
+LIBDNS_EXTERNAL_DATA const dns_name_t *dns_tsig_hmacsha512_name = &hmacsha512;
 
 static isc_result_t
 tsig_verify_tcp(isc_buffer_t *source, dns_message_t *msg);
@@ -263,7 +267,7 @@ adjust_lru(dns_tsigkey_t *tkey) {
  * counter: it's protected by a separate lock.
  */
 static isc_result_t
-keyring_add(dns_tsig_keyring_t *ring, dns_name_t *name,
+keyring_add(dns_tsig_keyring_t *ring, const dns_name_t *name,
 	    dns_tsigkey_t *tkey)
 {
 	isc_result_t result;
@@ -296,9 +300,9 @@ keyring_add(dns_tsig_keyring_t *ring, dns_name_t *name,
 }
 
 isc_result_t
-dns_tsigkey_createfromkey(dns_name_t *name, dns_name_t *algorithm,
+dns_tsigkey_createfromkey(const dns_name_t *name, const dns_name_t *algorithm,
 			  dst_key_t *dstkey, isc_boolean_t generated,
-			  dns_name_t *creator, isc_stdtime_t inception,
+			  const dns_name_t *creator, isc_stdtime_t inception,
 			  isc_stdtime_t expire, isc_mem_t *mctx,
 			  dns_tsig_keyring_t *ring, dns_tsigkey_t **key)
 {
@@ -378,21 +382,24 @@ dns_tsigkey_createfromkey(dns_name_t *name, dns_name_t *algorithm,
 			goto cleanup_name;
 		}
 	} else {
+		dns_name_t *tmpname;
 		if (dstkey != NULL) {
 			ret = DNS_R_BADALG;
 			goto cleanup_name;
 		}
-		tkey->algorithm = isc_mem_get(mctx, sizeof(dns_name_t));
-		if (tkey->algorithm == NULL) {
+		tmpname = isc_mem_get(mctx, sizeof(dns_name_t));
+		if (tmpname == NULL) {
 			ret = ISC_R_NOMEMORY;
 			goto cleanup_name;
 		}
-		dns_name_init(tkey->algorithm, NULL);
-		ret = dns_name_dup(algorithm, mctx, tkey->algorithm);
-		if (ret != ISC_R_SUCCESS)
-			goto cleanup_algorithm;
-		(void)dns_name_downcase(tkey->algorithm, tkey->algorithm,
-					NULL);
+		dns_name_init(tmpname, NULL);
+		ret = dns_name_dup(algorithm, mctx, tmpname);
+		if (ret != ISC_R_SUCCESS) {
+			isc_mem_put(mctx, tmpname, sizeof(dns_name_t));
+			goto cleanup_name;
+		}
+		(void)dns_name_downcase(tmpname, tmpname, NULL);
+		tkey->algorithm = tmpname;
 	}
 
 	if (creator != NULL) {
@@ -471,9 +478,11 @@ dns_tsigkey_createfromkey(dns_name_t *name, dns_name_t *algorithm,
 	}
  cleanup_algorithm:
 	if (algname_is_allocated(tkey->algorithm)) {
-		if (dns_name_dynamic(tkey->algorithm))
-			dns_name_free(tkey->algorithm, mctx);
-		isc_mem_put(mctx, tkey->algorithm, sizeof(dns_name_t));
+		dns_name_t *tmpname;
+		DE_CONST(tkey->algorithm, tmpname);
+		if (dns_name_dynamic(tmpname))
+			dns_name_free(tmpname, mctx);
+		isc_mem_put(mctx, tmpname, sizeof(dns_name_t));
 	}
  cleanup_name:
 	dns_name_free(&tkey->name, mctx);
@@ -548,7 +557,11 @@ destroyring(dns_tsig_keyring_t *ring) {
 }
 
 static unsigned int
+<<<<<<< HEAD
 dst_alg_fromname(dns_name_t *algorithm) {
+=======
+dst_alg_fromname(const dns_name_t *algorithm) {
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 #ifndef PK11_MD5_DISABLE
 	if (dns_name_equal(algorithm, DNS_TSIG_HMACMD5_NAME)) {
 		return (DST_ALG_HMACMD5);
@@ -724,9 +737,9 @@ dns_tsigkeyring_dumpanddetach(dns_tsig_keyring_t **ringp, FILE *fp) {
 }
 
 isc_result_t
-dns_tsigkey_create(dns_name_t *name, dns_name_t *algorithm,
+dns_tsigkey_create(const dns_name_t *name, const dns_name_t *algorithm,
 		   unsigned char *secret, int length, isc_boolean_t generated,
-		   dns_name_t *creator, isc_stdtime_t inception,
+		   const dns_name_t *creator, isc_stdtime_t inception,
 		   isc_stdtime_t expire, isc_mem_t *mctx,
 		   dns_tsig_keyring_t *ring, dns_tsigkey_t **key)
 {
@@ -851,8 +864,10 @@ tsigkey_free(dns_tsigkey_t *key) {
 	key->magic = 0;
 	dns_name_free(&key->name, key->mctx);
 	if (algname_is_allocated(key->algorithm)) {
-		dns_name_free(key->algorithm, key->mctx);
-		isc_mem_put(key->mctx, key->algorithm, sizeof(dns_name_t));
+		dns_name_t *name;
+		DE_CONST(key->algorithm, name);
+		dns_name_free(name, key->mctx);
+		isc_mem_put(key->mctx, name, sizeof(dns_name_t));
 	}
 	if (key->key != NULL)
 		dst_key_free(&key->key);
@@ -971,7 +986,10 @@ dns_tsig_sign(dns_message_t *msg) {
 		 * has validated at this point. This is why we include a
 		 * MAC length > 0 in the reply.
 		 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		ret = dst_context_create3(key->key, mctx,
 					  DNS_LOGCATEGORY_DNSSEC,
 					  ISC_TRUE, &ctx);
@@ -983,6 +1001,8 @@ dns_tsig_sign(dns_message_t *msg) {
 		 */
 		if (response) {
 			dns_rdata_t querytsigrdata = DNS_RDATA_INIT;
+
+			INSIST(msg->verified_sig);
 
 			ret = dns_rdataset_first(msg->querytsig);
 			if (ret != ISC_R_SUCCESS)
@@ -1475,6 +1495,10 @@ dns_tsig_verify(isc_buffer_t *source, dns_message_t *msg,
 		} else if (ret != ISC_R_SUCCESS) {
 			goto cleanup_context;
 		}
+<<<<<<< HEAD
+=======
+		msg->verified_sig = 1;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	} else if (tsig.error != dns_tsigerror_badsig &&
 		   tsig.error != dns_tsigerror_badkey) {
 		tsig_log(msg->tsigkey, 2, "signature was empty");
@@ -1552,7 +1576,10 @@ dns_tsig_verify(isc_buffer_t *source, dns_message_t *msg,
 	}
 
 	msg->tsigstatus = dns_rcode_noerror;
+<<<<<<< HEAD
 	msg->verified_sig = 1;
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	ret = ISC_R_SUCCESS;
 
  cleanup_context:
@@ -1791,6 +1818,10 @@ tsig_verify_tcp(isc_buffer_t *source, dns_message_t *msg) {
 		} else if (ret != ISC_R_SUCCESS) {
 			goto cleanup_context;
 		}
+<<<<<<< HEAD
+=======
+		msg->verified_sig = 1;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 		/*
 		 * Here at this point, the MAC has been verified. Even
@@ -1878,7 +1909,10 @@ tsig_verify_tcp(isc_buffer_t *source, dns_message_t *msg) {
 	}
 
 	msg->tsigstatus = dns_rcode_noerror;
+<<<<<<< HEAD
 	msg->verified_sig = 1;
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	ret = ISC_R_SUCCESS;
 
  cleanup_context:
@@ -1898,8 +1932,8 @@ tsig_verify_tcp(isc_buffer_t *source, dns_message_t *msg) {
 }
 
 isc_result_t
-dns_tsigkey_find(dns_tsigkey_t **tsigkey, dns_name_t *name,
-		 dns_name_t *algorithm, dns_tsig_keyring_t *ring)
+dns_tsigkey_find(dns_tsigkey_t **tsigkey, const dns_name_t *name,
+		 const dns_name_t *algorithm, dns_tsig_keyring_t *ring)
 {
 	dns_tsigkey_t *key;
 	isc_stdtime_t now;
@@ -2010,7 +2044,7 @@ dns_tsigkeyring_create(isc_mem_t *mctx, dns_tsig_keyring_t **ringp) {
 }
 
 isc_result_t
-dns_tsigkeyring_add(dns_tsig_keyring_t *ring, dns_name_t *name,
+dns_tsigkeyring_add(dns_tsig_keyring_t *ring, const dns_name_t *name,
 		    dns_tsigkey_t *tkey)
 {
 	isc_result_t result;

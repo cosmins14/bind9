@@ -39,6 +39,10 @@ TARGETS =	feature-test@EXEEXT@
 feature-test@EXEEXT@: feature-test.@O@
 	${LIBTOOL_MODE_LINK} ${PURIFY} ${CC} ${CFLAGS} ${LDFLAGS} -o $@ feature-test.@O@ ${ISCLIBS} ${LIBS}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 # Running the scripts below is bypassed when a separate
 # build directory is used.
 

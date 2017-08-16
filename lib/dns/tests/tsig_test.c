@@ -172,11 +172,25 @@ render(isc_buffer_t *buf, unsigned flags, dns_tsigkey_t *key,
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_create: %s",
 			 dns_result_totext(result));
+<<<<<<< HEAD
+=======
+	ATF_REQUIRE(msg != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	msg->id = 50;
 	msg->rcode = dns_rcode_noerror;
 	msg->flags = flags;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * XXXMPA: this hack needs to be replaced with use of
+	 * dns_message_reply() at some point.
+	 */
+	if ((flags & DNS_MESSAGEFLAG_QR) != 0)
+		msg->verified_sig = 1;
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	if (tsigin == tsigout)
 		msg->tcp_continuation = 1;
 
@@ -236,7 +250,11 @@ ATF_TC_HEAD(tsig_tcp, tc) {
 	atf_tc_set_md_var(tc, "descr", "test tsig tcp-continuation validation");
 }
 ATF_TC_BODY(tsig_tcp, tc) {
+<<<<<<< HEAD
 	dns_name_t *tsigowner = NULL;
+=======
+	const dns_name_t *tsigowner = NULL;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	dns_fixedname_t fkeyname;
 	dns_message_t *msg = NULL;
 	dns_name_t *keyname;
@@ -270,6 +288,10 @@ ATF_TC_BODY(tsig_tcp, tc) {
 				    secret, sizeof(secret), ISC_FALSE,
 				    NULL, 0, 0, mctx, ring, &key);
 	ATF_REQUIRE_EQ(result, ISC_R_SUCCESS);
+<<<<<<< HEAD
+=======
+	ATF_REQUIRE(key != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	/*
 	 * Create request.
@@ -290,6 +312,7 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	 * Process response message 1.
 	 */
 	result = dns_message_create(mctx, DNS_MESSAGE_INTENTPARSE, &msg);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_create: %s",
 			 dns_result_totext(result));
@@ -303,13 +326,32 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_parse: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_create: %s",
+			   dns_result_totext(result));
+	ATF_REQUIRE(msg != NULL);
+
+	result = dns_message_settsigkey(msg, key);
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_settsigkey: %s",
+			   dns_result_totext(result));
+
+	result = dns_message_parse(msg, buf, 0);
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_parse: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	printmessage(msg);
 
 	result = dns_message_setquerytsig(msg, querytsig);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_setquerytsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS,
+			   "dns_message_setquerytsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	result = dns_tsig_verify(buf, msg, NULL, NULL);
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
@@ -324,9 +366,15 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	ATF_REQUIRE(dns_message_gettsig(msg, &tsigowner) != NULL);
 
 	result = dns_message_getquerytsig(msg, mctx, &tsigin);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_getquerytsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS,
+			   "dns_message_getquerytsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	tsigctx = msg->tsigctx;
 	msg->tsigctx = NULL;
@@ -336,6 +384,10 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	result = dst_context_create3(key->key, mctx, DNS_LOGCATEGORY_DNSSEC,
 				     ISC_FALSE, &outctx);
 	ATF_REQUIRE_EQ(result, ISC_R_SUCCESS);
+<<<<<<< HEAD
+=======
+	ATF_REQUIRE(outctx != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	/*
 	 * Start digesting.
@@ -356,15 +408,22 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	 * Process response message 2.
 	 */
 	result = dns_message_create(mctx, DNS_MESSAGE_INTENTPARSE, &msg);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_create: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_create: %s",
+			   dns_result_totext(result));
+	ATF_REQUIRE(msg != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	msg->tcp_continuation = 1;
 	msg->tsigctx = tsigctx;
 	tsigctx = NULL;
 
 	result = dns_message_settsigkey(msg, key);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_settsigkey: %s",
 			 dns_result_totext(result));
@@ -373,19 +432,37 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_parse: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_settsigkey: %s",
+			   dns_result_totext(result));
+
+	result = dns_message_parse(msg, buf, 0);
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_parse: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	printmessage(msg);
 
 	result = dns_message_setquerytsig(msg, tsigin);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_setquerytsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS,
+			   "dns_message_setquerytsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	result = dns_tsig_verify(buf, msg, NULL, NULL);
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_tsig_verify: %s",
 			 dns_result_totext(result));
+<<<<<<< HEAD
 	ATF_CHECK_EQ(msg->verified_sig, 1);
+=======
+	ATF_CHECK_EQ(msg->verified_sig, 0);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	ATF_CHECK_EQ(msg->tsigstatus, dns_rcode_noerror);
 
 	/*
@@ -407,23 +484,35 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	render(buf, DNS_MESSAGEFLAG_QR, key, &tsigout, &tsigout, outctx);
 
 	result = add_tsig(outctx, key, buf);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "add_tsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "add_tsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	/*
 	 * Process response message 3.
 	 */
 	result = dns_message_create(mctx, DNS_MESSAGE_INTENTPARSE, &msg);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_create: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_create: %s",
+			   dns_result_totext(result));
+	ATF_REQUIRE(msg != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	msg->tcp_continuation = 1;
 	msg->tsigctx = tsigctx;
 	tsigctx = NULL;
 
 	result = dns_message_settsigkey(msg, key);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_settsigkey: %s",
 			 dns_result_totext(result));
@@ -432,6 +521,14 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_parse: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_settsigkey: %s",
+			   dns_result_totext(result));
+
+	result = dns_message_parse(msg, buf, 0);
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS, "dns_message_parse: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	printmessage(msg);
 
@@ -441,9 +538,15 @@ ATF_TC_BODY(tsig_tcp, tc) {
 	ATF_REQUIRE(dns_message_gettsig(msg, &tsigowner) != NULL);
 
 	result = dns_message_setquerytsig(msg, tsigin);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_setquerytsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS,
+			   "dns_message_setquerytsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	result = dns_tsig_verify(buf, msg, NULL, NULL);
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
@@ -456,9 +559,15 @@ ATF_TC_BODY(tsig_tcp, tc) {
 		isc_buffer_free(&tsigin);
 
 	result = dns_message_getquerytsig(msg, mctx, &tsigin);
+<<<<<<< HEAD
 	ATF_CHECK_EQ_MSG(result, ISC_R_SUCCESS,
 			 "dns_message_getquerytsig: %s",
 			 dns_result_totext(result));
+=======
+	ATF_REQUIRE_EQ_MSG(result, ISC_R_SUCCESS,
+			   "dns_message_getquerytsig: %s",
+			   dns_result_totext(result));
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	isc_buffer_free(&buf);
 	dns_message_destroy(&msg);

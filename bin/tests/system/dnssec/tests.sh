@@ -1187,11 +1187,9 @@ status=`expr $status + $ret`
 
 echo "I:checking privately secure to nxdomain works ($n)"
 ret=0
-$DIG $DIGOPTS +noauth private2secure-nxdomain.private.secure.example. SOA @10.53.0.2 \
-	> dig.out.ns2.test$n || ret=1
 $DIG $DIGOPTS +noauth private2secure-nxdomain.private.secure.example. SOA @10.53.0.4 \
 	> dig.out.ns4.test$n || ret=1
-$PERL ../digcomp.pl dig.out.ns2.test$n dig.out.ns4.test$n || ret=1
+grep "NXDOMAIN" dig.out.ns4.test$n > /dev/null || ret=1
 # Note - this is looking for failure, hence the &&
 grep "flags:.*ad.*QUERY" dig.out.ns4.test$n > /dev/null && ret=1
 n=`expr $n + 1`
@@ -1200,11 +1198,9 @@ status=`expr $status + $ret`
 
 echo "I:checking privately secure wildcard to nxdomain works ($n)"
 ret=0
-$DIG $DIGOPTS +noauth a.wild.private.secure.example. SOA @10.53.0.2 \
-	> dig.out.ns2.test$n || ret=1
 $DIG $DIGOPTS +noauth a.wild.private.secure.example. SOA @10.53.0.4 \
 	> dig.out.ns4.test$n || ret=1
-$PERL ../digcomp.pl dig.out.ns2.test$n dig.out.ns4.test$n || ret=1
+grep "NXDOMAIN" dig.out.ns4.test$n > /dev/null || ret=1
 # Note - this is looking for failure, hence the &&
 grep "flags:.*ad.*QUERY" dig.out.ns4.test$n > /dev/null && ret=1
 n=`expr $n + 1`
@@ -2544,6 +2540,18 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
+# Intentionally strip ".key" from keyfile name to ensure the error message
+# includes it anyway to avoid confusion (RT #21731)
+echo "I:check dnssec-dsfromkey error message when keyfile is not found ($n)"
+ret=0
+key=`$KEYGEN -q -r $RANDFILE example.` || ret=1
+mv $key.key $key
+$DSFROMKEY $key > dsfromkey.out.$n 2>&1 && ret=1
+grep "$key.key: file not found" dsfromkey.out.$n > /dev/null || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
+
 echo "I:testing soon-to-expire RRSIGs without a replacement private key ($n)"
 ret=0
 $DIG +noall +answer +dnssec +nottlid -p 5300 expiring.example ns @10.53.0.3 | grep RRSIG > dig.out.ns3.test$n 2>&1
@@ -2972,16 +2980,23 @@ until test $alg = 256
 do
 	size=
 	case $alg in
-	1) size="-b 512";;
+	1) # RSA/MD5
+	   size="-b 1024";;
 	2) # Diffie Helman
 	   alg=`expr $alg + 1`
 	   continue;;
-	3) size="-b 512";;
-	5) size="-b 512";;
-	6) size="-b 512";;
-	7) size="-b 512";;
-	8) size="-b 512";;
-	10) size="-b 1024";;
+	3) # DSA/SHA1
+	   size="-b 512";;
+	5) # RSA/SHA-1
+	   size="-b 1024";;
+	6) # DSA-NSEC3-SHA1
+	   size="-b 512";;
+	7) # RSASHA1-NSEC3-SHA1
+	   size="-b 1024";;
+	8) # RSA/SHA-256
+	   size="-b 1024";;
+	10) # RSA/SHA-512
+	   size="-b 1024";;
 	157|160|161|162|163|164|165) # private - non standard
 	   alg=`expr $alg + 1`
 	   continue;;
@@ -3021,6 +3036,7 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
+<<<<<<< HEAD
 #
 # Test for +sigchase with a null set of trusted keys.
 #
@@ -3044,6 +3060,8 @@ else
 	n=`expr $n + 1`
 fi
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 echo "I:checking that positive unknown NSEC3 hash algorithm does validate ($n)"
 ret=0
 $DIG $DIGOPTS +noauth +noadd +nodnssec +adflag -p 5300 @10.53.0.3 nsec3-unknown.example SOA > dig.out.ns3.test$n
@@ -3353,5 +3371,15 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
+<<<<<<< HEAD
+=======
+echo "I:check that the view is logged in messages from the validator when using views ($n)"
+ret=0
+grep "view rec: *validat" ns4/named.run > /dev/null || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 echo "I:exit status: $status"
 [ $status -eq 0 ] || exit 1

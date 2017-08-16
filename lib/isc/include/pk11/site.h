@@ -23,6 +23,12 @@
  *
  *\li PK11_<algorithm>_DISABLE:
  *	Same as SKIP, and disable support for the algorithm.
+<<<<<<< HEAD
+=======
+ *
+ *\li PK11_PAD_HMAC_KEYS:
+ *	Extend HMAC keys shorter than digest length.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
  */
 
 /* current implemented flags are:
@@ -38,6 +44,10 @@ PK11_SHA512_HMAC_REPLACE
 PK11_MD5_DISABLE
 PK11_DSA_DISABLE
 PK11_DH_DISABLE
+<<<<<<< HEAD
+=======
+PK11_PAD_HMAC_KEYS
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 */
 
 /*
@@ -66,8 +76,16 @@ PK11_DH_DISABLE
 #endif
 
 #if PK11_FLAVOR == PK11_SOFTHSMV1_FLAVOR
+<<<<<<< HEAD
 #define PK11_DH_DISABLE
 #define PK11_DSA_DISABLE
+=======
+#define PK11_PAD_HMAC_KEYS
+#endif
+
+#if PK11_FLAVOR == PK11_SOFTHSMV2_FLAVOR
+/* SoftHSMv2 was updated to enforce minimal key sizes... argh! */
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 #define PK11_MD5_HMAC_REPLACE
 #define PK11_SHA_1_HMAC_REPLACE
 #define PK11_SHA224_HMAC_REPLACE
@@ -76,9 +94,12 @@ PK11_DH_DISABLE
 #define PK11_SHA512_HMAC_REPLACE
 #endif
 
+<<<<<<< HEAD
 #if PK11_FLAVOR == PK11_SOFTHSMV2_FLAVOR
 #endif
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 #if PK11_FLAVOR == PK11_CRYPTECH_FLAVOR
 #define PK11_DH_DISABLE
 #define PK11_DSA_DISABLE

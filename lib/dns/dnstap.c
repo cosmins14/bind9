@@ -50,6 +50,7 @@
 
 #include <isc/buffer.h>
 #include <isc/file.h>
+#include <isc/log.h>
 #include <isc/mem.h>
 #include <isc/once.h>
 #include <isc/print.h>
@@ -104,6 +105,12 @@ struct dns_dtenv {
 	isc_region_t version;
 	char *path;
 	dns_dtmode_t mode;
+<<<<<<< HEAD
+=======
+	isc_offset_t max_size;
+	int rolls;
+	isc_log_rollsuffix_t suffix;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	isc_stats_t *stats;
 };
 
@@ -183,7 +190,11 @@ dns_dt_create(isc_mem_t *mctx, dns_dtmode_t mode, const char *path,
 
 	REQUIRE(path != NULL);
 	REQUIRE(envp != NULL && *envp == NULL);
+<<<<<<< HEAD
 	REQUIRE(foptp!= NULL && *foptp != NULL);
+=======
+	REQUIRE(foptp != NULL && *foptp != NULL);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	isc_log_write(dns_lctx, DNS_LOGCATEGORY_DNSTAP,
 		      DNS_LOGMODULE_DNSTAP, ISC_LOG_INFO,
@@ -241,6 +252,11 @@ dns_dt_create(isc_mem_t *mctx, dns_dtmode_t mode, const char *path,
 		CHECK(ISC_R_FAILURE);
 	}
 	env->mode = mode;
+<<<<<<< HEAD
+=======
+	env->max_size = 0;
+	env->rolls = ISC_LOG_ROLLINFINITE;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	env->fopt = *foptp;
 	*foptp = NULL;
 
@@ -275,6 +291,36 @@ dns_dt_create(isc_mem_t *mctx, dns_dtmode_t mode, const char *path,
 }
 
 isc_result_t
+<<<<<<< HEAD
+=======
+dns_dt_setupfile(dns_dtenv_t *env, isc_uint64_t max_size, int rolls,
+		 isc_log_rollsuffix_t suffix)
+{
+	REQUIRE(VALID_DTENV(env));
+
+	/*
+	 * If we're using unix domain socket mode, then any
+	 * change from the default values is invalid.
+	 */
+	if (env->mode == dns_dtmode_unix) {
+		if (max_size == 0 && rolls == ISC_LOG_ROLLINFINITE &&
+		    suffix == isc_log_rollsuffix_increment)
+		{
+			return (ISC_R_SUCCESS);
+		} else {
+			return (ISC_R_INVALIDFILE);
+		}
+	}
+
+	env->max_size = max_size;
+	env->rolls = rolls;
+	env->suffix = suffix;
+
+	return (ISC_R_SUCCESS);
+}
+
+isc_result_t
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 dns_dt_reopen(dns_dtenv_t *env, int roll) {
 	isc_result_t result = ISC_R_SUCCESS;
 	fstrm_res res;
@@ -290,14 +336,26 @@ dns_dt_reopen(dns_dtenv_t *env, int roll) {
 	 * Check that we can create a new fw object.
 	 */
 	fwopt = fstrm_writer_options_init();
+<<<<<<< HEAD
 	if (fwopt == NULL)
 		return (ISC_R_NOMEMORY);
+=======
+	if (fwopt == NULL) {
+		return (ISC_R_NOMEMORY);
+	}
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	res = fstrm_writer_options_add_content_type(fwopt,
 					    DNSTAP_CONTENT_TYPE,
 					    sizeof(DNSTAP_CONTENT_TYPE) - 1);
+<<<<<<< HEAD
 	if (res != fstrm_res_success)
 		CHECK(ISC_R_FAILURE);
+=======
+	if (res != fstrm_res_success) {
+		CHECK(ISC_R_FAILURE);
+	}
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	if (env->mode == dns_dtmode_file) {
 		ffwopt = fstrm_file_options_init();
@@ -312,11 +370,21 @@ dns_dt_reopen(dns_dtenv_t *env, int roll) {
 								  env->path);
 			fw = fstrm_unix_writer_init(fuwopt, fwopt);
 		}
+<<<<<<< HEAD
 	} else
 		CHECK(ISC_R_NOTIMPLEMENTED);
 
 	if (fw == NULL)
 		CHECK(ISC_R_FAILURE);
+=======
+	} else {
+		CHECK(ISC_R_NOTIMPLEMENTED);
+	}
+
+	if (fw == NULL) {
+		CHECK(ISC_R_FAILURE);
+	}
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	/*
 	 * We are committed here.
@@ -329,6 +397,7 @@ dns_dt_reopen(dns_dtenv_t *env, int roll) {
 
 	generation++;
 
+<<<<<<< HEAD
 	if (env->iothr != NULL)
 		fstrm_iothr_destroy(&env->iothr);
 
@@ -360,6 +429,45 @@ dns_dt_reopen(dns_dtenv_t *env, int roll) {
 	if (ffwopt != NULL)
 		fstrm_file_options_destroy(&ffwopt);
 
+=======
+	if (env->iothr != NULL) {
+		fstrm_iothr_destroy(&env->iothr);
+	}
+
+	if (roll != 0) {
+		roll = env->rolls;
+	}
+
+	if (env->mode == dns_dtmode_file && roll != 0) {
+		/*
+		 * Create a temporary isc_logfile_t structure so we can
+		 * take advantage of the logfile rolling facility.
+		 */
+		char *filename = isc_mem_strdup(env->mctx, env->path);
+		file.name = filename;
+		file.stream = NULL;
+		file.versions = roll != 0 ? roll : env->rolls;
+		file.maximum_size = 0;
+		file.maximum_reached = ISC_FALSE;
+		file.suffix = env->suffix;
+		result = isc_logfile_roll(&file);
+		isc_mem_free(env->mctx, filename);
+		CHECK(result);
+	}
+
+	env->iothr = fstrm_iothr_init(env->fopt, &fw);
+	if (env->iothr == NULL) {
+		isc_log_write(dns_lctx, DNS_LOGCATEGORY_DNSTAP,
+			      DNS_LOGMODULE_DNSTAP, ISC_LOG_WARNING,
+			      "unable to initialize dnstap I/O thread");
+		CHECK(ISC_R_FAILURE);
+	}
+
+ cleanup:
+	if (ffwopt != NULL)
+		fstrm_file_options_destroy(&ffwopt);
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	if (fw != NULL)
 		fstrm_writer_destroy(&fw);
 
@@ -690,6 +798,15 @@ dns_dt_send(dns_view_t *view, dns_dtmsgtype_t msgtype,
 		return;
 
 	REQUIRE(VALID_DTENV(view->dtenv));
+
+	if (view->dtenv->max_size != 0) {
+		struct stat statbuf;
+		if (stat(view->dtenv->path, &statbuf) >= 0 &&
+		    statbuf.st_size > view->dtenv->max_size)
+		{
+			dns_dt_reopen(view->dtenv, view->dtenv->rolls);
+		}
+	}
 
 	TIME_NOW(&now);
 	t = &now;

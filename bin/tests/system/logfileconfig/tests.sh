@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2011-2014, 2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2011-2014, 2016, 2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,19 +12,32 @@ SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 THISDIR=`pwd`
 CONFDIR="ns1"
-PLAINCONF="${THISDIR}/${CONFDIR}/named.plain"
 DIRCONF="${THISDIR}/${CONFDIR}/named.dirconf"
 PIPECONF="${THISDIR}/${CONFDIR}/named.pipeconf"
 SYMCONF="${THISDIR}/${CONFDIR}/named.symconf"
 PLAINCONF="${THISDIR}/${CONFDIR}/named.plainconf"
+<<<<<<< HEAD
 VERSCONF="${THISDIR}/${CONFDIR}/named.versconf"
+=======
+ISOCONF="${THISDIR}/${CONFDIR}/named.iso8601"
+ISOCONFUTC="${THISDIR}/${CONFDIR}/named.iso8601-utc"
+VERSCONF="${THISDIR}/${CONFDIR}/named.versconf"
+TSCONF="${THISDIR}/${CONFDIR}/named.tsconf"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 UNLIMITEDCONF="${THISDIR}/${CONFDIR}/named.unlimited"
 PLAINFILE="named_log"
 DIRFILE="named_dir"
 PIPEFILE="named_pipe"
 SYMFILE="named_sym"
 DLFILE="named_deflog"
+<<<<<<< HEAD
 VERSFILE="named_vers"
+=======
+ISOFILE="named_iso8601"
+ISOUTCFILE="named_iso8601_utc"
+VERSFILE="named_vers"
+TSFILE="named_ts"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 UNLIMITEDFILE="named_unlimited"
 PIDFILE="${THISDIR}/${CONFDIR}/named.pid"
 myRNDC="$RNDC -c ${THISDIR}/${CONFDIR}/rndc.conf"
@@ -242,10 +255,15 @@ else
 	echo "I: skipping symlink test (unable to create symlink)"
 fi
 
+<<<<<<< HEAD
 status=0
 
 n=`expr $n + 1`
 echo "I:testing default logfile using named -L file ($n)"
+=======
+n=`expr $n + 1`
+echo "I: testing default logfile using named -L file ($n)"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 # Now stop the server again and test the -L option
 rm -f $DLFILE
 $PERL ../../stop.pl .. ns1
@@ -277,6 +295,31 @@ fi
 echo "I:testing logging functionality"
 
 n=`expr $n + 1`
+<<<<<<< HEAD
+=======
+echo "I: testing iso8601 timestamp ($n)"
+cp $ISOCONF named.conf
+$myRNDC reconfig > rndc.out.test$n 2>&1
+if grep '^....-..-..T..:..:..\.... ' $ISOFILE > /dev/null; then
+	echo "I: testing iso8601 timestamp succeeded"
+else
+	echo "I: testing iso8601 timestamp failed"
+	status=`expr $status + 1`
+fi
+
+n=`expr $n + 1`
+echo "I: testing iso8601-utc timestamp ($n)"
+cp $ISOCONFUTC named.conf
+$myRNDC reconfig > rndc.out.test$n 2>&1
+if grep '^....-..-..T..:..:..\....Z' $ISOUTCFILE > /dev/null; then
+	echo "I: testing iso8601-utc timestamp succeeded"
+else
+	echo "I: testing iso8601-utc timestamp failed"
+	status=`expr $status + 1`
+fi
+
+n=`expr $n + 1`
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 echo "I: testing explict versions ($n)"
 cp $VERSCONF named.conf
 # a seconds since epoch version number
@@ -313,6 +356,35 @@ then
 fi
 
 n=`expr $n + 1`
+<<<<<<< HEAD
+=======
+echo "I: testing timestamped versions ($n)"
+cp $TSCONF named.conf
+# a seconds since epoch version number
+touch $TSFILE.2015010112000012
+t1=`$PERL -e 'print time()."\n";'`
+$myRNDC reconfig > rndc.out.test$n 2>&1
+$DIG version.bind txt ch @10.53.0.1 -p 5300 > dig.out.test$n
+t2=`$PERL -e 'print time()."\n";'`
+t=`expr ${t2:-0} - ${t1:-0}`
+if test ${t:-1000} -gt 5
+then
+        echo "I:  testing timestamped versions failed cleanup of old entries took too long ($t secs)"
+	status=`expr $status + 1`
+fi 
+if ! grep "status: NOERROR" dig.out.test$n > /dev/null
+then
+	echo "I:  testing timestamped versions failed DiG lookup failed"
+	status=`expr $status + 1`
+fi
+if test -f $TSFILE.1480039317
+then
+	echo "I:  testing timestamped versions failed $TSFILE.1480039317 not removed"
+	status=`expr $status + 1`
+fi
+
+n=`expr $n + 1`
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 echo "I: testing unlimited versions ($n)"
 cp $UNLIMITEDCONF named.conf
 # a seconds since epoch version number

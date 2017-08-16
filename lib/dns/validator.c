@@ -16,6 +16,7 @@
 #include <isc/task.h>
 #include <isc/util.h>
 
+#include <dns/client.h>
 #include <dns/db.h>
 #include <dns/dnssec.h>
 #include <dns/ds.h>
@@ -164,7 +165,7 @@ static isc_result_t
 finddlvsep(dns_validator_t *val, isc_boolean_t resume);
 
 static isc_result_t
-startfinddlvsep(dns_validator_t *val, dns_name_t *unsecure);
+startfinddlvsep(dns_validator_t *val, const dns_name_t *unsecure);
 
 /*%
  * Mark the RRsets as a answer.
@@ -3064,7 +3065,7 @@ dlvfetched(isc_task_t *task, isc_event_t *event) {
  * \li	Others on validation failures.
  */
 static isc_result_t
-startfinddlvsep(dns_validator_t *val, dns_name_t *unsecure) {
+startfinddlvsep(dns_validator_t *val, const dns_name_t *unsecure) {
 	char namebuf[DNS_NAME_FORMATSIZE];
 	isc_result_t result;
 
@@ -3939,11 +3940,30 @@ validator_logv(dns_validator_t *val, isc_logcategory_t *category,
 	char msgbuf[2048];
 	static const char spaces[] = "        *";
 	int depth = val->depth * 2;
+	const char *viewname, *sep1, *sep2;
 
 	vsnprintf(msgbuf, sizeof(msgbuf), fmt, ap);
 
 	if ((unsigned int) depth >= sizeof spaces)
 		depth = sizeof spaces - 1;
+
+	/*
+	 * Log the view name unless it's:
+	 * * "_default/IN" (which means there's only one view
+	 *   configured in the server), or
+	 * * "_dnsclient/IN" (which means this is being called
+	 *   from an application using dns/client.c).
+	 */
+	if (val->view->rdclass == dns_rdataclass_in &&
+	    (strcmp(val->view->name, "_default") == 0 ||
+	     strcmp(val->view->name, DNS_CLIENTVIEW_NAME) == 0))
+	{
+		sep1 = viewname = sep2 = "";
+	} else {
+		sep1 = "view ";
+		viewname = val->view->name;
+		sep2 = ": ";
+	}
 
 	if (val->event != NULL && val->event->name != NULL) {
 		char namebuf[DNS_NAME_FORMATSIZE];
@@ -3953,12 +3973,14 @@ validator_logv(dns_validator_t *val, isc_logcategory_t *category,
 		dns_rdatatype_format(val->event->type, typebuf,
 				     sizeof(typebuf));
 		isc_log_write(dns_lctx, category, module, level,
-			      "%.*svalidating %s/%s: %s", depth, spaces,
+			      "%s%s%s%.*svalidating %s/%s: %s",
+			      sep1, viewname, sep2, depth, spaces,
 			      namebuf, typebuf, msgbuf);
 	} else {
 		isc_log_write(dns_lctx, category, module, level,
-			      "%.*svalidator @%p: %s", depth, spaces,
-			       val, msgbuf);
+			      "%s%s%s%.*svalidator @%p: %s",
+			      sep1, viewname, sep2, depth, spaces,
+			      val, msgbuf);
 	}
 }
 

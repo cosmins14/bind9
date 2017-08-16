@@ -48,6 +48,7 @@ static isc_boolean_t short_form = ISC_TRUE, listed_server = ISC_FALSE;
 static isc_boolean_t default_lookups = ISC_TRUE;
 static int seen_error = -1;
 static isc_boolean_t list_addresses = ISC_TRUE;
+static isc_boolean_t list_almost_all = ISC_FALSE;
 static dns_rdatatype_t list_type = dns_rdatatype_a;
 static isc_boolean_t printed_server = ISC_FALSE;
 static isc_boolean_t ipv4only = ISC_FALSE, ipv6only = ISC_FALSE;
@@ -140,6 +141,7 @@ show_usage(void) {
 "Usage: host [-aCdilrTvVw] [-c class] [-N ndots] [-t type] [-W time]\n"
 "            [-R number] [-m flag] hostname [server]\n"
 "       -a is equivalent to -v -t ANY\n"
+"       -A is like -a but omits RRSIG, NSEC, NSEC3\n"
 "       -c specifies query class for non-IN data\n"
 "       -C compares SOA records on authoritative nameservers\n"
 "       -d is equivalent to -v\n"
@@ -161,12 +163,12 @@ show_usage(void) {
 	exit(1);
 }
 
-void
-dighost_shutdown(void) {
-	isc_app_shutdown();
+static void
+host_shutdown(void) {
+	(void) isc_app_shutdown();
 }
 
-void
+static void
 received(int bytes, isc_sockaddr_t *from, dig_query_t *query) {
 	isc_time_t now;
 	int diff;
@@ -181,7 +183,7 @@ received(int bytes, isc_sockaddr_t *from, dig_query_t *query) {
 	}
 }
 
-void
+static void
 trying(char *frm, dig_lookup_t *lookup) {
 	UNUSED(lookup);
 
@@ -223,18 +225,7 @@ say_message(dns_name_t *name, const char *msg, dns_rdata_t *rdata,
 	printf("\n");
 	isc_buffer_free(&b);
 }
-#ifdef DIG_SIGCHASE
-/* Just for compatibility : not use in host program */
-isc_result_t
-printrdataset(dns_name_t *owner_name, dns_rdataset_t *rdataset,
-	      isc_buffer_t *target)
-{
-  UNUSED(owner_name);
-  UNUSED(rdataset);
-  UNUSED(target);
-  return(ISC_FALSE);
-}
-#endif
+
 static isc_result_t
 printsection(dns_message_t *msg, dns_section_t sectionid,
 	     const char *section_name, isc_boolean_t headers,
@@ -287,6 +278,11 @@ printsection(dns_message_t *msg, dns_section_t sectionid,
 				rdataset->type == dns_rdatatype_aaaa ||
 				rdataset->type == dns_rdatatype_ns ||
 				rdataset->type == dns_rdatatype_ptr))))
+				continue;
+			if (list_almost_all &&
+			       (rdataset->type == dns_rdatatype_rrsig ||
+				rdataset->type == dns_rdatatype_nsec ||
+				rdataset->type == dns_rdatatype_nsec3))
 				continue;
 			if (!short_form) {
 				result = dns_rdataset_totext(rdataset,
@@ -356,8 +352,9 @@ printsection(dns_message_t *msg, dns_section_t sectionid,
 }
 
 static isc_result_t
-printrdata(dns_message_t *msg, dns_rdataset_t *rdataset, dns_name_t *owner,
-	   const char *set_name, isc_boolean_t headers)
+printrdata(dns_message_t *msg, dns_rdataset_t *rdataset,
+	   const dns_name_t *owner, const char *set_name,
+	   isc_boolean_t headers)
 {
 	isc_buffer_t target;
 	isc_result_t result;
@@ -406,11 +403,11 @@ chase_cnamechain(dns_message_t *msg, dns_name_t *qname) {
 	}
 }
 
-isc_result_t
+static isc_result_t
 printmessage(dig_query_t *query, dns_message_t *msg, isc_boolean_t headers) {
 	isc_boolean_t did_flag = ISC_FALSE;
 	dns_rdataset_t *opt, *tsig = NULL;
-	dns_name_t *tsigname;
+	const dns_name_t *tsigname;
 	isc_result_t result = ISC_R_SUCCESS;
 	int force_error;
 
@@ -594,7 +591,11 @@ printmessage(dig_query_t *query, dns_message_t *msg, isc_boolean_t headers) {
 	return (result);
 }
 
+<<<<<<< HEAD
 static const char * optstring = "46ac:dilnm:rst:vVwCDN:R:TUW:";
+=======
+static const char * optstring = "46aAc:dilnm:rst:vVwCDN:R:TUW:";
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 /*% version */
 static void
@@ -631,6 +632,7 @@ pre_parse_args(int argc, char **argv) {
 			ipv6only = ISC_TRUE;
 			break;
 		case 'a': break;
+		case 'A': break;
 		case 'c': break;
 		case 'd': break;
 		case 'i': break;
@@ -765,6 +767,9 @@ parse_args(isc_boolean_t is_batchfile, int argc, char **argv) {
 			}
 			default_lookups = ISC_FALSE;
 			break;
+		case 'A':
+			list_almost_all = ISC_TRUE;
+			/* FALL THROUGH */
 		case 'a':
 			if (!lookup->rdtypeset ||
 			    lookup->rdtype != dns_rdatatype_axfr)
@@ -888,6 +893,12 @@ main(int argc, char **argv) {
 #ifdef WITH_IDN
 	idnoptions = IDN_ASCCHECK;
 #endif
+
+	/* setup dighost callbacks */
+	dighost_printmessage = printmessage;
+	dighost_received = received;
+	dighost_trying = trying;
+	dighost_shutdown = host_shutdown;
 
 	debug("main()");
 	progname = argv[0];

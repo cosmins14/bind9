@@ -122,12 +122,21 @@ logging {<br>
 	category <em class="replaceable"><code>string</code></em> { <em class="replaceable"><code>string</code></em>; ... };<br>
 	channel <em class="replaceable"><code>string</code></em> {<br>
 		buffered <em class="replaceable"><code>boolean</code></em>;<br>
+<<<<<<< HEAD
 		file <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> versions ( "unlimited" | <em class="replaceable"><code>integer</code></em> )<br>
 		    </span>] [<span class="optional"> size <em class="replaceable"><code>size</code></em> </span>];<br>
 		null;<br>
 		print-category <em class="replaceable"><code>boolean</code></em>;<br>
 		print-severity <em class="replaceable"><code>boolean</code></em>;<br>
 		print-time <em class="replaceable"><code>boolean</code></em>;<br>
+=======
+		file <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> versions ( unlimited | <em class="replaceable"><code>integer</code></em> ) </span>]<br>
+		    [<span class="optional"> size <em class="replaceable"><code>size</code></em> </span>] [<span class="optional"> suffix ( increment | timestamp ) </span>];<br>
+		null;<br>
+		print-category <em class="replaceable"><code>boolean</code></em>;<br>
+		print-severity <em class="replaceable"><code>boolean</code></em>;<br>
+		print-time ( iso8601 | iso8601-utc | local | <em class="replaceable"><code>boolean</code></em> );<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		severity <em class="replaceable"><code>log_severity</code></em>;<br>
 		stderr;<br>
 		syslog [<span class="optional"> <em class="replaceable"><code>syslog_facility</code></em> </span>];<br>
@@ -264,7 +273,14 @@ options {<br>
 	    resolver ) [<span class="optional"> ( query | response ) </span>]; ... };<br>
 	dnstap-identity ( <em class="replaceable"><code>quoted_string</code></em> | none |<br>
 	    hostname );<br>
+<<<<<<< HEAD
 	dnstap-output ( file | unix ) <em class="replaceable"><code>quoted_string</code></em>;<br>
+=======
+	dnstap-output ( file | unix ) <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"><br>
+	    size ( unlimited | <em class="replaceable"><code>size</code></em> ) </span>] [<span class="optional"> versions (<br>
+	    unlimited | <em class="replaceable"><code>integer</code></em> ) </span>] [<span class="optional"> suffix ( increment<br>
+	    | timestamp ) </span>];<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	dnstap-version ( <em class="replaceable"><code>quoted_string</code></em> | none );<br>
 	dscp <em class="replaceable"><code>integer</code></em>;<br>
 	dual-stack-servers [<span class="optional"> port <em class="replaceable"><code>integer</code></em> </span>] { ( <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> port<br>
@@ -395,11 +411,22 @@ options {<br>
 	require-server-cookie <em class="replaceable"><code>boolean</code></em>;<br>
 	reserved-sockets <em class="replaceable"><code>integer</code></em>;<br>
 	resolver-query-timeout <em class="replaceable"><code>integer</code></em>;<br>
+<<<<<<< HEAD
 	response-policy { zone <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> log <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
 	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> policy ( cname | disabled | drop |<br>
 	    given | no-op | nodata | nxdomain | passthru | tcp-only<br>
 	    <em class="replaceable"><code>quoted_string</code></em> ) </span>] [<span class="optional"> recursive-only <em class="replaceable"><code>boolean</code></em> </span>]; ... } [<span class="optional"><br>
 	    break-dnssec <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"> max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+=======
+	response-padding { <em class="replaceable"><code>address_match_element</code></em>; ... } block-size<br>
+	    <em class="replaceable"><code>integer</code></em>;<br>
+	response-policy { zone <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> log <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
+	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> min-update-interval <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+	    policy ( cname | disabled | drop | given | no-op | nodata |<br>
+	    nxdomain | passthru | tcp-only <em class="replaceable"><code>quoted_string</code></em> ) </span>] [<span class="optional"><br>
+	    recursive-only <em class="replaceable"><code>boolean</code></em> </span>]; ... } [<span class="optional"> break-dnssec <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
+	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> min-update-interval <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    min-ns-dots <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> nsip-wait-recurse <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
 	    qname-wait-recurse <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"> recursive-only <em class="replaceable"><code>boolean</code></em> </span>];<br>
 	root-delegation-only [<span class="optional"> exclude { <em class="replaceable"><code>quoted_string</code></em>; ... } </span>];<br>
@@ -422,7 +449,14 @@ options {<br>
 	stacksize ( default | unlimited | <em class="replaceable"><code>sizeval</code></em> );<br>
 	startup-notify-rate <em class="replaceable"><code>integer</code></em>;<br>
 	statistics-file <em class="replaceable"><code>quoted_string</code></em>;<br>
+<<<<<<< HEAD
+=======
+	tcp-advertised-timeout <em class="replaceable"><code>integer</code></em>;<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	tcp-clients <em class="replaceable"><code>integer</code></em>;<br>
+	tcp-idle-timeout <em class="replaceable"><code>integer</code></em>;<br>
+	tcp-initial-timeout <em class="replaceable"><code>integer</code></em>;<br>
+	tcp-keepalive-timeout <em class="replaceable"><code>integer</code></em>;<br>
 	tcp-listen-queue <em class="replaceable"><code>integer</code></em>;<br>
 	tkey-dhkey <em class="replaceable"><code>quoted_string</code></em> <em class="replaceable"><code>integer</code></em>;<br>
 	tkey-domain <em class="replaceable"><code>quoted_string</code></em>;<br>
@@ -467,6 +501,10 @@ server <em class="replaceable"><code>netprefix</code></em> {<br>
 	    dscp <em class="replaceable"><code>integer</code></em> </span>];<br>
 	notify-source-v6 ( <em class="replaceable"><code>ipv6_address</code></em> | * ) [<span class="optional"> port ( <em class="replaceable"><code>integer</code></em> | * ) </span>]<br>
 	    [<span class="optional"> dscp <em class="replaceable"><code>integer</code></em> </span>];<br>
+<<<<<<< HEAD
+=======
+	padding <em class="replaceable"><code>integer</code></em>;<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	provide-ixfr <em class="replaceable"><code>boolean</code></em>;<br>
 	query-source ( ( [<span class="optional"> address </span>] ( <em class="replaceable"><code>ipv4_address</code></em> | * ) [<span class="optional"> port (<br>
 	    <em class="replaceable"><code>integer</code></em> | * ) </span>] ) | ( [<span class="optional"> [<span class="optional"> address </span>] ( <em class="replaceable"><code>ipv4_address</code></em> | * ) </span>]<br>
@@ -478,6 +516,10 @@ server <em class="replaceable"><code>netprefix</code></em> {<br>
 	request-ixfr <em class="replaceable"><code>boolean</code></em>;<br>
 	request-nsid <em class="replaceable"><code>boolean</code></em>;<br>
 	send-cookie <em class="replaceable"><code>boolean</code></em>;<br>
+<<<<<<< HEAD
+=======
+	tcp-keepalive <em class="replaceable"><code>boolean</code></em>;<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	tcp-only <em class="replaceable"><code>boolean</code></em>;<br>
 	transfer-format ( many-answers | one-answer );<br>
 	transfer-source ( <em class="replaceable"><code>ipv4_address</code></em> | * ) [<span class="optional"> port ( <em class="replaceable"><code>integer</code></em> | * ) </span>] [<span class="optional"><br>
@@ -699,11 +741,22 @@ view <em class="replaceable"><code>string</code></em> [<span class="optional"> <
 	request-nsid <em class="replaceable"><code>boolean</code></em>;<br>
 	require-server-cookie <em class="replaceable"><code>boolean</code></em>;<br>
 	resolver-query-timeout <em class="replaceable"><code>integer</code></em>;<br>
+<<<<<<< HEAD
 	response-policy { zone <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> log <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
 	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> policy ( cname | disabled | drop |<br>
 	    given | no-op | nodata | nxdomain | passthru | tcp-only<br>
 	    <em class="replaceable"><code>quoted_string</code></em> ) </span>] [<span class="optional"> recursive-only <em class="replaceable"><code>boolean</code></em> </span>]; ... } [<span class="optional"><br>
 	    break-dnssec <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"> max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+=======
+	response-padding { <em class="replaceable"><code>address_match_element</code></em>; ... } block-size<br>
+	    <em class="replaceable"><code>integer</code></em>;<br>
+	response-policy { zone <em class="replaceable"><code>quoted_string</code></em> [<span class="optional"> log <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
+	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> min-update-interval <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+	    policy ( cname | disabled | drop | given | no-op | nodata |<br>
+	    nxdomain | passthru | tcp-only <em class="replaceable"><code>quoted_string</code></em> ) </span>] [<span class="optional"><br>
+	    recursive-only <em class="replaceable"><code>boolean</code></em> </span>]; ... } [<span class="optional"> break-dnssec <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
+	    max-policy-ttl <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> min-update-interval <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"><br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    min-ns-dots <em class="replaceable"><code>integer</code></em> </span>] [<span class="optional"> nsip-wait-recurse <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"><br>
 	    qname-wait-recurse <em class="replaceable"><code>boolean</code></em> </span>] [<span class="optional"> recursive-only <em class="replaceable"><code>boolean</code></em> </span>];<br>
 	root-delegation-only [<span class="optional"> exclude { <em class="replaceable"><code>quoted_string</code></em>; ... } </span>];<br>
@@ -722,6 +775,10 @@ view <em class="replaceable"><code>string</code></em> [<span class="optional"> <
 		    ) </span>] [<span class="optional"> dscp <em class="replaceable"><code>integer</code></em> </span>];<br>
 		notify-source-v6 ( <em class="replaceable"><code>ipv6_address</code></em> | * ) [<span class="optional"> port ( <em class="replaceable"><code>integer</code></em><br>
 		    | * ) </span>] [<span class="optional"> dscp <em class="replaceable"><code>integer</code></em> </span>];<br>
+<<<<<<< HEAD
+=======
+		padding <em class="replaceable"><code>integer</code></em>;<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		provide-ixfr <em class="replaceable"><code>boolean</code></em>;<br>
 		query-source ( ( [<span class="optional"> address </span>] ( <em class="replaceable"><code>ipv4_address</code></em> | * ) [<span class="optional"> port<br>
 		    ( <em class="replaceable"><code>integer</code></em> | * ) </span>] ) | ( [<span class="optional"> [<span class="optional"> address </span>] (<br>
@@ -735,6 +792,10 @@ view <em class="replaceable"><code>string</code></em> [<span class="optional"> <
 		request-ixfr <em class="replaceable"><code>boolean</code></em>;<br>
 		request-nsid <em class="replaceable"><code>boolean</code></em>;<br>
 		send-cookie <em class="replaceable"><code>boolean</code></em>;<br>
+<<<<<<< HEAD
+=======
+		tcp-keepalive <em class="replaceable"><code>boolean</code></em>;<br>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		tcp-only <em class="replaceable"><code>boolean</code></em>;<br>
 		transfer-format ( many-answers | one-answer );<br>
 		transfer-source ( <em class="replaceable"><code>ipv4_address</code></em> | * ) [<span class="optional"> port ( <em class="replaceable"><code>integer</code></em> |<br>

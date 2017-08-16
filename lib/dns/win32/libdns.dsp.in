@@ -98,10 +98,6 @@ LINK32=link.exe
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=..\include\dns\acache.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\include\dns\acl.h
 # End Source File
 # Begin Source File
@@ -199,6 +195,10 @@ SOURCE=..\include\dns\dyndb.h
 # Begin Source File
 
 SOURCE=..\include\dns\ecdb.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\dns\ecs.h
 # End Source File
 # Begin Source File
 
@@ -500,10 +500,6 @@ SOURCE=..\include\dns\zt.h
 # PROP Default_Filter "c"
 # Begin Source File
 
-SOURCE=..\acache.c
-# End Source File
-# Begin Source File
-
 SOURCE=..\acl.c
 # End Source File
 # Begin Source File
@@ -589,6 +585,10 @@ SOURCE=..\dyndb.c
 # Begin Source File
 
 SOURCE=..\ecdb.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\ecs.c
 # End Source File
 # Begin Source File
 
@@ -887,6 +887,10 @@ SOURCE=..\opensslecdsa_link.c
 # End Source File
 # Begin Source File
 
+SOURCE=..\openssleddsa_link.c
+# End Source File
+# Begin Source File
+
 SOURCE=..\opensslgost_link.c
 # End Source File
 # Begin Source File
@@ -910,6 +914,10 @@ SOURCE=..\pkcs11dsa_link.c
 # Begin Source File
 
 SOURCE=..\pkcs11ecdsa_link.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\pkcs11eddsa_link.c
 # End Source File
 # Begin Source File
 

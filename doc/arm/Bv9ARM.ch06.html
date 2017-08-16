@@ -1258,7 +1258,12 @@
   [ <span class="command"><strong>channel</strong></span> <em class="replaceable"><code>channel_name</code></em> <span class="command"><strong>{</strong></span>
     ( ( <span class="command"><strong>file</strong></span> <em class="replaceable"><code>path_name</code></em>
           [ <span class="command"><strong>versions</strong></span> ( <em class="replaceable"><code>number</code></em> | <code class="option">unlimited</code> ) ]
+<<<<<<< HEAD
           [ <span class="command"><strong>size</strong></span> <em class="replaceable"><code>size_spec</code></em> ] )
+=======
+          [ <span class="command"><strong>size</strong></span> <em class="replaceable"><code>size_spec</code></em> ]
+          [ <span class="command"><strong>suffix</strong></span> ( <code class="option">increment</code> | <code class="option">timestamp</code> ) )
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
       | <span class="command"><strong>syslog</strong></span> <em class="replaceable"><code>syslog_facility</code></em>
       | <span class="command"><strong>stderr</strong></span>
       | <span class="command"><strong>null</strong></span> ) <span class="command"><strong>;</strong></span>
@@ -1266,7 +1271,11 @@
                    <code class="option">info</code> | <code class="option">debug</code> [ <em class="replaceable"><code>level</code></em> ] | <code class="option">dynamic</code> ) <span class="command"><strong>;</strong></span> ]
       [ <span class="command"><strong>print-category</strong></span> <em class="replaceable"><code>yes_or_no</code></em> <span class="command"><strong>;</strong></span> ]
       [ <span class="command"><strong>print-severity</strong></span> <em class="replaceable"><code>yes_or_no</code></em> <span class="command"><strong>;</strong></span> ]
+<<<<<<< HEAD
       [ <span class="command"><strong>print-time</strong></span> <em class="replaceable"><code>yes_or_no</code></em> <span class="command"><strong>;</strong></span> ]
+=======
+      [ <span class="command"><strong>print-time</strong></span> ( <code class="option">yes</code> | <code class="option">no</code> | <code class="option">local</code> | <code class="option">iso8601</code> | <code class="option">iso8601-utc</code> ) ;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
       [ <span class="command"><strong>buffered</strong></span> <em class="replaceable"><code>yes_or_no</code></em> <span class="command"><strong>;</strong></span> ]
     <span class="command"><strong>};</strong></span> ]
   [ <span class="command"><strong>category</strong></span> <em class="replaceable"><code>category_name</code></em> <span class="command"><strong>{</strong></span>
@@ -1357,6 +1366,7 @@
 
           <p>
             The <span class="command"><strong>file</strong></span> destination clause directs
+<<<<<<< HEAD
             the channel
             to a disk file.  It can include limitations
             both on how large the file is allowed to become, and how many
@@ -1396,22 +1406,75 @@
             associated with it.  If backup versions are kept, the files are
             rolled as
             described above and a new one begun.  If there is no
-            <span class="command"><strong>versions</strong></span> option, no more data will
-            be written to the log
-            until some out-of-band mechanism removes or truncates the log to
-            less than the
-            maximum size.  The default behavior is not to limit the size of
-            the
-            file.
+=======
+            the channel to a disk file.  It can include additional
+            arguments to specify how large the file is allowed to
+            become before it is rolled to a backup file
+            (<span class="command"><strong>size</strong></span>), how many backup versions of
+            the file will be saved each time this happens
+            (<span class="command"><strong>versions</strong></span>), and the format to use
+            for naming backup versions (<span class="command"><strong>suffix</strong></span>).
           </p>
 
           <p>
+            The <span class="command"><strong>size</strong></span> option is used to limit
+            log file growth. If the file ever exceeds the specified
+            size, then <span class="command"><strong>named</strong></span> will stop writing to the
+            file unless it has a <span class="command"><strong>versions</strong></span> option
+            associated with it. If backup versions are kept, the files
+            are rolled as described below.  If there is no
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
+            <span class="command"><strong>versions</strong></span> option, no more data will
+            be written to the log until some out-of-band mechanism
+            removes or truncates the log to less than the maximum size.
+            The default behavior is not to limit the size of the file.
+          </p>
+          <p>
+            File rolling only occurs when the file exceeds the size
+            specified with the <span class="command"><strong>size</strong></span> option. No
+            backup versions are kept by default; any existing
+            log file is simply appended.  The
+            <span class="command"><strong>versions</strong></span> option specifies
+            how many backup versions of the file should be kept.
+            If set to <code class="literal">unlimited</code>, there is no limit.
+          </p>
+          <p>
+            The <span class="command"><strong>suffix</strong></span> option can be set to
+            either <code class="literal">increment</code> or
+            <code class="literal">timestamp</code>.  If set to
+            <code class="literal">timestamp</code>, then when a log file is
+            rolled, it is saved with the current timestamp as a
+            file suffix. If set to <code class="literal">increment</code>,
+            then backup files are saved with incrementing numbers
+            as suffixes; older files are renamed when rolling.
+            For example, if <span class="command"><strong>versions</strong></span>
+            is set to 3 and <span class="command"><strong>suffix</strong></span> to
+            <code class="literal">increment</code>, then when
+            <code class="filename">filename.log</code> reaches the size
+            specified by <span class="command"><strong>size</strong></span>,
+            <code class="filename">filename.log.1</code> is renamed to
+            <code class="filename">filename.log.2</code>,
+            <code class="filename">filename.log.0</code> is renamed
+            to <code class="filename">filename.log.1</code>,
+            and <code class="filename">filename.log</code> is
+            renamed to <code class="filename">filename.log.0</code>,
+            whereupon a new <code class="filename">filename.log</code> is
+            opened.
+          </p>
+
+          <p>
+<<<<<<< HEAD
             Example usage of the <span class="command"><strong>size</strong></span> and
             <span class="command"><strong>versions</strong></span> options:
+=======
+            Example usage of the <span class="command"><strong>size</strong></span>,
+            <span class="command"><strong>versions</strong></span>, and <span class="command"><strong>suffix</strong></span>
+            options:
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
           </p>
 
 <pre class="programlisting">channel an_example_channel {
-    file "example.log" versions 3 size 20m;
+    file "example.log" versions 3 size 20m suffix increment;
     print-time yes;
     print-category yes;
 };
@@ -1503,14 +1566,36 @@ notrace</strong></span>. All debugging messages in the server have a debug
             server's global debug level to determine what messages to print.
           </p>
           <p>
+<<<<<<< HEAD
             If <span class="command"><strong>print-time</strong></span> has been turned on,
             then
             the date and time will be logged. <span class="command"><strong>print-time</strong></span> may
+=======
+            <span class="command"><strong>print-time</strong></span> can be set to
+            <strong class="userinput"><code>yes</code></strong>, <strong class="userinput"><code>no</code></strong>,
+            or a time format specifier, which may be one of
+            <code class="option">local</code>, <code class="option">iso8601</code> or
+            <code class="option">iso8601-utc</code>.  If set to
+            <strong class="userinput"><code>no</code></strong>, then the date and time will
+            not be logged.  If set to <strong class="userinput"><code>yes</code></strong>
+            or <code class="option">local</code>, the date and time are logged
+            in a human readable format, using the local time zone.
+            If set to <code class="option">iso8601</code> the local time is
+            logged in ISO8601 format.  If set to
+            <code class="option">iso8601-utc</code>, then the date and time
+            are logged in ISO8601 format, with time zone set to
+            UTC. The default is <code class="option">local</code>.
+          </p>
+          <p>
+            <span class="command"><strong>print-time</strong></span> may
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             be specified for a <span class="command"><strong>syslog</strong></span> channel,
-            but is usually
+            but it is usually
             pointless since <span class="command"><strong>syslog</strong></span> also logs
-            the date and
-            time. If <span class="command"><strong>print-category</strong></span> is
+            the date and time.
+          </p>
+          <p>
+            If <span class="command"><strong>print-category</strong></span> is
             requested, then the
             category of the message will be logged as well. Finally, if <span class="command"><strong>print-severity</strong></span> is
             on, then the severity level of the message will be logged. The <span class="command"><strong>print-</strong></span> options may
@@ -1867,15 +1952,19 @@ category notify { null; };
 	    address and port number, and the query name,
 	    class and type.  Next, it reports whether the
 	    Recursion Desired flag was set (+ if set, -
-	    if not set), if the query was signed (S),
-	    EDNS was in used along with the EDNS version
-	    number (E(#)), if TCP was used (T), if DO
-	    (DNSSEC Ok) was set (D), if CD (Checking
-	    Disabled) was set (C), if a valid DNS Server
-	    COOKIE was received (V), or if a DNS COOKIE
-	    option without a valid Server COOKIE was
+	    if not set), whether the query was signed (S),
+	    whether EDNS was in use along with the EDNS version
+	    number (E(#)), whether TCP was used (T), whether
+	    DO (DNSSEC Ok) was set (D), whether CD (Checking
+	    Disabled) was set (C), whether a valid DNS Server
+	    COOKIE was received (V), and whether a DNS
+	    COOKIE option without a valid Server COOKIE was
 	    present (K).  After this the destination
 	    address the query was sent to is reported.
+	    Finally, if any CLIENT-SUBNET option
+	    was present in the client query, it is
+	    included in square brackets in the format
+	    [ECS <em class="replaceable"><code>address/source/scope</code></em>].
 	  </p>
 
 	  <p>
@@ -2414,7 +2503,11 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>server-id</strong></span> <em class="replaceable"><code>server_id_string</code></em> ; ]
   [ <span class="command"><strong>directory</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>dnstap {</strong></span> <em class="replaceable"><code>message_type</code></em> ; ... <span class="command"><strong>}</strong></span> ; ]
+<<<<<<< HEAD
   [ <span class="command"><strong>dnstap-output</strong></span> ( <code class="option">file</code> | <code class="option">unix</code> ) <em class="replaceable"><code>path_name</code></em> ; ]
+=======
+  [ <span class="command"><strong>dnstap-output</strong></span> ( <code class="option">file</code> | <code class="option">unix</code> ) <em class="replaceable"><code>path_name</code></em> [ <span class="command"><strong>size</strong></span> <em class="replaceable"><code>size_spec</code></em> ] [ <span class="command"><strong>versions</strong></span> ( <em class="replaceable"><code>number</code></em> | <code class="option">unlimited</code> ) ] ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>dnstap-identity</strong></span> ( <em class="replaceable"><code>string</code></em> | <code class="option">hostname</code> | <code class="option">none</code> ) ; ]
   [ <span class="command"><strong>dnstap-version</strong></span> ( <em class="replaceable"><code>string</code></em> | <code class="option">none</code> ) ; ]
   [ <span class="command"><strong>fstrm-set-buffer-hint</strong></span> <em class="replaceable"><code>number</code></em> ; ]
@@ -2427,6 +2520,10 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>geoip-directory</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>key-directory</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>managed-keys-directory</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
+<<<<<<< HEAD
+=======
+  [ <span class="command"><strong>new-zones-directory</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>named-xfer</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>tkey-gssapi-keytab</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>tkey-gssapi-credential</strong></span> <em class="replaceable"><code>principal</code></em> ; ]
@@ -2456,6 +2553,10 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>has-old-clients</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>host-statistics</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>host-statistics-max</strong></span> <em class="replaceable"><code>number</code></em> ; ]
+<<<<<<< HEAD
+=======
+  [ <span class="command"><strong>glue-cache</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>minimal-any</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>minimal-responses</strong></span> ( <em class="replaceable"><code>yes_or_no</code></em> | <code class="option">no-auth</code> | <code class="option">no-auth-recursive</code> ) ; ]
   [ <span class="command"><strong>multiple-cnames</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
@@ -2551,6 +2652,13 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>serial-query-rate</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>serial-queries</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>tcp-listen-queue</strong></span> <em class="replaceable"><code>number</code></em> ; ]
+<<<<<<< HEAD
+=======
+  [ <span class="command"><strong>tcp-initial-timeout</strong></span> <em class="replaceable"><code>number</code></em>; ]
+  [ <span class="command"><strong>tcp-idle-timeout</strong></span> <em class="replaceable"><code>number</code></em>; ]
+  [ <span class="command"><strong>tcp-keepalive-timeout</strong></span> <em class="replaceable"><code>number</code></em>; ]
+  [ <span class="command"><strong>tcp-advertised-timeout</strong></span> <em class="replaceable"><code>number</code></em>; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>transfer-format</strong></span> ( <code class="option">one-answer</code> | <code class="option">many-answers</code> ) ; ]
   [ <span class="command"><strong>transfer-message-size</strong></span>  <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>transfers-in</strong></span>  <em class="replaceable"><code>number</code></em> ; ]
@@ -2612,8 +2720,11 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>nta-recheck</strong></span> <em class="replaceable"><code>duration</code></em> ; ]
   [ <span class="command"><strong>port</strong></span> <em class="replaceable"><code>ip_port</code></em> ; ]
   [ <span class="command"><strong>dscp</strong></span> <em class="replaceable"><code>ip_dscp</code></em> ; ]
+<<<<<<< HEAD
   [ <span class="command"><strong>additional-from-auth</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>additional-from-cache</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>random-device</strong></span> <em class="replaceable"><code>path_name</code></em> ; ]
   [ <span class="command"><strong>max-cache-size</strong></span> <em class="replaceable"><code>size_or_percent</code></em> ; ]
   [ <span class="command"><strong>match-mapped-addresses</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
@@ -2633,14 +2744,21 @@ badresp:1,adberr:0,findfail:0,valfail:0]
   [ <span class="command"><strong>preferred-glue</strong></span> ( <code class="option">A</code> | <code class="option">AAAA</code> | <code class="option">none</code> ); ]
   [ <span class="command"><strong>edns-udp-size</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>max-udp-size</strong></span> <em class="replaceable"><code>number</code></em> ; ]
+<<<<<<< HEAD
+=======
+  [ <span class="command"><strong>response-padding</strong></span> { <em class="replaceable"><code>address_match_list</code></em> } block-size <em class="replaceable"><code>number</code></em> ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>max-rsa-exponent-size</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>root-delegation-only</strong></span> [ <span class="command"><strong>exclude {</strong></span> <em class="replaceable"><code>namelist</code></em> <span class="command"><strong>}</strong></span> ] ; ]
   [ <span class="command"><strong>querylog</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>disable-algorithms</strong></span> <em class="replaceable"><code>domain</code></em> <span class="command"><strong>{</strong></span> <em class="replaceable"><code>algorithm</code></em> ; ... <span class="command"><strong>}</strong></span> ; ]
   [ <span class="command"><strong>disable-ds-digests</strong></span> <em class="replaceable"><code>domain</code></em> <span class="command"><strong>{</strong></span> <em class="replaceable"><code>digest_type</code></em> ; ... <span class="command"><strong>}</strong></span> ; ]
+<<<<<<< HEAD
   [ <span class="command"><strong>acache-enable</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
   [ <span class="command"><strong>acache-cleaning-interval</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>max-acache-size</strong></span> <em class="replaceable"><code>size_spec</code></em> ; ]
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>max-recursion-depth</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>max-recursion-queries</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>masterfile-format</strong></span> ( <code class="option">text</code> | <code class="option">raw</code> | <code class="option">map</code> ) ; ]
@@ -2680,10 +2798,19 @@ badresp:1,adberr:0,findfail:0,valfail:0]
                  tcp-only | nxdomain | nodata | cname <em class="replaceable"><code>domain</code></em> ) ]
       [ <span class="command"><strong>recursive-only</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
       [ <span class="command"><strong>log</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
+<<<<<<< HEAD
       [ <span class="command"><strong>max-policy-ttl</strong></span> <em class="replaceable"><code>number</code></em> ] ;
          ...
     <span class="command"><strong>}</strong></span> [ <span class="command"><strong>recursive-only</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
       [ <span class="command"><strong>max-policy-ttl</strong></span> <em class="replaceable"><code>number</code></em> ]
+=======
+      [ <span class="command"><strong>max-policy-ttl</strong></span> <em class="replaceable"><code>number</code></em> ]
+      [ <span class="command"><strong>min-update-interval</strong></span> <em class="replaceable"><code>number</code></em> ] ;
+         ...
+    <span class="command"><strong>}</strong></span> [ <span class="command"><strong>recursive-only</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
+      [ <span class="command"><strong>max-policy-ttl</strong></span> <em class="replaceable"><code>number</code></em> ]
+      [ <span class="command"><strong>min-update-interval</strong></span> <em class="replaceable"><code>number</code></em> ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
       [ <span class="command"><strong>break-dnssec</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
       [ <span class="command"><strong>min-ns-dots</strong></span> <em class="replaceable"><code>number</code></em> ]
       [ <span class="command"><strong>nsip-wait-recurse</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ]
@@ -2986,6 +3113,26 @@ badresp:1,adberr:0,findfail:0,valfail:0]
                 the socket.)
               </p>
               <p>
+<<<<<<< HEAD
+=======
+                If the first argument is <code class="literal">file</code>, then
+                up to three additional options can be added:
+                <span class="command"><strong>size</strong></span> indicates the size to which a
+                <span class="command"><strong>dnstap</strong></span> log file can grow before being
+                rolled to a new file; <span class="command"><strong>versions</strong></span>
+                specifies the number of rolled log files to retain; and
+                <span class="command"><strong>suffix</strong></span> indicates whether to retain
+                rolled log files with an incrementing counter as the
+                suffix (<code class="literal">increment</code>) or with the
+                current timestamp (<code class="literal">timestamp</code>).
+                These are similar to the <span class="command"><strong>size</strong></span>,
+                <span class="command"><strong>versions</strong></span>, and <span class="command"><strong>suffix</strong></span>
+                options in a <span class="command"><strong>logging</strong></span> channel.
+                The default is to allow <span class="command"><strong>dnstap</strong></span> log
+                files to grow to any size without rolling.
+              </p>
+              <p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                 <span class="command"><strong>dnstap-output</strong></span> can only be set globally
                 in <span class="command"><strong>options</strong></span>. Currently, it can only be
                 set once while <span class="command"><strong>named</strong></span> is running;
@@ -3087,6 +3234,17 @@ badresp:1,adberr:0,findfail:0,valfail:0]
                 of the new format.)
               </p>
             </dd>
+<<<<<<< HEAD
+=======
+<dt><span class="term"><span class="command"><strong>new-zones-directory</strong></span></span></dt>
+<dd>
+              <p>
+                Specifies the directory in which to store the configuration
+                parameters for zones added via <span class="command"><strong>rndc addzone</strong></span>.
+                By default, this is the working directory.
+              </p>
+            </dd>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 <dt><span class="term"><span class="command"><strong>named-xfer</strong></span></span></dt>
 <dd>
               <p>
@@ -4190,7 +4348,33 @@ options {
                   both authoritative and recursive queries.
                 </p>
                 <p>
+<<<<<<< HEAD
                   The default is <strong class="userinput"><code>no</code></strong>.
+=======
+                  The default is <strong class="userinput"><code>yes</code></strong>.
+                </p>
+              </dd>
+<dt><span class="term"><span class="command"><strong>glue-cache</strong></span></span></dt>
+<dd>
+                <p>
+                  When set to <strong class="userinput"><code>yes</code></strong>, a cache is
+                  used to improve query performance when adding
+                  address-type (A and AAAA) glue records to the
+                  additional section of DNS response messages that
+                  delegate to a child zone.
+                </p>
+                <p>
+                  The glue cache uses memory proportional to the number
+                  of delegations in the zone. The default setting is
+                  <strong class="userinput"><code>yes</code></strong>, which improves performance
+                  at the cost of increased memory usage for the zone. If
+                  you don't want this, set it to <strong class="userinput"><code>no</code></strong>.
+                </p>
+                <p>
+                  The glue cache is only used when
+                  <strong class="userinput"><code>minimal-responses</code></strong> is also set
+                  to <strong class="userinput"><code>yes</code></strong>.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                 </p>
               </dd>
 <dt><span class="term"><span class="command"><strong>minimal-any</strong></span></span></dt>
@@ -4213,7 +4397,11 @@ options {
                   will be added to the authority or additional sections.
                   The default is <strong class="userinput"><code>no</code></strong>.
                 </p>
+<<<<<<< HEAD
             </dd>
+=======
+              </dd>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 <dt><span class="term"><span class="command"><strong>multiple-cnames</strong></span></span></dt>
 <dd>
                 <p>
@@ -4374,9 +4562,54 @@ options {
                   256 bits for SHA256.
                 </p>
               </dd>
+<<<<<<< HEAD
 <dt><span class="term"><span class="command"><strong>rfc2308-type1</strong></span></span></dt>
 <dd>
                 <p>
+=======
+<dt><span class="term"><span class="command"><strong>response-padding</strong></span></span></dt>
+<dd>
+                <p>
+                  The EDNS Padding option is intended to improve
+                  confidentiality when DNS queries are sent over an
+                  encrypted channel by reducing the variability in
+                  packet sizes.  If a query:
+                  </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+                      contains an EDNS Padding option,
+                    </li>
+<li class="listitem">
+                      includes a valid server cookie or uses TCP,
+                    </li>
+<li class="listitem">
+                      is <span class="emphasis"><em>not</em></span> signed using TSIG or
+                      SIG(0), and
+                    </li>
+<li class="listitem">
+                      is from a client whose address matches the specified ACL,
+                    </li>
+</ol></div>
+<p>
+                  then the response is padded with an EDNS Padding option
+                  to a multiple of <code class="varname">block-size</code> bytes.
+                  If these conditions are not met, the response is not
+                  padded.
+                </p>
+                <p>
+                  If <code class="varname">block-size</code> is 0 or the ACL is
+                  <span class="command"><strong>none;</strong></span>, then this feature is
+                  disabled and no padding will occur; this is the
+                  default.  If <code class="varname">block-size</code> is greater
+                  than 512, a warning is logged and the value is truncated
+                  to 512.  Block sizes are ordinarily expected to be powers
+                  of two (for instance, 128), but this is not mandatory.
+                </p>
+              </dd>
+<dt><span class="term"><span class="command"><strong>rfc2308-type1</strong></span></span></dt>
+<dd>
+                <p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                   Setting this to <strong class="userinput"><code>yes</code></strong> will
                   cause the server to send NS records along with the SOA
                   record for negative
@@ -4479,6 +4712,7 @@ options {
                   and NT/DOS "<span class="command"><strong>\r\n</strong></span>" newlines
                   are always accepted,
                   and the option is ignored.
+<<<<<<< HEAD
                 </p>
               </dd>
 <dt>
@@ -4566,6 +4800,9 @@ options {
                   process.
                 </p>
 
+=======
+                </p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
               </dd>
 <dt><span class="term"><span class="command"><strong>match-mapped-addresses</strong></span></span></dt>
 <dd>
@@ -5287,7 +5524,12 @@ options {
                 <p>
                   Specifies a list of addresses to which
                   <span class="command"><strong>filter-aaaa-on-v4</strong></span>
+<<<<<<< HEAD
                   is applies.  The default is <strong class="userinput"><code>any</code></strong>.
+=======
+                  and <span class="command"><strong>filter-aaaa-on-v6</strong></span>
+                  apply.  The default is <strong class="userinput"><code>any</code></strong>.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                 </p>
               </dd>
 <dt><span class="term"><span class="command"><strong>keep-response-order</strong></span></span></dt>
@@ -6087,6 +6329,7 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
 <dt><span class="term"><span class="command"><strong>max-journal-size</strong></span></span></dt>
 <dd>
                 <p>
+<<<<<<< HEAD
                   Sets a maximum size for each journal file
                   (see <a class="xref" href="Bv9ARM.ch04.html#journal" title="The journal file">the section called &#8220;The journal file&#8221;</a>).  When the journal file
                   approaches
@@ -6097,6 +6340,26 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
                   <code class="literal">unlimited</code>, which also
                   means 2 gigabytes.
                   This may also be set on a per-zone basis.
+=======
+                  Sets a maximum size for each journal file (see
+                  <a class="xref" href="Bv9ARM.ch04.html#journal" title="The journal file">the section called &#8220;The journal file&#8221;</a>), expressed in bytes
+                  or, if followed by an optional unit suffix ('k',
+                  'm', or 'g'), in kilobytes, megabytes, or gigabytes.
+                  When the journal file approaches the specified size,
+                  some of the oldest transactions in the journal
+                  will be automatically removed. The largest
+                  permitted value is 2 gigabytes.  Very small
+                  values are rounded up to 4096 bytes.  You
+                  can specify <code class="literal">unlimited</code>, which
+                  also means 2 gigabytes. If you set the limit to
+                  <code class="literal">default</code> or leave it unset, the
+                  journal is allowed to grow up to twice as large as
+                  the zone. (There is little benefit in storing
+                  larger journals.)
+                </p>
+                <p>
+                  This option may also be set on a per-zone basis.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
                 </p>
               </dd>
 <dt><span class="term"><span class="command"><strong>max-records</strong></span></span></dt>
@@ -6372,6 +6635,75 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
                   length to a system-defined default value.
                 </p>
               </dd>
+<<<<<<< HEAD
+=======
+<dt><span class="term"><span class="command"><strong>tcp-initial-timeout</strong></span></span></dt>
+<dd>
+                <p>
+                  The amount of time (in units of 100 milliseconds) the
+                  server waits on a new TCP connection for the first message
+                  from the client. The default is 300 (30 seconds),
+                  the minimum is 25 (2.5 seconds), and the maximum is
+                  1200 (two minutes). Values above the maximum or below
+                  the minimum will be adjusted with a logged warning.
+                  (Note: This value must be greater than the expected
+                  round trip delay time; otherwise no client will ever
+                  have enough time to submit a message.)
+                  This value can be updated at runtime by using
+                  <span class="command"><strong>rndc tcp-timeouts</strong></span>.
+                </p>
+              </dd>
+<dt><span class="term"><span class="command"><strong>tcp-idle-timeout</strong></span></span></dt>
+<dd>
+                <p>
+                  The amount of time (in units of 100 milliseconds) the
+                  server waits on an idle TCP conenction before closing
+                  it when the client is not using the EDNS TCP keepalive
+                  option.  The default is 300 (30 seconds), the maximum
+                  is 1200 (two minutes), and the minimum is 1 (one tenth
+                  of a second). Values above the maximum or below the minimum
+                  will be adjusted with a logged warning.
+                  See <span class="command"><strong>tcp-keepalive-timeout</strong></span>
+                  for clients using the EDNS TCP keepalive option.
+                  This value can be updated at runtime by using
+                  <span class="command"><strong>rndc tcp-timeouts</strong></span>.
+                </p>
+              </dd>
+<dt><span class="term"><span class="command"><strong>tcp-keepalive-timeout</strong></span></span></dt>
+<dd>
+                <p>
+                  The amount of time (in units of 100 milliseconds) the
+                  server waits on an idle TCP conenction before closing
+                  it when the client is using the EDNS TCP keepalive
+                  option.  The default is 300 (30 seconds), the maximum
+                  is 1200 (two minutes), and the minimum is 1 (one tenth
+                  of a second). Values above the maximum or below the minimum
+                  will be adjusted with a logged warning.
+                  This value may be greater than
+                  <span class="command"><strong>tcp-idle-timeout</strong></span>, because
+                  clients using the EDNS TCP keepalive option are expected
+                  to use TCP connections for more than one message.
+                  This value can be updated at runtime by using
+                  <span class="command"><strong>rndc tcp-timeouts</strong></span>.
+                </p>
+              </dd>
+<dt><span class="term"><span class="command"><strong>tcp-advertised-timeout</strong></span></span></dt>
+<dd>
+                <p>
+                  The timeout value (in units of 100 milliseconds) the
+                  server will send in respones containing the EDNS TCP
+                  keepalive option. This informs a client of the
+                  amount of time it may keep the session open.
+                  The default is 300 (30 seconds), the maximum is
+                  1200 (two minutes), and the minimum is 0, which
+                  signals that the clients must close TCP connections
+                  immediately.  Ordinarily this should be set to the
+                  same value as <span class="command"><strong>tcp-keepalive-timeout</strong></span>.
+                  This value can be updated at runtime by using
+                  <span class="command"><strong>rndc tcp-timeouts</strong></span>.
+                </p>
+              </dd>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 </dl></div>
 
         </div>
@@ -6500,7 +6832,7 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
 
           <p>
             The response to a DNS query may consist of multiple resource
-            records (RRs) forming a resource records set (RRset).
+            records (RRs) forming a resource record set (RRset).
             The name server will normally return the
             RRs within the RRset in an indeterminate order
             (but see the <span class="command"><strong>rrset-order</strong></span>
@@ -6616,17 +6948,21 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
           <p>
             When multiple records are returned in an answer it may be
             useful to configure the order of the records placed into the
-            response.
-            The <span class="command"><strong>rrset-order</strong></span> statement permits
-            configuration
-            of the ordering of the records in a multiple record response.
+            response.  The <span class="command"><strong>rrset-order</strong></span> statement permits
+            configuration of the ordering of the records in a
+            multiple-record response.
             See also the <span class="command"><strong>sortlist</strong></span> statement,
             <a class="xref" href="Bv9ARM.ch06.html#the_sortlist_statement" title="The sortlist Statement">the section called &#8220;The <span class="command"><strong>sortlist</strong></span> Statement&#8221;</a>.
           </p>
+<<<<<<< HEAD
 
           <p>
             An <span class="command"><strong>order_spec</strong></span> is defined as
             follows:
+=======
+          <p>
+            An <span class="command"><strong>order_spec</strong></span> is defined as follows:
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
           </p>
           <p>
             [<span class="optional">class <em class="replaceable"><code>class_name</code></em></span>]
@@ -6656,7 +6992,10 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
 <td>
                     <p>
                       Records are returned in the order they
-                      are defined in the zone file.
+                      are defined in the zone file. This option
+                      is only available if <acronym class="acronym">BIND</acronym>
+                      is configured with "--enable-fixed-rrset" at
+                      compile time.
                     </p>
                   </td>
 </tr>
@@ -6676,13 +7015,29 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
                   </td>
 <td>
                     <p>
-                      Records are returned in a cyclic round-robin order.
+                      Records are returned in a cyclic round-robin order,
+                      rotating by one record per query.
                     </p>
                     <p>
-                      If <acronym class="acronym">BIND</acronym> is configured with the
-                      "--enable-fixed-rrset" option at compile time, then
+                      If <acronym class="acronym">BIND</acronym> is configured with
+                      "--enable-fixed-rrset" at compile time, then
                       the initial ordering of the RRset will match the
-                      one specified in the zone file.
+                      one specified in the zone file; otherwise the
+                      initial ordering is indeterminate.
+                    </p>
+                  </td>
+</tr>
+<tr>
+<td>
+                    <p><span class="command"><strong>none</strong></span></p>
+                  </td>
+<td>
+                    <p>
+                      Records are returned in whatever order they were
+                      retrieved from the database.  This order is
+                      indeterminate, but will be consistent as long as the
+                      database is not modified. When no ordering is
+                      specified, this is the default.
                     </p>
                   </td>
 </tr>
@@ -6690,6 +7045,11 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
 </table>
           </div>
           <p>
+<<<<<<< HEAD
+=======
+          </p>
+          <p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             For example:
           </p>
 
@@ -6698,7 +7058,10 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
    order cyclic;
 };
 </pre>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
           <p>
             will cause any responses for type A records in class IN that
             have "<code class="literal">host.example.com</code>" as a
@@ -6710,7 +7073,12 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
             appear, they are not combined &#8212; the last one applies.
           </p>
           <p>
+<<<<<<< HEAD
             By default, all records are returned in random order.
+=======
+            By default, records are returned in indeterminate but
+            consistent order (see <span class="command"><strong>none</strong></span> above).
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
           </p>
 
           <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
@@ -7403,6 +7771,7 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
                   disabled.  This option can be specified multiple times.
                 </p>
               </dd>
+<<<<<<< HEAD
 </dl></div>
         </div>
 
@@ -7511,6 +7880,9 @@ avoid-v6-udp-ports { 40000; range 50000 60000; };
               </dd>
 </dl></div>
 
+=======
+</dl></div>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         </div>
 
         <div class="section">
@@ -8094,6 +8466,18 @@ example.com                 CNAME   rpz-tcp-only.
             turn off rewrite logging for a particular response policy
             zone. By default, all rewrites are logged.
           </p>
+<<<<<<< HEAD
+=======
+
+          <p>
+            Updates to RPZ zones are processed asynchronously; if there
+            is more than one update pending they are bundled together.
+            If an update to a RPZ zone (for example, via IXFR) happens less
+            than <code class="option">min-update-interval</code> seconds after the most
+            recent update, then the changes will not be carried out until this
+            interval has elapsed.  The default is <code class="literal">5</code> seconds.
+          </p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         </div>
 
         <div class="section">
@@ -8414,7 +8798,13 @@ example.com                 CNAME   rpz-tcp-only.
   [ <span class="command"><strong>edns-udp-size</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>edns-version</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>max-udp-size</strong></span> <em class="replaceable"><code>number</code></em> ; ]
+<<<<<<< HEAD
   [ <span class="command"><strong>tcp-only</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
+=======
+  [ <span class="command"><strong>padding</strong></span> <em class="replaceable"><code>number</code></em> ; ]
+  [ <span class="command"><strong>tcp-only</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
+  [ <span class="command"><strong>tcp-keepalive</strong></span> <em class="replaceable"><code>yes_or_no</code></em> ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>transfers</strong></span> <em class="replaceable"><code>number</code></em> ; ]
   [ <span class="command"><strong>transfer-format</strong></span> ( one-answer | many-answers ) ; ]
   [ <span class="command"><strong>keys</strong></span> <span class="command"><strong>{</strong></span> <em class="replaceable"><code>key_id</code></em> <span class="command"><strong>}</strong></span> ; ]
@@ -8583,6 +8973,22 @@ example.com                 CNAME   rpz-tcp-only.
           </p>
 
           <p>
+<<<<<<< HEAD
+=======
+            The <span class="command"><strong>padding</strong></span> option adds EDNS Padding
+            options to outgoing messages, increasing the packet size to
+            a multiple of the specified block size. Valid block sizes
+            range from 0 (the default, which disables the use of
+            EDNS Padding) to 512 bytes.  Larger values will be reduced
+            to 512, with a logged warning.
+            Note: This option is not currently compatible with no TSIG
+            or SIG(0), as the EDNS OPT record containing the padding
+            would have to be added to the packet after it had already
+            been signed.
+          </p>
+
+          <p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             The <span class="command"><strong>tcp-only</strong></span> option sets the transport
             protocol to TCP. The default is to use the UDP transport
             and to fallback on TCP only when a truncated response
@@ -8590,6 +8996,15 @@ example.com                 CNAME   rpz-tcp-only.
           </p>
 
           <p>
+<<<<<<< HEAD
+=======
+            The <span class="command"><strong>tcp-keepalive</strong></span> option adds EDNS
+            TCP keepalive to messages sent over TCP. Note currently
+            idle timeouts in responses are ignored.
+          </p>
+
+          <p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
             The server supports two zone transfer methods. The first, <span class="command"><strong>one-answer</strong></span>,
             uses one DNS message per resource record transferred. <span class="command"><strong>many-answers</strong></span> packs
             as many resource records as possible into a message. <span class="command"><strong>many-answers</strong></span> is
@@ -9352,7 +9767,15 @@ view "external" {
 
 <span class="command"><strong>zone</strong></span> <em class="replaceable"><code>"."</code></em> [ <em class="replaceable"><code>class</code></em> ] <span class="command"><strong>{</strong></span>
     <span class="command"><strong>type</strong></span> redirect;
+<<<<<<< HEAD
     <span class="command"><strong>file</strong></span> <em class="replaceable"><code>string</code></em> ;
+=======
+  [ <span class="command"><strong>file</strong></span> <em class="replaceable"><code>string</code></em> ; ]
+  [ <span class="command"><strong>masters</strong></span> [ <span class="command"><strong>port</strong></span> <em class="replaceable"><code>ip_port</code></em> ] [ <span class="command"><strong>dscp</strong></span> <em class="replaceable"><code>ip_dscp</code></em> ] <span class="command"><strong>{</strong></span>
+      ( <em class="replaceable"><code>masters_list</code></em> | <em class="replaceable"><code>ip_addr</code></em> [ <span class="command"><strong>port</strong></span> <em class="replaceable"><code>ip_port</code></em> ] ) [ <span class="command"><strong>key</strong></span> <em class="replaceable"><code>key_name</code></em> ] ;
+        ...
+    <span class="command"><strong>}</strong></span> ; ]
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
   [ <span class="command"><strong>masterfile-format</strong></span> ( <code class="option">text</code> | <code class="option">raw</code> | <code class="option">map</code> ) ; ]
   [ <span class="command"><strong>allow-query</strong></span> <span class="command"><strong>{</strong></span> <em class="replaceable"><code>address_match_list</code></em> <span class="command"><strong>}</strong></span> ; ]
   [ <span class="command"><strong>max-zone-ttl</strong></span> <em class="replaceable"><code>number</code></em> ; ]
@@ -9660,17 +10083,24 @@ view "external" {
                         AAAA records.
                       </p>
                       <p>
+                        If a redirect zone is configured with a
+                        <code class="option">masters</code> option, then it is
+                        transfered in as if it were a slave zone.
+                        Otherwise, it is loaded from a file as if it
+                        were a master zone.
+                      </p>
+                      <p>
                         Because redirect zones are not referenced
                         directly by name, they are not kept in the
                         zone lookup table with normal master and slave
-                        zones. Consequently, it is not currently possible
-                        to use
-                        <span class="command"><strong>rndc reload
-                                <em class="replaceable"><code>zonename</code></em></strong></span>
-                        to reload a redirect zone.  However, when using
-                        <span class="command"><strong>rndc reload</strong></span> without specifying
-                        a zone name, redirect zones will be reloaded along
-                        with other zones.
+                        zones. To reload a redirect zone, use
+                        <span class="command"><strong>rndc reload -redirect</strong></span>,
+                        and to retransfer a redirect zone configured
+                        as slave, use
+                        <span class="command"><strong>rndc retransfer -redirect</strong></span>.
+                        When using <span class="command"><strong>rndc reload</strong></span>
+                        without specifying a zone name, redirect zones
+                        will be reloaded along with other zones.
                       </p>
                     </td>
 </tr>
@@ -14554,6 +14984,10 @@ HOST-127.EXAMPLE. MX 0 .
 </tr>
 </table>
 </div>
+<<<<<<< HEAD
 <p xmlns:db="http://docbook.org/ns/docbook" style="text-align: center;">BIND 9.11.2</p>
+=======
+<p xmlns:db="http://docbook.org/ns/docbook" style="text-align: center;">BIND 9.12.0-pre-alpha</p>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 </body>
 </html>

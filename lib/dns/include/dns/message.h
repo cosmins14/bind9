@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2010, 2012-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2010, 2012-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -97,12 +97,13 @@
 #define DNS_OPT_CLIENT_SUBNET	8		/*%< client subnet opt code */
 #define DNS_OPT_EXPIRE		9		/*%< EXPIRE opt code */
 #define DNS_OPT_COOKIE		10		/*%< COOKIE opt code */
+#define DNS_OPT_TCP_KEEPALIVE	11		/*%< TCP keepalive opt code */
 #define DNS_OPT_PAD		12		/*%< PAD opt code */
 
 /*%< Experimental options [65001...65534] as per RFC6891 */
 
 /*%< The number of EDNS options we know about. */
-#define DNS_EDNSOPTIONS	5
+#define DNS_EDNSOPTIONS	7
 
 #define DNS_MESSAGE_REPLYPRESERVE	(DNS_MESSAGEFLAG_RD|DNS_MESSAGEFLAG_CD)
 #define DNS_MESSAGEEXTFLAG_REPLYPRESERVE (DNS_MESSAGEEXTFLAG_DO)
@@ -217,6 +218,9 @@ struct dns_message {
 	unsigned int			opt_reserved;
 	unsigned int			sig_reserved;
 	unsigned int			reserved; /* reserved space (render) */
+
+	isc_uint16_t			padding;
+	unsigned int			padding_off;
 
 	isc_buffer_t		       *buffer;
 	dns_compress_t		       *cctx;
@@ -683,7 +687,7 @@ dns_message_currentname(dns_message_t *msg, dns_section_t section,
 
 isc_result_t
 dns_message_findname(dns_message_t *msg, dns_section_t section,
-		     dns_name_t *target, dns_rdatatype_t type,
+		     const dns_name_t *target, dns_rdatatype_t type,
 		     dns_rdatatype_t covers, dns_name_t **foundname,
 		     dns_rdataset_t **rdataset);
 /*%<
@@ -718,7 +722,7 @@ dns_message_findname(dns_message_t *msg, dns_section_t section,
  */
 
 isc_result_t
-dns_message_findtype(dns_name_t *name, dns_rdatatype_t type,
+dns_message_findtype(const dns_name_t *name, dns_rdatatype_t type,
 		     dns_rdatatype_t covers, dns_rdataset_t **rdataset);
 /*%<
  * Search the name for the specified type.  If it is found, *rdataset is
@@ -738,7 +742,7 @@ dns_message_findtype(dns_name_t *name, dns_rdatatype_t type,
  */
 
 isc_result_t
-dns_message_find(dns_name_t *name, dns_rdataclass_t rdclass,
+dns_message_find(const dns_name_t *name, dns_rdataclass_t rdclass,
 		 dns_rdatatype_t type, dns_rdatatype_t covers,
 		 dns_rdataset_t **rdataset);
 /*%<
@@ -1067,7 +1071,7 @@ dns_message_setopt(dns_message_t *msg, dns_rdataset_t *opt);
  */
 
 dns_rdataset_t *
-dns_message_gettsig(dns_message_t *msg, dns_name_t **owner);
+dns_message_gettsig(dns_message_t *msg, const dns_name_t **owner);
 /*%<
  * Get the TSIG record and owner for 'msg'.
  *
@@ -1161,7 +1165,7 @@ dns_message_getquerytsig(dns_message_t *msg, isc_mem_t *mctx,
  */
 
 dns_rdataset_t *
-dns_message_getsig0(dns_message_t *msg, dns_name_t **owner);
+dns_message_getsig0(dns_message_t *msg, const dns_name_t **owner);
 /*%<
  * Get the SIG(0) record and owner for 'msg'.
  *
@@ -1365,7 +1369,7 @@ dns_message_logpacket(dns_message_t *message, const char *description,
 		      int level, isc_mem_t *mctx);
 void
 dns_message_logpacket2(dns_message_t *message,
-		       const char *description, isc_sockaddr_t *address,
+		       const char *description, const isc_sockaddr_t *address,
 		       isc_logcategory_t *category, isc_logmodule_t *module,
 		       int level, isc_mem_t *mctx);
 void
@@ -1374,8 +1378,8 @@ dns_message_logfmtpacket(dns_message_t *message, const char *description,
 			 const dns_master_style_t *style, int level,
 			 isc_mem_t *mctx);
 void
-dns_message_logfmtpacket2(dns_message_t *message,
-			  const char *description, isc_sockaddr_t *address,
+dns_message_logfmtpacket2(dns_message_t *message, const char *description,
+			  const isc_sockaddr_t *address,
 			  isc_logcategory_t *category, isc_logmodule_t *module,
 			  const dns_master_style_t *style, int level,
 			  isc_mem_t *mctx);
@@ -1424,6 +1428,16 @@ dns_message_setclass(dns_message_t *msg, dns_rdataclass_t rdclass);
  *
  * Requires:
  * \li   msg be a valid message with parsing intent.
+ */
+
+void
+dns_message_setpadding(dns_message_t *msg, isc_uint16_t padding);
+/*%<
+ * Set the padding block size in the response.
+ * 0 means no padding (default).
+ *
+ * Requires:
+ * \li	msg be a valid message.
  */
 
 ISC_LANG_ENDDECLS

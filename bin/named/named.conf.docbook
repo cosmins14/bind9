@@ -133,12 +133,21 @@ logging {
 	category <replaceable>string</replaceable> { <replaceable>string</replaceable>; ... };
 	channel <replaceable>string</replaceable> {
 		buffered <replaceable>boolean</replaceable>;
+<<<<<<< HEAD
 		file <replaceable>quoted_string</replaceable> <optional> versions ( "unlimited" | <replaceable>integer</replaceable> )
 		    </optional> <optional> size <replaceable>size</replaceable> </optional>;
 		null;
 		print-category <replaceable>boolean</replaceable>;
 		print-severity <replaceable>boolean</replaceable>;
 		print-time <replaceable>boolean</replaceable>;
+=======
+		file <replaceable>quoted_string</replaceable> <optional> versions ( unlimited | <replaceable>integer</replaceable> ) </optional>
+		    <optional> size <replaceable>size</replaceable> </optional> <optional> suffix ( increment | timestamp ) </optional>;
+		null;
+		print-category <replaceable>boolean</replaceable>;
+		print-severity <replaceable>boolean</replaceable>;
+		print-time ( iso8601 | iso8601-utc | local | <replaceable>boolean</replaceable> );
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		severity <replaceable>log_severity</replaceable>;
 		stderr;
 		syslog <optional> <replaceable>syslog_facility</replaceable> </optional>;
@@ -271,7 +280,14 @@ options {
 	    resolver ) <optional> ( query | response ) </optional>; ... };
 	dnstap-identity ( <replaceable>quoted_string</replaceable> | none |
 	    hostname );
+<<<<<<< HEAD
 	dnstap-output ( file | unix ) <replaceable>quoted_string</replaceable>;
+=======
+	dnstap-output ( file | unix ) <replaceable>quoted_string</replaceable> <optional>
+	    size ( unlimited | <replaceable>size</replaceable> ) </optional> <optional> versions (
+	    unlimited | <replaceable>integer</replaceable> ) </optional> <optional> suffix ( increment
+	    | timestamp ) </optional>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	dnstap-version ( <replaceable>quoted_string</replaceable> | none );
 	dscp <replaceable>integer</replaceable>;
 	dual-stack-servers <optional> port <replaceable>integer</replaceable> </optional> { ( <replaceable>quoted_string</replaceable> <optional> port
@@ -402,11 +418,22 @@ options {
 	require-server-cookie <replaceable>boolean</replaceable>;
 	reserved-sockets <replaceable>integer</replaceable>;
 	resolver-query-timeout <replaceable>integer</replaceable>;
+<<<<<<< HEAD
 	response-policy { zone <replaceable>quoted_string</replaceable> <optional> log <replaceable>boolean</replaceable> </optional> <optional>
 	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> policy ( cname | disabled | drop |
 	    given | no-op | nodata | nxdomain | passthru | tcp-only
 	    <replaceable>quoted_string</replaceable> ) </optional> <optional> recursive-only <replaceable>boolean</replaceable> </optional>; ... } <optional>
 	    break-dnssec <replaceable>boolean</replaceable> </optional> <optional> max-policy-ttl <replaceable>integer</replaceable> </optional> <optional>
+=======
+	response-padding { <replaceable>address_match_element</replaceable>; ... } block-size
+	    <replaceable>integer</replaceable>;
+	response-policy { zone <replaceable>quoted_string</replaceable> <optional> log <replaceable>boolean</replaceable> </optional> <optional>
+	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> min-update-interval <replaceable>integer</replaceable> </optional> <optional>
+	    policy ( cname | disabled | drop | given | no-op | nodata |
+	    nxdomain | passthru | tcp-only <replaceable>quoted_string</replaceable> ) </optional> <optional>
+	    recursive-only <replaceable>boolean</replaceable> </optional>; ... } <optional> break-dnssec <replaceable>boolean</replaceable> </optional> <optional>
+	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> min-update-interval <replaceable>integer</replaceable> </optional> <optional>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    min-ns-dots <replaceable>integer</replaceable> </optional> <optional> nsip-wait-recurse <replaceable>boolean</replaceable> </optional> <optional>
 	    qname-wait-recurse <replaceable>boolean</replaceable> </optional> <optional> recursive-only <replaceable>boolean</replaceable> </optional>;
 	root-delegation-only <optional> exclude { <replaceable>quoted_string</replaceable>; ... } </optional>;
@@ -429,7 +456,14 @@ options {
 	stacksize ( default | unlimited | <replaceable>sizeval</replaceable> );
 	startup-notify-rate <replaceable>integer</replaceable>;
 	statistics-file <replaceable>quoted_string</replaceable>;
+<<<<<<< HEAD
+=======
+	tcp-advertised-timeout <replaceable>integer</replaceable>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	tcp-clients <replaceable>integer</replaceable>;
+	tcp-idle-timeout <replaceable>integer</replaceable>;
+	tcp-initial-timeout <replaceable>integer</replaceable>;
+	tcp-keepalive-timeout <replaceable>integer</replaceable>;
 	tcp-listen-queue <replaceable>integer</replaceable>;
 	tkey-dhkey <replaceable>quoted_string</replaceable> <replaceable>integer</replaceable>;
 	tkey-domain <replaceable>quoted_string</replaceable>;
@@ -473,6 +507,10 @@ server <replaceable>netprefix</replaceable> {
 	    dscp <replaceable>integer</replaceable> </optional>;
 	notify-source-v6 ( <replaceable>ipv6_address</replaceable> | * ) <optional> port ( <replaceable>integer</replaceable> | * ) </optional>
 	    <optional> dscp <replaceable>integer</replaceable> </optional>;
+<<<<<<< HEAD
+=======
+	padding <replaceable>integer</replaceable>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	provide-ixfr <replaceable>boolean</replaceable>;
 	query-source ( ( <optional> address </optional> ( <replaceable>ipv4_address</replaceable> | * ) <optional> port (
 	    <replaceable>integer</replaceable> | * ) </optional> ) | ( <optional> <optional> address </optional> ( <replaceable>ipv4_address</replaceable> | * ) </optional>
@@ -484,6 +522,10 @@ server <replaceable>netprefix</replaceable> {
 	request-ixfr <replaceable>boolean</replaceable>;
 	request-nsid <replaceable>boolean</replaceable>;
 	send-cookie <replaceable>boolean</replaceable>;
+<<<<<<< HEAD
+=======
+	tcp-keepalive <replaceable>boolean</replaceable>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	tcp-only <replaceable>boolean</replaceable>;
 	transfer-format ( many-answers | one-answer );
 	transfer-source ( <replaceable>ipv4_address</replaceable> | * ) <optional> port ( <replaceable>integer</replaceable> | * ) </optional> <optional>
@@ -702,11 +744,22 @@ view <replaceable>string</replaceable> <optional> <replaceable>class</replaceabl
 	request-nsid <replaceable>boolean</replaceable>;
 	require-server-cookie <replaceable>boolean</replaceable>;
 	resolver-query-timeout <replaceable>integer</replaceable>;
+<<<<<<< HEAD
 	response-policy { zone <replaceable>quoted_string</replaceable> <optional> log <replaceable>boolean</replaceable> </optional> <optional>
 	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> policy ( cname | disabled | drop |
 	    given | no-op | nodata | nxdomain | passthru | tcp-only
 	    <replaceable>quoted_string</replaceable> ) </optional> <optional> recursive-only <replaceable>boolean</replaceable> </optional>; ... } <optional>
 	    break-dnssec <replaceable>boolean</replaceable> </optional> <optional> max-policy-ttl <replaceable>integer</replaceable> </optional> <optional>
+=======
+	response-padding { <replaceable>address_match_element</replaceable>; ... } block-size
+	    <replaceable>integer</replaceable>;
+	response-policy { zone <replaceable>quoted_string</replaceable> <optional> log <replaceable>boolean</replaceable> </optional> <optional>
+	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> min-update-interval <replaceable>integer</replaceable> </optional> <optional>
+	    policy ( cname | disabled | drop | given | no-op | nodata |
+	    nxdomain | passthru | tcp-only <replaceable>quoted_string</replaceable> ) </optional> <optional>
+	    recursive-only <replaceable>boolean</replaceable> </optional>; ... } <optional> break-dnssec <replaceable>boolean</replaceable> </optional> <optional>
+	    max-policy-ttl <replaceable>integer</replaceable> </optional> <optional> min-update-interval <replaceable>integer</replaceable> </optional> <optional>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    min-ns-dots <replaceable>integer</replaceable> </optional> <optional> nsip-wait-recurse <replaceable>boolean</replaceable> </optional> <optional>
 	    qname-wait-recurse <replaceable>boolean</replaceable> </optional> <optional> recursive-only <replaceable>boolean</replaceable> </optional>;
 	root-delegation-only <optional> exclude { <replaceable>quoted_string</replaceable>; ... } </optional>;
@@ -725,6 +778,10 @@ view <replaceable>string</replaceable> <optional> <replaceable>class</replaceabl
 		    ) </optional> <optional> dscp <replaceable>integer</replaceable> </optional>;
 		notify-source-v6 ( <replaceable>ipv6_address</replaceable> | * ) <optional> port ( <replaceable>integer</replaceable>
 		    | * ) </optional> <optional> dscp <replaceable>integer</replaceable> </optional>;
+<<<<<<< HEAD
+=======
+		padding <replaceable>integer</replaceable>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		provide-ixfr <replaceable>boolean</replaceable>;
 		query-source ( ( <optional> address </optional> ( <replaceable>ipv4_address</replaceable> | * ) <optional> port
 		    ( <replaceable>integer</replaceable> | * ) </optional> ) | ( <optional> <optional> address </optional> (
@@ -738,6 +795,10 @@ view <replaceable>string</replaceable> <optional> <replaceable>class</replaceabl
 		request-ixfr <replaceable>boolean</replaceable>;
 		request-nsid <replaceable>boolean</replaceable>;
 		send-cookie <replaceable>boolean</replaceable>;
+<<<<<<< HEAD
+=======
+		tcp-keepalive <replaceable>boolean</replaceable>;
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		tcp-only <replaceable>boolean</replaceable>;
 		transfer-format ( many-answers | one-answer );
 		transfer-source ( <replaceable>ipv4_address</replaceable> | * ) <optional> port ( <replaceable>integer</replaceable> |

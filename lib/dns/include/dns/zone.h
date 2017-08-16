@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1338,6 +1338,21 @@ dns_zone_gettype(dns_zone_t *zone);
  *\li	'zone' to be valid initialised zone.
  */
 
+dns_zonetype_t
+dns_zone_getredirecttype(dns_zone_t *zone);
+/*%<
+ * Returns whether the redirect zone is configured as a master or a
+ * slave zone.
+ *
+ * Requires:
+ *\li	'zone' to be valid initialised zone.
+ *\li	'zone' to be a redirect zone.
+ *
+ * Returns:
+ *\li	'dns_zone_master'
+ *\li	'dns_zone_slave'
+ */
+
 void
 dns_zone_settask(dns_zone_t *zone, isc_task_t *task);
 /*%<
@@ -2009,7 +2024,8 @@ dns_zone_nameonly(dns_zone_t *zone, char *buf, size_t len);
  */
 
 isc_result_t
-dns_zone_checknames(dns_zone_t *zone, dns_name_t *name, dns_rdata_t *rdata);
+dns_zone_checknames(dns_zone_t *zone, const dns_name_t *name,
+		    dns_rdata_t *rdata);
 /*%<
  * Check if this record meets the check-names policy.
  *
@@ -2022,19 +2038,6 @@ dns_zone_checknames(dns_zone_t *zone, dns_name_t *name, dns_rdata_t *rdata);
  *	DNS_R_SUCCESS		passed checks.
  *	DNS_R_BADOWNERNAME	failed ownername checks.
  *	DNS_R_BADNAME		failed rdata checks.
- */
-
-void
-dns_zone_setacache(dns_zone_t *zone, dns_acache_t *acache);
-/*%<
- *	Associate the zone with an additional cache.
- *
- * Require:
- *	'zone' to be a valid zone.
- *	'acache' to be a non NULL pointer.
- *
- * Ensures:
- *	'zone' will have a reference to 'acache'
  */
 
 void
@@ -2091,8 +2094,9 @@ dns_zone_setisself(dns_zone_t *zone, dns_isselffunc_t isself, void *arg);
  * Set the isself callback function and argument.
  *
  * isc_boolean_t
- * isself(dns_view_t *myview, dns_tsigkey_t *mykey, isc_netaddr_t *srcaddr,
- *	  isc_netaddr_t *destaddr, dns_rdataclass_t rdclass, void *arg);
+ * isself(dns_view_t *myview, dns_tsigkey_t *mykey,
+ *	  const isc_netaddr_t *srcaddr, const isc_netaddr_t *destaddr,
+ *	  dns_rdataclass_t rdclass, void *arg);
  *
  * 'isself' returns ISC_TRUE if a non-recursive query from 'srcaddr' to
  * 'destaddr' with optional key 'mykey' for class 'rdclass' would be

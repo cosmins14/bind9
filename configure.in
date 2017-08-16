@@ -1353,7 +1353,11 @@ then
 
 	# Look for functions relating to thread naming
 	AC_CHECK_FUNCS(pthread_setname_np pthread_set_name_np)
+<<<<<<< HEAD
 	AC_CHECK_HEADERS(pthread_np.h)
+=======
+	AC_CHECK_HEADERS([pthread_np.h], [], [], [#include <pthread.h>])
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 	#
 	# Look for sysconf to allow detection of the number of processors.
@@ -1443,12 +1447,14 @@ AC_ARG_WITH(pkcs11,
    use_pkcs11="$withval", use_pkcs11="auto")
 
 #
-# were --with-ecdsa, --with-gost, --with-aes specified
+# were --with-ecdsa, --with-gost, --with-eddsa, --with-aes specified
 #
 AC_ARG_WITH(ecdsa, [  --with-ecdsa            Crypto ECDSA],
 	    with_ecdsa="$withval", with_ecdsa="auto")
 AC_ARG_WITH(gost, [  --with-gost             Crypto GOST [yes|no|raw|asn1].],
 	    with_gost="$withval", with_gost="auto")
+AC_ARG_WITH(eddsa, [  --with-eddsa            Crypto EDDSA [yes|all|no].],
+            with_eddsa="$withval", with_eddsa="auto")
 AC_ARG_WITH(aes, [  --with-aes              Crypto AES],
 	    with_aes="$withval", with_aes="checkcc")
 
@@ -1474,20 +1480,20 @@ case $with_cc_alg in
 		with_cc_alg="sha256"
 		;;
 	auto)
-		if test "$with_aes" != "no"
+		if test "no" != "$with_aes"
 		then
 			with_aes="yes"
 		fi
 		;;
 	*)
 		with_cc_alg="aes"
-		if test "$with_aes" != "no"
+		if test "no" != "$with_aes"
 		then
 			with_aes="yes"
 		fi
 		;;
 esac
-if test "with_aes" = "checkcc"
+if test "checkcc" = "with_aes"
 then
 	with_aes="no"
 fi
@@ -1514,6 +1520,7 @@ then
 fi
 OPENSSL_ECDSA=""
 OPENSSL_GOST=""
+OPENSSL_ED25519=""
 gosttype="raw"
 case "$with_gost" in
 	raw)
@@ -1537,6 +1544,8 @@ case "$use_openssl" in
 		AC_MSG_RESULT(disabled because of native PKCS11)
 		DST_OPENSSL_INC=""
 		CRYPTO="-DPKCS11CRYPTO"
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -1546,6 +1555,8 @@ case "$use_openssl" in
 		AC_MSG_RESULT(no)
 		DST_OPENSSL_INC=""
 		CRYPTO=""
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -1554,6 +1565,8 @@ case "$use_openssl" in
 	auto)
 		DST_OPENSSL_INC=""
 		CRYPTO=""
+		OPENSSLEDDSALINKOBJS=""
+		OPENSSLEDDSALINKSRS=""
 		OPENSSLGOSTLINKOBJS=""
 		OPENSSLGOSTLINKSRS=""
 		OPENSSLLINKOBJS=""
@@ -1853,6 +1866,86 @@ int main() {
 		;;
 	esac
 
+	AC_MSG_CHECKING(for OpenSSL Ed25519 support)
+	have_ed25519=""
+	have_ed448=""
+	AC_TRY_RUN([
+#include <openssl/evp.h>
+#include <openssl/objects.h>
+int main() {
+	EVP_PKEY_CTX *ctx;
+
+	ctx = EVP_PKEY_CTX_new_id(NID_ED25519, NULL);
+	if (ctx == NULL)
+		return (2);
+	return (0);
+}
+],
+	[AC_MSG_RESULT(yes)
+	have_ed25519="yes"],
+	[AC_MSG_RESULT(no)
+	have_ed25519="no"],
+	[AC_MSG_RESULT(using --with-eddsa)])
+	case "$with_eddsa" in
+	yes|all)
+	    case "$have_ed25519" in
+	    no)  AC_MSG_ERROR([eddsa not supported]) ;;
+	    *)  have_ed25519=yes ;;
+	    esac
+	    ;;
+	no)
+	    have_ed25519=no ;;
+	*)
+	    case "$have_ed25519" in
+	    yes|no) ;;
+	    *) AC_MSG_ERROR([need --with-eddsa=[[yes, all or no]]]) ;;
+	    esac
+	    ;;
+	esac
+	case $have_ed25519 in
+	yes)
+		OPENSSL_ED25519="yes"
+		OPENSSLEDDSALINKOBJS='${OPENSSLEDDSALINKOBJS}'
+		OPENSSLEDDSALINKSRCS='${OPENSSLEDDSALINKSRCS}'
+		AC_DEFINE(HAVE_OPENSSL_ED25519, 1,
+			  [Define if your OpenSSL version supports Ed25519.])
+		AC_MSG_CHECKING(for OpenSSL Ed448 support)
+		AC_TRY_RUN([
+#include <openssl/evp.h>
+#include <openssl/objects.h>
+int main() {
+	EVP_PKEY_CTX *ctx;
+
+	ctx = EVP_PKEY_CTX_new_id(NID_ED448, NULL);
+	if (ctx == NULL)
+		return (2);
+	return (0);
+}
+],
+		[AC_MSG_RESULT(yes)
+		have_ed448="yes"],
+		[AC_MSG_RESULT(no)
+		have_ed448="no"],
+		[AC_MSG_RESULT(using --with-eddsa)])
+		case $with_eddsa in
+		all)
+			have_ed448=yes ;;
+		*)
+			;;
+		esac
+		case $have_ed448 in
+		yes)
+			AC_DEFINE(HAVE_OPENSSL_ED448, 1,
+				  [Define if your OpenSSL version supports Ed448.])],
+			;;	   
+		*)
+			;;
+		esac
+		;;
+	*)
+		;;
+	esac
+
 	have_aes="no"
 	AC_MSG_CHECKING(for OpenSSL AES support)
 	AC_TRY_RUN([
@@ -1915,11 +2008,14 @@ esac
 #
 
 AC_SUBST(DST_OPENSSL_INC)
+AC_SUBST(OPENSSLEDDSALINKOBJS)
+AC_SUBST(OPENSSLEDDSALINKSRCS)
 AC_SUBST(OPENSSLGOSTLINKOBJS)
 AC_SUBST(OPENSSLGOSTLINKSRCS)
 AC_SUBST(OPENSSLLINKOBJS)
 AC_SUBST(OPENSSLLINKSRCS)
 AC_SUBST(OPENSSL_ECDSA)
+AC_SUBST(OPENSSL_ED25519)
 AC_SUBST(OPENSSL_GOST)
 
 DNS_CRYPTO_LIBS="$DNS_CRYPTO_LIBS $DST_OPENSSL_LIBS"
@@ -1979,7 +2075,7 @@ case $with_cc_alg in
 		;;
 	aes)
 		AC_MSG_RESULT(aes)
-		if test "$with_aes" != "yes"
+		if test "yes" != "$with_aes"
 		then
 			AC_MSG_ERROR("Client Cookie wants to use unavailable AES");
 		fi
@@ -2138,6 +2234,10 @@ AC_SUBST(PKCS11_PROVIDER)
 
 PKCS11_ECDSA=""
 PKCS11_GOST=""
+<<<<<<< HEAD
+=======
+PKCS11_ED25519=""
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 set_pk11_flavor="no"
 AC_MSG_CHECKING(for native PKCS11)
 
@@ -2171,6 +2271,32 @@ case "$want_native_pkcs11" in
 			AC_MSG_RESULT(disabled)
 			;;
 		esac
+<<<<<<< HEAD
+=======
+		AC_MSG_CHECKING(for PKCS11 Ed25519)
+		case "$with_eddsa" in
+		yes|all)
+			AC_MSG_RESULT(enabled)
+			PKCS11_ED25519="yes"
+			AC_DEFINE(HAVE_PKCS11_ED25519, 1,
+				  [Define if your PKCS11 provider supports Ed25519.])
+			AC_MSG_CHECKING(for PKCS11 Ed448)
+			case "$with_eddsa" in
+			all)
+				AC_MSG_RESULT(enabled)
+				AC_DEFINE(HAVE_PKCS11_ED448, 1,
+					  [Define if your PKCS11 provider supports Ed448.])
+				;;
+			*)
+				AC_MSG_RESULT(disabled)
+				;;
+			esac
+			;;
+		*)
+			AC_MSG_RESULT(disabled)
+			;;
+		esac
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		AC_MSG_CHECKING(for PKCS11 flavor)
 		case "$PKCS11_PROVIDER" in
 			*nfast*)
@@ -2220,6 +2346,7 @@ AC_SUBST(PKCS11LINKSRCS)
 AC_SUBST(CRYPTO)
 AC_SUBST(PKCS11_ECDSA)
 AC_SUBST(PKCS11_GOST)
+AC_SUBST(PKCS11_ED25519)
 AC_SUBST(PKCS11_TEST)
 
 # for PKCS11 benchmarks
@@ -2230,7 +2357,7 @@ if test "no" = "$have_clock_gt"; then
 	AC_CHECK_LIB(rt,clock_gettime,have_clock_gt=rt,)
 fi
 
-if test "$have_clock_gt" != "no"; then
+if test "no" != "$have_clock_gt"; then
 	AC_DEFINE(HAVE_CLOCK_GETTIME, 1, [Define if clock_gettime is available.])
 fi
 
@@ -2704,7 +2831,7 @@ case "$use_purify" in
 		PURIFY=""
 		;;
 	*)
-		if test -f $purify_path || test $purify_path = purify; then
+		if test -f "$purify_path" || test purify = "$purify_path"; then
 			AC_MSG_RESULT($purify_path)
 			PURIFYFLAGS="`echo $PURIFYOPTIONS`"
 			PURIFY="$purify_path $PURIFYFLAGS"
@@ -2782,12 +2909,12 @@ Install perl or explicitly disable the feature by --disable-symtable.])
 		case $host_os in
 		freebsd*|netbsd*|openbsd*|linux*|solaris*|darwin*)
 			MKSYMTBL_PROGRAM="$PERL"
-			if test $want_symtable = all; then
+			if test "all" = "$want_symtable"; then
 				ALWAYS_MAKE_SYMTABLE="yes"
 			fi
 			;;
 		*)
-			if test $want_symtable = yes -o $want_symtable = all
+			if test "yes" = "$want_symtable" -o "all" = "$want_symtable"
 			then
 				AC_MSG_WARN([this system is not known to generate internal symbol table safely; disabling it])
 			fi
@@ -3531,7 +3658,11 @@ no)	;;
 			break
 		fi
 	done
+<<<<<<< HEAD
 	if test "$use_readline" != "auto" &&
+=======
+	if test "auto" != "$use_readline" &&
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	   test "X$READLINE_LIB" = "X"
 	then
 		AC_MSG_ERROR([The readline library was not found.])
@@ -3539,7 +3670,11 @@ no)	;;
 	LIBS="$saved_LIBS"
 	;;
 esac
+<<<<<<< HEAD
 if test yes = "$ac_cv_func_readline"
+=======
+if test "yes" = "$ac_cv_func_readline"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 then
 	case "$READLINE_LIB" in
 	*edit*)
@@ -4611,10 +4746,10 @@ if test "yes" = "$idnlib"; then
 fi
 
 IDNLIBS=
-if test "$use_idn" != no; then
+if test "no" != "$use_idn"; then
 	AC_DEFINE(WITH_IDN, 1, [define if idnkit support is to be included.])
 	STD_CINCLUDES="$STD_CINCLUDES -I$idn_path/include"
-	if test "$idnlib" != no; then
+	if test "no" != "$idnlib"; then
 		IDNLIBS="$idnlib $iconvlib"
 	else
 		IDNLIBS="-L$idn_path/lib -lidnkit $iconvlib"
@@ -4628,7 +4763,11 @@ AC_SUBST(IDNLIBS)
 AC_ARG_WITH(atf,
 	[  --with-atf=ARG          support Automated Test Framework],
 	atf="$withval", atf="no")
+<<<<<<< HEAD
 if test yes = "$atf"; then
+=======
+if test "yes" = "$atf"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	atf=`pwd`/unit/atf
 	ATFBUILD=atf-src
 	AC_SUBST(ATFBUILD)
@@ -4647,7 +4786,7 @@ if test yes = "$atf"; then
 fi
 
 ATFLIBS=
-if test "$atf" != no; then
+if test "no" != "$atf"; then
 	AC_DEFINE(ATF_TEST, 1, [define if ATF unit tests are to be built.])
 	STD_CINCLUDES="$STD_CINCLUDES -I$atf/include"
 	ATFBIN="$atf/bin"
@@ -5290,9 +5429,13 @@ AC_ARG_WITH(make-clean,
     make_clean="$withval", make_clean="yes")
 case "$make_clean" in
 yes)
-	if test "$no_create" != "yes"
+	if test "yes" != "$no_create"
 	then
+<<<<<<< HEAD
 		if test "$silent" = "yes"
+=======
+		if test "yes" = "$silent"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		then
                         make clean > /dev/null
                 else
@@ -5321,7 +5464,11 @@ report() {
             echo "    Allow 'dnstap' packet logging (--enable-dnstap)"
     test "no" = "$use_geoip" || echo "    GeoIP access control (--with-geoip)"
     test "no" = "$use_gssapi" || echo "    GSS-API (--with-gssapi)"
+<<<<<<< HEAD
     if test "yes" = "$enable_full_report" -o "$with_cc_alg" != "aes"; then
+=======
+    if test "yes" = "$enable_full_report" -o "aes" != "$with_cc_alg"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "        Algorithm: $with_cc_alg"
     fi
 
@@ -5338,7 +5485,11 @@ report() {
         test "X$NZD_TOOLS" = "X" || echo "    LMDB database to store configuration for 'addzone' zones (--with-lmdb)"
     fi
 
+<<<<<<< HEAD
     if test "$use_pkcs11" != "no"; then
+=======
+    if test "no" != "$use_pkcs11"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         if test "yes" = "$want_native_pkcs11"; then
             echo "    Native PKCS#11/Cryptoki support (--enable-native-pkcs11)"
         else
@@ -5351,6 +5502,11 @@ report() {
     fi
     test "yes" = "$OPENSSL_ECDSA" -o "$PKCS11_ECDSA" && \
         echo "    ECDSA algorithm support (--with-ecdsa)"
+<<<<<<< HEAD
+=======
+    test "yes" = "$OPENSSL_ED25519" -o "$PKCS11_ED25519" && \
+        echo "    EDDSA algorithm support (--with-eddsa)"
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
     test "yes" = "$enable_fixed" && \
         echo "    Allow 'fixed' rrset-order (--enable-fixed-rrset)"
     test "yes" = "$enable_filter" && \
@@ -5412,8 +5568,15 @@ report() {
         echo "    GOST algorithm support (--with-gost)"
     test "X$CRYPTO" = "X" -o "yes" = "$OPENSSL_ECDSA" -o "yes" = "$PKCS11_ECDSA" || \
         echo "    ECDSA algorithm support (--with-ecdsa)"
+<<<<<<< HEAD
 
     test "yess" = "$enable_seccomp" || \
+=======
+    test "X$CRYPTO" = "X" -o "yes" = "$OPENSSL_ED25519" -o "yes" = "$PKCS11_ED25519" || \
+        echo "    EDDSA algorithm support (--with-eddsa)"
+
+    test "yes" = "$enable_seccomp" || \
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "    Use libseccomp system call filtering (--enable-seccomp)"
     test "yes" = "$want_backtrace" || \
         echo "    Print backtrace on crash (--enable-backtrace)"
@@ -5434,14 +5597,22 @@ report() {
         echo "Unrecognized options:"
         echo "    $ac_unrecognized_opts"
     fi
+<<<<<<< HEAD
     if test "$enable_full_report" != "yes"; then
+=======
+    if test "yes" != "$enable_full_report"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         echo "-------------------------------------------------------------------------------"
         echo "For more detail, use --enable-full-report."
     fi
     echo "==============================================================================="
 }
 
+<<<<<<< HEAD
 if test "$silent" != "yes"; then
+=======
+if test "yes" != "$silent"; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
         report
 fi
 

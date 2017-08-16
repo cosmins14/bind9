@@ -118,6 +118,8 @@
 
 #define WANTNSID(x) (((x)->attributes & NS_CLIENTATTR_WANTNSID) != 0)
 #define WANTEXPIRE(x) (((x)->attributes & NS_CLIENTATTR_WANTEXPIRE) != 0)
+#define WANTPAD(x) (((x)->attributes & NS_CLIENTATTR_WANTPAD) != 0)
+#define USEKEEPALIVE(x) (((x)->attributes & NS_CLIENTATTR_USEKEEPALIVE) != 0)
 
 /*% nameserver client manager structure */
 struct ns_clientmgr {
@@ -228,7 +230,8 @@ struct ns_clientmgr {
 
 unsigned int ns_client_requests;
 
-static void client_read(ns_client_t *client);
+static void read_settimeout(ns_client_t *client, isc_boolean_t newconn);
+static void client_read(ns_client_t *client, isc_boolean_t newconn);
 static void client_accept(ns_client_t *client);
 static void client_udprecv(ns_client_t *client);
 static void clientmgr_destroy(ns_clientmgr_t *manager);
@@ -279,6 +282,32 @@ ns_client_settimeout(ns_client_t *client, unsigned int seconds) {
 	isc_interval_t interval;
 
 	isc_interval_set(&interval, seconds, 0);
+	result = isc_timer_reset(client->timer, isc_timertype_once, NULL,
+				 &interval, ISC_FALSE);
+	client->timerset = ISC_TRUE;
+	if (result != ISC_R_SUCCESS) {
+		ns_client_log(client, NS_LOGCATEGORY_CLIENT,
+			      NS_LOGMODULE_CLIENT, ISC_LOG_ERROR,
+			      "setting timeout: %s",
+			      isc_result_totext(result));
+		/* Continue anyway. */
+	}
+}
+
+static void
+read_settimeout(ns_client_t *client, isc_boolean_t newconn) {
+	isc_result_t result;
+	isc_interval_t interval;
+	unsigned int ds;
+
+	if (newconn)
+		ds = ns_g_initialtimo;
+	else if (USEKEEPALIVE(client))
+		ds = ns_g_keepalivetimo;
+	else
+		ds = ns_g_idletimo;
+
+	isc_interval_set(&interval, ds / 10, 100000000 * (ds % 10));
 	result = isc_timer_reset(client->timer, isc_timertype_once, NULL,
 				 &interval, ISC_FALSE);
 	client->timerset = ISC_TRUE;
@@ -381,7 +410,7 @@ exit_check(ns_client_t *client) {
 
 		if (NS_CLIENTSTATE_READING == client->newstate) {
 			if (!client->pipelined) {
-				client_read(client);
+				client_read(client, ISC_FALSE);
 				client->newstate = NS_CLIENTSTATE_MAX;
 				return (ISC_TRUE); /* We're done. */
 			} else if (client->mortal) {
@@ -636,7 +665,7 @@ client_start(isc_task_t *task, isc_event_t *event) {
 
 	if (TCP_CLIENT(client)) {
 		if (client->pipelined) {
-			client_read(client);
+			client_read(client, ISC_FALSE);
 		} else {
 			client_accept(client);
 		}
@@ -1549,6 +1578,7 @@ ns_client_addopt(ns_client_t *client, dns_message_t *message,
 	int count = 0;
 	unsigned int flags;
 	unsigned char expire[4];
+	unsigned char advtimo[2];
 
 	REQUIRE(NS_CLIENT_VALID(client));
 	REQUIRE(opt != NULL && *opt == NULL);
@@ -1566,7 +1596,8 @@ ns_client_addopt(ns_client_t *client, dns_message_t *message,
 	/* Set EDNS options if applicable */
 	if (WANTNSID(client) &&
 	    (ns_g_server->server_id != NULL ||
-	     ns_g_server->server_usehostname)) {
+	     ns_g_server->server_usehostname))
+	{
 		if (ns_g_server->server_usehostname) {
 			result = ns_os_gethostname(nsid, sizeof(nsid));
 			if (result != ISC_R_SUCCESS) {
@@ -1613,14 +1644,15 @@ ns_client_addopt(ns_client_t *client, dns_message_t *message,
 		count++;
 	}
 	if (((client->attributes & NS_CLIENTATTR_HAVEECS) != 0) &&
-	    (client->ecs_addr.family == AF_INET ||
-	     client->ecs_addr.family == AF_INET6 ||
-	     client->ecs_addr.family == AF_UNSPEC))
+	    (client->ecs.addr.family == AF_INET ||
+	     client->ecs.addr.family == AF_INET6 ||
+	     client->ecs.addr.family == AF_UNSPEC))
 	{
 		isc_buffer_t buf;
 		isc_uint8_t addr[16];
 		isc_uint32_t plen, addrl;
 		isc_uint16_t family;
+<<<<<<< HEAD
 
 		/* Add CLIENT-SUBNET option. */
 
@@ -1656,6 +1688,43 @@ ns_client_addopt(ns_client_t *client, dns_message_t *message,
 		/* scope prefix-length */
 		isc_buffer_putuint8(&buf, client->ecs_scope);
 
+=======
+
+		/* Add CLIENT-SUBNET option. */
+
+		plen = client->ecs.source;
+
+		/* Round up prefix len to a multiple of 8 */
+		addrl = (plen + 7) / 8;
+
+		switch (client->ecs.addr.family) {
+		case AF_UNSPEC:
+			INSIST(plen == 0);
+			family = 0;
+			break;
+		case AF_INET:
+			INSIST(plen <= 32);
+			family = 1;
+			memmove(addr, &client->ecs.addr.type, addrl);
+			break;
+		case AF_INET6:
+			INSIST(plen <= 128);
+			family = 2;
+			memmove(addr, &client->ecs.addr.type, addrl);
+			break;
+		default:
+			INSIST(0);
+		}
+
+		isc_buffer_init(&buf, ecs, sizeof(ecs));
+		/* family */
+		isc_buffer_putuint16(&buf, family);
+		/* source prefix-length */
+		isc_buffer_putuint8(&buf, client->ecs.source);
+		/* scope prefix-length */
+		isc_buffer_putuint8(&buf, client->ecs.scope);
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 		/* address */
 		if (addrl > 0) {
 			/* Mask off last address byte */
@@ -1670,6 +1739,43 @@ ns_client_addopt(ns_client_t *client, dns_message_t *message,
 		ednsopts[count].length = addrl + 4;
 		ednsopts[count].value = ecs;
 		count++;
+	}
+	if (TCP_CLIENT(client) && USEKEEPALIVE(client)) {
+		isc_buffer_t buf;
+
+		INSIST(count < DNS_EDNSOPTIONS);
+
+		isc_buffer_init(&buf, advtimo, sizeof(advtimo));
+		isc_buffer_putuint16(&buf, (isc_uint16_t) ns_g_advertisedtimo);
+		ednsopts[count].code = DNS_OPT_TCP_KEEPALIVE;
+		ednsopts[count].length = 2;
+		ednsopts[count].value = advtimo;
+		count++;
+	}
+
+	/* Padding must be added last */
+	if ((view != NULL) && (view->padding > 0) && WANTPAD(client) &&
+	    (TCP_CLIENT(client) ||
+	     ((client->attributes & NS_CLIENTATTR_HAVECOOKIE) != 0)))
+	{
+		isc_netaddr_t netaddr;
+		int match;
+
+		isc_netaddr_fromsockaddr(&netaddr, &client->peeraddr);
+		result = dns_acl_match(&netaddr, NULL,
+				       view->pad_acl,
+				       &ns_g_server->aclenv,
+				       &match, NULL);
+		if (result == ISC_R_SUCCESS && match > 0) {
+			INSIST(count < DNS_EDNSOPTIONS);
+
+			ednsopts[count].code = DNS_OPT_PAD;
+			ednsopts[count].length = 0;
+			ednsopts[count].value = NULL;
+			count++;
+
+			dns_message_setpadding(message, view->padding);
+		}
 	}
 
 	result = dns_message_buildopt(message, opt, 0, udpsize, flags,
@@ -1704,7 +1810,7 @@ allowed(isc_netaddr_t *addr, dns_name_t *signer,
  */
 isc_boolean_t
 ns_client_isself(dns_view_t *myview, dns_tsigkey_t *mykey,
-		 isc_sockaddr_t *srcaddr, isc_sockaddr_t *dstaddr,
+		 const isc_sockaddr_t *srcaddr, const isc_sockaddr_t *dstaddr,
 		 dns_rdataclass_t rdclass, void *arg)
 {
 	dns_view_t *view;
@@ -2070,9 +2176,9 @@ process_ecs(ns_client_t *client, isc_buffer_t *buf, size_t optlen) {
 		}
 	}
 
-	memmove(&client->ecs_addr, &caddr, sizeof(caddr));
-	client->ecs_addrlen = addrlen;
-	client->ecs_scope = 0;
+	memmove(&client->ecs.addr, &caddr, sizeof(caddr));
+	client->ecs.source = addrlen;
+	client->ecs.scope = 0;
 	client->attributes |= NS_CLIENTATTR_HAVEECS;
 
 	isc_buffer_forward(buf, (unsigned int)optlen);
@@ -2160,6 +2266,21 @@ process_opt(ns_client_t *client, dns_rdataset_t *opt) {
 				isc_stats_increment(ns_g_server->nsstats,
 						  dns_nsstatscounter_ecsopt);
 				break;
+			case DNS_OPT_TCP_KEEPALIVE:
+				if (!USEKEEPALIVE(client))
+					isc_stats_increment(
+					       ns_g_server->nsstats,
+					       dns_nsstatscounter_keepaliveopt);
+				client->attributes |=
+					NS_CLIENTATTR_USEKEEPALIVE;
+				isc_buffer_forward(&optbuf, optlen);
+				break;
+			case DNS_OPT_PAD:
+				client->attributes |= NS_CLIENTATTR_WANTPAD;
+				isc_stats_increment(ns_g_server->nsstats,
+						  dns_nsstatscounter_padopt);
+				isc_buffer_forward(&optbuf, optlen);
+				break;
 			default:
 				isc_stats_increment(ns_g_server->nsstats,
 						  dns_nsstatscounter_otheropt);
@@ -2190,7 +2311,7 @@ client_request(isc_task_t *task, isc_event_t *event) {
 	isc_buffer_t tbuffer;
 	dns_view_t *view;
 	dns_rdataset_t *opt;
-	dns_name_t *signame;
+	const dns_name_t *signame;
 	isc_boolean_t ra;	/* Recursion available. */
 	isc_netaddr_t netaddr;
 	int match;
@@ -2469,8 +2590,8 @@ client_request(isc_task_t *task, isc_event_t *event) {
 	else
 		opt = dns_message_getopt(client->message);
 
-	client->ecs_addrlen = 0;
-	client->ecs_scope = 0;
+	client->ecs.source = 0;
+	client->ecs.scope = 0;
 
 	if (opt != NULL) {
 		/*
@@ -2582,11 +2703,11 @@ client_request(isc_task_t *task, isc_event_t *event) {
 			}
 
 			if ((client->attributes & NS_CLIENTATTR_HAVEECS) != 0) {
-				addr = &client->ecs_addr;
-				scope = &client->ecs_scope;
+				addr = &client->ecs.addr;
+				scope = &client->ecs.scope;
 			}
 
-			if (allowed(&netaddr, tsig, addr, client->ecs_addrlen,
+			if (allowed(&netaddr, tsig, addr, client->ecs.source,
 				    scope, view->matchclients) &&
 			    allowed(&client->destaddr, tsig, NULL,
 				    0, NULL, view->matchdestinations) &&
@@ -2995,8 +3116,7 @@ client_create(ns_clientmgr_t *manager, ns_client_t **clientp) {
 	client->recursionquota = NULL;
 	client->interface = NULL;
 	client->peeraddr_valid = ISC_FALSE;
-	client->ecs_addrlen = 0;
-	client->ecs_scope = 0;
+	dns_ecs_init(&client->ecs);
 #ifdef ALLOW_FILTER_AAAA
 	client->filter_aaaa = dns_aaaa_ok;
 #endif
@@ -3065,7 +3185,7 @@ client_create(ns_clientmgr_t *manager, ns_client_t **clientp) {
 }
 
 static void
-client_read(ns_client_t *client) {
+client_read(ns_client_t *client, isc_boolean_t newconn) {
 	isc_result_t result;
 
 	CTRACE("read");
@@ -3079,7 +3199,7 @@ client_read(ns_client_t *client) {
 	 * Set a timeout to limit the amount of time we will wait
 	 * for a request on this TCP connection.
 	 */
-	ns_client_settimeout(client, 30);
+	read_settimeout(client, newconn);
 
 	client->state = client->newstate = NS_CLIENTSTATE_READING;
 	INSIST(client->nreads == 0);
@@ -3197,7 +3317,7 @@ client_newconn(isc_task_t *task, isc_event_t *event) {
 			client->pipelined = ISC_TRUE;
 		}
 
-		client_read(client);
+		client_read(client, ISC_TRUE);
 	}
 
  freeevent:
@@ -3629,8 +3749,8 @@ ns_client_checkaclsilent(ns_client_t *client, isc_netaddr_t *netaddr,
 	}
 
 	if ((client->attributes & NS_CLIENTATTR_HAVEECS) != 0) {
-		ecs_addr = &client->ecs_addr;
-		ecs_addrlen = client->ecs_addrlen;
+		ecs_addr = &client->ecs.addr;
+		ecs_addrlen = client->ecs.source;
 	}
 
 	result = dns_acl_match2(netaddr, client->signer,
@@ -3748,7 +3868,7 @@ ns_client_log(ns_client_t *client, isc_logcategory_t *category,
 }
 
 void
-ns_client_aclmsg(const char *msg, dns_name_t *name, dns_rdatatype_t type,
+ns_client_aclmsg(const char *msg, const dns_name_t *name, dns_rdatatype_t type,
 		 dns_rdataclass_t rdclass, char *buf, size_t len)
 {
 	char namebuf[DNS_NAME_FORMATSIZE];

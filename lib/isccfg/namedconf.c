@@ -107,6 +107,8 @@ static cfg_type_t cfg_type_key;
 static cfg_type_t cfg_type_logfile;
 static cfg_type_t cfg_type_logging;
 static cfg_type_t cfg_type_logseverity;
+static cfg_type_t cfg_type_logsuffix;
+static cfg_type_t cfg_type_logversions;
 static cfg_type_t cfg_type_lwres;
 static cfg_type_t cfg_type_masterselement;
 static cfg_type_t cfg_type_maxttl;
@@ -123,6 +125,7 @@ static cfg_type_t cfg_type_optional_port;
 static cfg_type_t cfg_type_optional_uint32;
 static cfg_type_t cfg_type_options;
 static cfg_type_t cfg_type_portiplist;
+static cfg_type_t cfg_type_printtime;
 static cfg_type_t cfg_type_querysource4;
 static cfg_type_t cfg_type_querysource6;
 static cfg_type_t cfg_type_querysource;
@@ -1025,10 +1028,12 @@ options_clauses[] = {
 	{ "avoid-v6-udp-ports", &cfg_type_bracketed_portlist, 0 },
 	{ "bindkeys-file", &cfg_type_qstring, 0 },
 	{ "blackhole", &cfg_type_bracketed_aml, 0 },
-	{ "cookie-secret", &cfg_type_sstring, 0 },
 	{ "cookie-algorithm", &cfg_type_cookiealg, 0 },
+	{ "cookie-secret", &cfg_type_sstring, 0 },
 	{ "coresize", &cfg_type_size, 0 },
 	{ "datasize", &cfg_type_size, 0 },
+	{ "deallocate-on-exit", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
+	{ "directory", &cfg_type_qstring, CFG_CLAUSEFLAG_CALLBACK },
 #ifdef HAVE_DNSTAP
 	{ "dnstap-output", &cfg_type_dnstapoutput, 0 },
 	{ "dnstap-identity", &cfg_type_serverid, 0 },
@@ -1047,6 +1052,7 @@ options_clauses[] = {
 	  CFG_CLAUSEFLAG_NOTCONFIGURED },
 	{ "dnstap-version", &cfg_type_qstringornone,
 	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+<<<<<<< HEAD
 	{ "fstrm-set-buffer-hint", &cfg_type_uint32,
 	  CFG_CLAUSEFLAG_NOTCONFIGURED },
 	{ "fstrm-set-flush-timeout", &cfg_type_uint32,
@@ -1067,19 +1073,45 @@ options_clauses[] = {
 	{ "session-keyalg", &cfg_type_astring, 0 },
 	{ "deallocate-on-exit", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "directory", &cfg_type_qstring, CFG_CLAUSEFLAG_CALLBACK },
+=======
+#endif
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	{ "dscp", &cfg_type_uint32, 0 },
 	{ "dump-file", &cfg_type_qstring, 0 },
 	{ "fake-iquery", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "files", &cfg_type_size, 0 },
 	{ "flush-zones-on-shutdown", &cfg_type_boolean, 0 },
+#ifdef HAVE_DNSTAP
+	{ "fstrm-set-buffer-hint", &cfg_type_uint32, 0 },
+	{ "fstrm-set-flush-timeout", &cfg_type_uint32, 0 },
+	{ "fstrm-set-input-queue-size", &cfg_type_uint32, 0 },
+	{ "fstrm-set-output-notify-threshold", &cfg_type_uint32, 0 },
+	{ "fstrm-set-output-queue-model", &cfg_type_fstrm_model, 0 },
+	{ "fstrm-set-output-queue-size", &cfg_type_uint32, 0 },
+	{ "fstrm-set-reopen-interval", &cfg_type_uint32, 0 },
+#else
+	{ "fstrm-set-buffer-hint", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-flush-timeout", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-input-queue-size", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-output-notify-threshold", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-output-queue-model", &cfg_type_fstrm_model,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-output-queue-size", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "fstrm-set-reopen-interval", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+#endif /* HAVE_DNSTAP */
 #ifdef HAVE_GEOIP
 	{ "geoip-directory", &cfg_type_qstringornone, 0 },
 	{ "geoip-use-ecs", &cfg_type_boolean, 0 },
 #else
 	{ "geoip-directory", &cfg_type_qstringornone,
 	  CFG_CLAUSEFLAG_NOTCONFIGURED },
-	{ "geoip-use-ecs", &cfg_type_qstringornone,
-	  CFG_CLAUSEFLAG_NOTCONFIGURED },
+	{ "geoip-use-ecs", &cfg_type_boolean, CFG_CLAUSEFLAG_NOTCONFIGURED },
 #endif /* HAVE_GEOIP */
 	{ "has-old-clients", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "heartbeat-interval", &cfg_type_uint32, 0 },
@@ -1091,40 +1123,47 @@ options_clauses[] = {
 	{ "listen-on", &cfg_type_listenon, CFG_CLAUSEFLAG_MULTI },
 	{ "listen-on-v6", &cfg_type_listenon, CFG_CLAUSEFLAG_MULTI },
 	{ "lock-file", &cfg_type_qstringornone, 0 },
-	{ "sit-secret", &cfg_type_sstring, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "managed-keys-directory", &cfg_type_qstring, 0 },
 	{ "match-mapped-addresses", &cfg_type_boolean, 0 },
 	{ "max-rsa-exponent-size", &cfg_type_uint32, 0 },
-	{ "memstatistics-file", &cfg_type_qstring, 0 },
 	{ "memstatistics", &cfg_type_boolean, 0 },
+	{ "memstatistics-file", &cfg_type_qstring, 0 },
 	{ "multiple-cnames", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "named-xfer", &cfg_type_qstring, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "notify-rate", &cfg_type_uint32, 0 },
 	{ "pid-file", &cfg_type_qstringornone, 0 },
 	{ "port", &cfg_type_uint32, 0 },
 	{ "querylog", &cfg_type_boolean, 0 },
-	{ "recursing-file", &cfg_type_qstring, 0 },
 	{ "random-device", &cfg_type_qstring, 0 },
+	{ "recursing-file", &cfg_type_qstring, 0 },
 	{ "recursive-clients", &cfg_type_uint32, 0 },
 	{ "reserved-sockets", &cfg_type_uint32, 0 },
 	{ "secroots-file", &cfg_type_qstring, 0 },
 	{ "serial-queries", &cfg_type_uint32, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "serial-query-rate", &cfg_type_uint32, 0 },
 	{ "server-id", &cfg_type_serverid, 0 },
+	{ "session-keyalg", &cfg_type_astring, 0 },
+	{ "session-keyfile", &cfg_type_qstringornone, 0 },
+	{ "session-keyname", &cfg_type_astring, 0 },
+	{ "sit-secret", &cfg_type_sstring, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "stacksize", &cfg_type_size, 0 },
 	{ "startup-notify-rate", &cfg_type_uint32, 0 },
 	{ "statistics-file", &cfg_type_qstring, 0 },
 	{ "statistics-interval", &cfg_type_uint32, CFG_CLAUSEFLAG_NYI },
+	{ "tcp-advertised-timeout", &cfg_type_uint32, 0 },
 	{ "tcp-clients", &cfg_type_uint32, 0 },
+	{ "tcp-idle-timeout", &cfg_type_uint32, 0 },
+	{ "tcp-initial-timeout", &cfg_type_uint32, 0 },
+	{ "tcp-keepalive-timeout", &cfg_type_uint32, 0 },
 	{ "tcp-listen-queue", &cfg_type_uint32, 0 },
 	{ "tkey-dhkey", &cfg_type_tkey_dhkey, 0 },
+	{ "tkey-domain", &cfg_type_qstring, 0 },
 	{ "tkey-gssapi-credential", &cfg_type_qstring, 0 },
 	{ "tkey-gssapi-keytab", &cfg_type_qstring, 0 },
-	{ "tkey-domain", &cfg_type_qstring, 0 },
 	{ "transfer-message-size", &cfg_type_uint32, 0 },
-	{ "transfers-per-ns", &cfg_type_uint32, 0 },
 	{ "transfers-in", &cfg_type_uint32, 0 },
 	{ "transfers-out", &cfg_type_uint32, 0 },
+	{ "transfers-per-ns", &cfg_type_uint32, 0 },
 	{ "treat-cr-as-space", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "use-id-pool", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "use-ixfr", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
@@ -1232,6 +1271,24 @@ static cfg_type_t cfg_type_masterstyle = {
 	&cfg_rep_string, &masterstyle_enums
 };
 
+static keyword_type_t blocksize_kw = { "block-size", &cfg_type_uint32 };
+
+static cfg_type_t cfg_type_blocksize = {
+	"blocksize", parse_keyvalue, print_keyvalue,
+	doc_keyvalue, &cfg_rep_uint32, &blocksize_kw
+};
+
+static cfg_tuplefielddef_t resppadding_fields[] = {
+	{ "acl", &cfg_type_bracketed_aml, 0 },
+	{ "block-size", &cfg_type_blocksize, 0 },
+	{ NULL, NULL, 0 }
+};
+
+static cfg_type_t cfg_type_resppadding = {
+	"resppadding", cfg_parse_tuple, cfg_print_tuple, cfg_doc_tuple,
+	&cfg_rep_tuple, resppadding_fields
+};
+
 /*%
  *  dnstap {
  *      <message type> [query | response] ;
@@ -1275,6 +1332,98 @@ static cfg_type_t cfg_type_dnstap = {
 /*%
  * dnstap-output
  */
+static isc_result_t
+parse_dtout(cfg_parser_t *pctx, const cfg_type_t *type, cfg_obj_t **ret) {
+	isc_result_t result;
+	cfg_obj_t *obj = NULL;
+	const cfg_tuplefielddef_t *fields = type->of;
+
+	CHECK(cfg_create_tuple(pctx, type, &obj));
+
+	/* Parse the mandatory "mode" and "path" fields */
+	CHECK(cfg_parse_obj(pctx, fields[0].type, &obj->value.tuple[0]));
+	CHECK(cfg_parse_obj(pctx, fields[1].type, &obj->value.tuple[1]));
+
+	/* Parse "versions" and "size" fields in any order. */
+	for (;;) {
+		CHECK(cfg_peektoken(pctx, 0));
+		if (pctx->token.type == isc_tokentype_string) {
+			CHECK(cfg_gettoken(pctx, 0));
+			if (strcasecmp(TOKEN_STRING(pctx),
+				       "size") == 0 &&
+			    obj->value.tuple[2] == NULL)
+			{
+				CHECK(cfg_parse_obj(pctx, fields[2].type,
+						    &obj->value.tuple[2]));
+			} else if (strcasecmp(TOKEN_STRING(pctx),
+					      "versions") == 0 &&
+				   obj->value.tuple[3] == NULL)
+			{
+				CHECK(cfg_parse_obj(pctx, fields[3].type,
+						    &obj->value.tuple[3]));
+			} else if (strcasecmp(TOKEN_STRING(pctx),
+					      "suffix") == 0 &&
+				   obj->value.tuple[4] == NULL) {
+				CHECK(cfg_parse_obj(pctx, fields[4].type,
+					    &obj->value.tuple[4]));
+			} else {
+				cfg_parser_error(pctx, CFG_LOG_NEAR,
+						 "unexpected token");
+				result = ISC_R_UNEXPECTEDTOKEN;
+				goto cleanup;
+			}
+		} else {
+			break;
+		}
+	}
+
+	/* Create void objects for missing optional values. */
+	if (obj->value.tuple[2] == NULL)
+		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[2]));
+	if (obj->value.tuple[3] == NULL)
+		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[3]));
+	if (obj->value.tuple[4] == NULL)
+		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[4]));
+
+	*ret = obj;
+	return (ISC_R_SUCCESS);
+
+ cleanup:
+	CLEANUP_OBJ(obj);
+	return (result);
+}
+
+static void
+print_dtout(cfg_printer_t *pctx, const cfg_obj_t *obj) {
+	cfg_print_obj(pctx, obj->value.tuple[0]); /* mode */
+	cfg_print_obj(pctx, obj->value.tuple[1]); /* file */
+	if (obj->value.tuple[2]->type->print != cfg_print_void) {
+		cfg_print_cstr(pctx, " size ");
+		cfg_print_obj(pctx, obj->value.tuple[2]);
+	}
+	if (obj->value.tuple[3]->type->print != cfg_print_void) {
+		cfg_print_cstr(pctx, " versions ");
+		cfg_print_obj(pctx, obj->value.tuple[3]);
+	}
+	if (obj->value.tuple[4]->type->print != cfg_print_void) {
+		cfg_print_cstr(pctx, " suffix ");
+		cfg_print_obj(pctx, obj->value.tuple[4]);
+	}
+}
+
+
+static void
+doc_dtout(cfg_printer_t *pctx, const cfg_type_t *type) {
+	UNUSED(type);
+	cfg_print_cstr(pctx, "( file | unix ) <quoted_string>");
+	cfg_print_cstr(pctx, " ");
+	cfg_print_cstr(pctx, "[ size ( unlimited | <size> ) ]");
+	cfg_print_cstr(pctx, " ");
+	cfg_print_cstr(pctx, "[ versions ( unlimited | <integer> ) ]");
+	cfg_print_cstr(pctx, " ");
+	cfg_print_cstr(pctx, "[ suffix ( increment | timestamp ) ]");
+}
+
 static const char *dtoutmode_enums[] = { "file", "unix", NULL };
 static cfg_type_t cfg_type_dtmode = {
 	"dtmode", cfg_parse_enum, cfg_print_ustring, cfg_doc_enum,
@@ -1284,11 +1433,14 @@ static cfg_type_t cfg_type_dtmode = {
 static cfg_tuplefielddef_t dtout_fields[] = {
 	{ "mode", &cfg_type_dtmode, 0 },
 	{ "path", &cfg_type_qstring, 0 },
+	{ "size", &cfg_type_sizenodefault, 0 },
+	{ "versions", &cfg_type_logversions, 0 },
+	{ "suffix", &cfg_type_logsuffix, 0 },
 	{ NULL, NULL, 0 }
 };
 
 static cfg_type_t cfg_type_dnstapoutput = {
-	"dnstapoutput", cfg_parse_tuple, cfg_print_tuple, cfg_doc_tuple,
+	"dnstapoutput", parse_dtout, print_dtout, doc_dtout,
 	&cfg_rep_tuple, dtout_fields
 };
 
@@ -1297,8 +1449,9 @@ static cfg_type_t cfg_type_dnstapoutput = {
  *	zone <string> [ policy (given|disabled|passthru|drop|tcp-only|
  *					nxdomain|nodata|cname <domain> ) ]
  *		      [ recursive-only yes|no ] [ log yes|no ]
- *		      [ max-policy-ttl number ] ;
+ *		      [ max-policy-ttl number ] [ min-update-interval number ] ;
  *  } [ recursive-only yes|no ] [ max-policy-ttl number ]
+ *	 [ min-update-interval number ]
  *	 [ break-dnssec yes|no ] [ min-ns-dots number ]
  *	 [ qname-wait-recurse yes|no ] ;
  */
@@ -1488,6 +1641,7 @@ static cfg_tuplefielddef_t rpz_zone_fields[] = {
 	{ "zone name", &cfg_type_rpz_zone, 0 },
 	{ "log", &cfg_type_boolean, 0 },
 	{ "max-policy-ttl", &cfg_type_uint32, 0 },
+	{ "min-update-interval", &cfg_type_uint32, 0 },
 	{ "policy", &cfg_type_rpz_policy, 0 },
 	{ "recursive-only", &cfg_type_boolean, 0 },
 	{ NULL, NULL, 0 }
@@ -1506,6 +1660,7 @@ static cfg_tuplefielddef_t rpz_fields[] = {
 	{ "zone list", &cfg_type_rpz_list, 0 },
 	{ "break-dnssec", &cfg_type_boolean, 0 },
 	{ "max-policy-ttl", &cfg_type_uint32, 0 },
+	{ "min-update-interval", &cfg_type_uint32, 0 },
 	{ "min-ns-dots", &cfg_type_uint32, 0 },
 	{ "nsip-wait-recurse", &cfg_type_boolean, 0 },
 	{ "qname-wait-recurse", &cfg_type_boolean, 0 },
@@ -1694,10 +1849,14 @@ static cfg_type_t cfg_type_dns64 = {
 
 static cfg_clausedef_t
 view_clauses[] = {
-	{ "acache-cleaning-interval", &cfg_type_uint32, 0 },
-	{ "acache-enable", &cfg_type_boolean, 0 },
-	{ "additional-from-auth", &cfg_type_boolean, 0 },
-	{ "additional-from-cache", &cfg_type_boolean, 0 },
+	{ "acache-cleaning-interval", &cfg_type_uint32,
+	  CFG_CLAUSEFLAG_OBSOLETE },
+	{ "acache-enable", &cfg_type_boolean,
+	  CFG_CLAUSEFLAG_OBSOLETE },
+	{ "additional-from-auth", &cfg_type_boolean,
+	  CFG_CLAUSEFLAG_OBSOLETE },
+	{ "additional-from-cache", &cfg_type_boolean,
+	  CFG_CLAUSEFLAG_OBSOLETE },
 	{ "allow-new-zones", &cfg_type_boolean, 0 },
 	{ "allow-query-cache", &cfg_type_bracketed_aml, 0 },
 	{ "allow-query-cache-on", &cfg_type_bracketed_aml, 0 },
@@ -1754,6 +1913,7 @@ view_clauses[] = {
 	{ "filter-aaaa-on-v6", &cfg_type_filter_aaaa,
 	   CFG_CLAUSEFLAG_NOTCONFIGURED },
 #endif
+	{ "glue-cache", &cfg_type_boolean, 0 },
 	{ "ixfr-from-differences", &cfg_type_ixfrdifftype, 0 },
 	{ "lame-ttl", &cfg_type_ttlval, 0 },
 #ifdef HAVE_LMDB
@@ -1763,7 +1923,8 @@ view_clauses[] = {
 #endif
 	{ "nocookie-udp-size", &cfg_type_uint32, 0 },
 	{ "nosit-udp-size", &cfg_type_uint32, CFG_CLAUSEFLAG_OBSOLETE },
-	{ "max-acache-size", &cfg_type_sizenodefault, 0 },
+	{ "max-acache-size", &cfg_type_sizenodefault,
+	  CFG_CLAUSEFLAG_OBSOLETE },
 	{ "max-cache-size", &cfg_type_sizeorpercent, 0 },
 	{ "max-cache-ttl", &cfg_type_uint32, 0 },
 	{ "max-clients-per-query", &cfg_type_uint32, 0 },
@@ -1774,6 +1935,10 @@ view_clauses[] = {
 	{ "min-roots", &cfg_type_uint32, CFG_CLAUSEFLAG_NOTIMP },
 	{ "minimal-any", &cfg_type_boolean, 0 },
 	{ "minimal-responses", &cfg_type_minimal, 0 },
+<<<<<<< HEAD
+=======
+	{ "new-zones-directory", &cfg_type_qstring, 0 },
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	{ "nta-recheck", &cfg_type_ttlval, 0 },
 	{ "nta-lifetime", &cfg_type_ttlval, 0 },
 	{ "nxdomain-redirect", &cfg_type_astring, 0 },
@@ -1793,10 +1958,11 @@ view_clauses[] = {
 	  CFG_CLAUSEFLAG_OBSOLETE },
 	{ "rate-limit", &cfg_type_rrl, 0 },
 	{ "recursion", &cfg_type_boolean, 0 },
-	{ "request-sit", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "request-nsid", &cfg_type_boolean, 0 },
+	{ "request-sit", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "require-server-cookie", &cfg_type_boolean, 0 },
 	{ "resolver-query-timeout", &cfg_type_uint32, 0 },
+	{ "response-padding", &cfg_type_resppadding, 0 },
 	{ "response-policy", &cfg_type_rpz, 0 },
 	{ "rfc2308-type1", &cfg_type_boolean, CFG_CLAUSEFLAG_NYI },
 	{ "root-delegation-only",  &cfg_type_optional_exclude, 0 },
@@ -1878,7 +2044,11 @@ zone_clauses[] = {
 	{ "masterfile-format", &cfg_type_masterformat, 0 },
 	{ "masterfile-style", &cfg_type_masterstyle, 0 },
 	{ "max-ixfr-log-size", &cfg_type_size, CFG_CLAUSEFLAG_OBSOLETE },
+<<<<<<< HEAD
 	{ "max-journal-size", &cfg_type_sizenodefault, 0 },
+=======
+	{ "max-journal-size", &cfg_type_size, 0 },
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	{ "max-records", &cfg_type_uint32, 0 },
 	{ "max-refresh-time", &cfg_type_uint32, 0 },
 	{ "max-retry-time", &cfg_type_uint32, 0 },
@@ -2076,9 +2246,9 @@ server_clauses[] = {
 	{ "edns-version", &cfg_type_uint32, 0 },
 	{ "keys", &cfg_type_server_key_kludge, 0 },
 	{ "max-udp-size", &cfg_type_uint32, 0 },
-	{ "tcp-only", &cfg_type_boolean, 0 },
 	{ "notify-source", &cfg_type_sockaddr4wild, 0 },
 	{ "notify-source-v6", &cfg_type_sockaddr6wild, 0 },
+	{ "padding", &cfg_type_uint32, 0 },
 	{ "provide-ixfr", &cfg_type_boolean, 0 },
 	{ "query-source", &cfg_type_querysource4, 0 },
 	{ "query-source-v6", &cfg_type_querysource6, 0 },
@@ -2088,6 +2258,8 @@ server_clauses[] = {
 	{ "request-sit", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
 	{ "send-cookie", &cfg_type_boolean, 0 },
 	{ "support-ixfr", &cfg_type_boolean, CFG_CLAUSEFLAG_OBSOLETE },
+	{ "tcp-keepalive", &cfg_type_boolean, 0 },
+	{ "tcp-only", &cfg_type_boolean, 0 },
 	{ "transfer-format", &cfg_type_transferformat, 0 },
 	{ "transfer-source", &cfg_type_sockaddr4wild, 0 },
 	{ "transfer-source-v6", &cfg_type_sockaddr6wild, 0 },
@@ -2104,7 +2276,6 @@ static cfg_type_t cfg_type_server = {
 	&cfg_rep_map, server_clausesets
 };
 
-
 /*%
  * Clauses that can be found in a 'channel' clause in the
  * 'logging' statement.
@@ -2112,8 +2283,24 @@ static cfg_type_t cfg_type_server = {
  * These have some additional constraints that need to be
  * checked after parsing:
  *  - There must exactly one of file/syslog/null/stderr
- *
  */
+
+static const char *printtime_enums[] = {
+	"iso8601", "iso8601-utc", "local", NULL
+};
+static isc_result_t
+parse_printtime(cfg_parser_t *pctx, const cfg_type_t *type, cfg_obj_t **ret) {
+	return (parse_enum_or_other(pctx, type, &cfg_type_boolean, ret));
+}
+static void
+doc_printtime(cfg_printer_t *pctx, const cfg_type_t *type) {
+	doc_enum_or_other(pctx, type, &cfg_type_boolean);
+}
+static cfg_type_t cfg_type_printtime = {
+	"printtime", parse_printtime, cfg_print_ustring, doc_printtime,
+	&cfg_rep_string, printtime_enums
+};
+
 static cfg_clausedef_t
 channel_clauses[] = {
 	/* Destinations.  We no longer require these to be first. */
@@ -2123,7 +2310,7 @@ channel_clauses[] = {
 	{ "stderr", &cfg_type_void, 0 },
 	/* Options.  We now accept these for the null channel, too. */
 	{ "severity", &cfg_type_logseverity, 0 },
-	{ "print-time", &cfg_type_boolean, 0 },
+	{ "print-time", &cfg_type_printtime, 0 },
 	{ "print-severity", &cfg_type_boolean, 0 },
 	{ "print-category", &cfg_type_boolean, 0 },
 	{ "buffered", &cfg_type_boolean, 0 },
@@ -2349,7 +2536,6 @@ static cfg_type_t cfg_type_sizenodefault = {
 /*%
  * A size in absolute values or percents.
  */
-
 static cfg_type_t cfg_type_sizeval_percent = {
 	"sizeval_percent", parse_sizeval_percent, cfg_print_ustring,
 	doc_sizeval_percent, &cfg_rep_string, NULL
@@ -3274,10 +3460,17 @@ static cfg_type_t cfg_type_logversions = {
 	&cfg_rep_string, logversions_enums
 };
 
+static const char *logsuffix_enums[] = { "increment", "timestamp", NULL };
+static cfg_type_t cfg_type_logsuffix = {
+	"logsuffix", cfg_parse_enum, cfg_print_ustring, cfg_doc_enum,
+	&cfg_rep_string, &logsuffix_enums
+};
+
 static cfg_tuplefielddef_t logfile_fields[] = {
 	{ "file", &cfg_type_qstring, 0 },
 	{ "versions", &cfg_type_logversions, 0 },
 	{ "size", &cfg_type_size, 0 },
+	{ "suffix", &cfg_type_logsuffix, 0 },
 	{ NULL, NULL, 0 }
 };
 
@@ -3307,6 +3500,11 @@ parse_logfile(cfg_parser_t *pctx, const cfg_type_t *type, cfg_obj_t **ret) {
 				   obj->value.tuple[2] == NULL) {
 				CHECK(cfg_parse_obj(pctx, fields[2].type,
 					    &obj->value.tuple[2]));
+			} else if (strcasecmp(TOKEN_STRING(pctx),
+					      "suffix") == 0 &&
+				   obj->value.tuple[3] == NULL) {
+				CHECK(cfg_parse_obj(pctx, fields[3].type,
+					    &obj->value.tuple[3]));
 			} else {
 				break;
 			}
@@ -3320,6 +3518,8 @@ parse_logfile(cfg_parser_t *pctx, const cfg_type_t *type, cfg_obj_t **ret) {
 		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[1]));
 	if (obj->value.tuple[2] == NULL)
 		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[2]));
+	if (obj->value.tuple[3] == NULL)
+		CHECK(cfg_parse_void(pctx, NULL, &obj->value.tuple[3]));
 
 	*ret = obj;
 	return (ISC_R_SUCCESS);
@@ -3340,6 +3540,10 @@ print_logfile(cfg_printer_t *pctx, const cfg_obj_t *obj) {
 		cfg_print_cstr(pctx, " size ");
 		cfg_print_obj(pctx, obj->value.tuple[2]);
 	}
+	if (obj->value.tuple[3]->type->print != cfg_print_void) {
+		cfg_print_cstr(pctx, " suffix ");
+		cfg_print_obj(pctx, obj->value.tuple[3]);
+	}
 }
 
 
@@ -3348,9 +3552,11 @@ doc_logfile(cfg_printer_t *pctx, const cfg_type_t *type) {
 	UNUSED(type);
 	cfg_print_cstr(pctx, "<quoted_string>");
 	cfg_print_cstr(pctx, " ");
-	cfg_print_cstr(pctx, "[ versions ( \"unlimited\" | <integer> ) ]");
+	cfg_print_cstr(pctx, "[ versions ( unlimited | <integer> ) ]");
 	cfg_print_cstr(pctx, " ");
 	cfg_print_cstr(pctx, "[ size <size> ]");
+	cfg_print_cstr(pctx, " ");
+	cfg_print_cstr(pctx, "[ suffix ( increment | timestamp ) ]");
 }
 
 static cfg_type_t cfg_type_logfile = {

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .\" Copyright (C) 2015, 2016 Internet Systems Consortium, Inc. ("ISC")
+=======
+.\" Copyright (C) 2015-2017 Internet Systems Consortium, Inc. ("ISC")
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 .\" 
 .\" This Source Code Form is subject to the terms of the Mozilla Public
 .\" License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -39,7 +43,11 @@
 dnstap-read \- print dnstap data in human\-readable form
 .SH "SYNOPSIS"
 .HP \w'\fBdnstap\-read\fR\ 'u
+<<<<<<< HEAD
 \fBdnstap\-read\fR [\fB\-m\fR] [\fB\-p\fR] [\fB\-y\fR] {\fIfile\fR}
+=======
+\fBdnstap\-read\fR [\fB\-m\fR] [\fB\-p\fR] [\fB\-x\fR] [\fB\-y\fR] {\fIfile\fR}
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 .SH "DESCRIPTION"
 .PP
 \fBdnstap\-read\fR
@@ -66,6 +74,15 @@ data, print the text form of the DNS message that was encapsulated in the
 frame\&.
 .RE
 .PP
+\-x
+.RS 4
+After printing the
+\fBdnstap\fR
+data, print a hex dump of the wire form of the DNS message that was encapsulated in the
+\fBdnstap\fR
+frame\&.
+.RE
+.PP
 \-y
 .RS 4
 Print
@@ -82,5 +99,9 @@ BIND 9 Administrator Reference Manual\&.
 \fBInternet Systems Consortium, Inc\&.\fR
 .SH "COPYRIGHT"
 .br
+<<<<<<< HEAD
 Copyright \(co 2015, 2016 Internet Systems Consortium, Inc. ("ISC")
+=======
+Copyright \(co 2015-2017 Internet Systems Consortium, Inc. ("ISC")
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 .br

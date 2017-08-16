@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2000-2002, 2004-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -53,6 +53,8 @@ typedef struct dst_context 	dst_context_t;
 #define DST_ALG_ECCGOST		12
 #define DST_ALG_ECDSA256	13
 #define DST_ALG_ECDSA384	14
+#define DST_ALG_ED25519		15
+#define DST_ALG_ED448		16
 #define DST_ALG_HMACMD5		157
 #define DST_ALG_GSSAPI		160
 #define DST_ALG_HMACSHA1	161	/* XXXMPA */
@@ -410,7 +412,7 @@ dst_key_tofile(const dst_key_t *key, int type, const char *directory);
  */
 
 isc_result_t
-dst_key_fromdns(dns_name_t *name, dns_rdataclass_t rdclass,
+dst_key_fromdns(const dns_name_t *name, dns_rdataclass_t rdclass,
 		isc_buffer_t *source, isc_mem_t *mctx, dst_key_t **keyp);
 /*%<
  * Converts a DNS KEY record into a DST key.
@@ -448,7 +450,7 @@ dst_key_todns(const dst_key_t *key, isc_buffer_t *target);
  */
 
 isc_result_t
-dst_key_frombuffer(dns_name_t *name, unsigned int alg,
+dst_key_frombuffer(const dns_name_t *name, unsigned int alg,
 		   unsigned int flags, unsigned int protocol,
 		   dns_rdataclass_t rdclass,
 		   isc_buffer_t *source, isc_mem_t *mctx, dst_key_t **keyp);
@@ -521,7 +523,7 @@ dst_key_getgssctx(const dst_key_t *key);
  */
 
 isc_result_t
-dst_key_fromgssapi(dns_name_t *name, gss_ctx_id_t gssctx, isc_mem_t *mctx,
+dst_key_fromgssapi(const dns_name_t *name, gss_ctx_id_t gssctx, isc_mem_t *mctx,
 		   dst_key_t **keyp, isc_region_t *intoken);
 /*%<
  * Converts a GSSAPI opaque context id into a DST key.
@@ -543,27 +545,27 @@ dst_key_fromgssapi(dns_name_t *name, gss_ctx_id_t gssctx, isc_mem_t *mctx,
 
 #ifdef DST_KEY_INTERNAL
 isc_result_t
-dst_key_buildinternal(dns_name_t *name, unsigned int alg,
+dst_key_buildinternal(const dns_name_t *name, unsigned int alg,
 		      unsigned int bits, unsigned int flags,
 		      unsigned int protocol, dns_rdataclass_t rdclass,
 		      void *data, isc_mem_t *mctx, dst_key_t **keyp);
 #endif
 
 isc_result_t
-dst_key_fromlabel(dns_name_t *name, int alg, unsigned int flags,
+dst_key_fromlabel(const dns_name_t *name, int alg, unsigned int flags,
 		  unsigned int protocol, dns_rdataclass_t rdclass,
 		  const char *engine, const char *label, const char *pin,
 		  isc_mem_t *mctx, dst_key_t **keyp);
 
 isc_result_t
-dst_key_generate(dns_name_t *name, unsigned int alg,
+dst_key_generate(const dns_name_t *name, unsigned int alg,
 		 unsigned int bits, unsigned int param,
 		 unsigned int flags, unsigned int protocol,
 		 dns_rdataclass_t rdclass,
 		 isc_mem_t *mctx, dst_key_t **keyp);
 
 isc_result_t
-dst_key_generate2(dns_name_t *name, unsigned int alg,
+dst_key_generate2(const dns_name_t *name, unsigned int alg,
 		  unsigned int bits, unsigned int param,
 		  unsigned int flags, unsigned int protocol,
 		  dns_rdataclass_t rdclass,

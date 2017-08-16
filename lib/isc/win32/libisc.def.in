@@ -483,6 +483,7 @@ isc_netaddr_masktoprefixlen
 isc_netaddr_prefixok
 isc_netaddr_setzone
 isc_netaddr_totext
+isc_netaddr_unspec
 isc_netscope_pton
 isc_ntpaths_get
 isc_ntpaths_init
@@ -710,6 +711,7 @@ isc_time_compare
 isc_time_formatISO8601
 isc_time_formatISO8601ms
 isc_time_formathttptimestamp
+isc_time_formatshorttimestamp
 isc_time_formattimestamp
 isc_time_isepoch
 isc_time_microdiff

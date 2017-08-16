@@ -156,9 +156,13 @@ string specified on the command line is the zone configuration text that would o
 named\&.conf\&.
 .sp
 The configuration is saved in a file called
-\fIname\fR\&.nzf, where
-\fIname\fR
-is the name of the view, or if it contains characters that are incompatible with use as a file name, a cryptographic hash generated from the name of the view\&. When
+\fIviewname\fR\&.nzf
+(or, if
+\fBnamed\fR
+is compiled with liblmdb, an LMDB database file called
+\fIviewname\fR\&.nzd)\&.
+\fIviewname\fR
+is the name of the view, unless the view name contains characters that are incompatible with use as a file name, in which case a cryptographic hash of the view name is used instead\&. When
 \fBnamed\fR
 is restarted, the file will be loaded into the view configuration, so that zones that were added can persist after a restart\&.
 .sp
@@ -547,6 +551,17 @@ See also
 Sync changes in the journal file for a dynamic zone to the master file\&. If the "\-clean" option is specified, the journal file is also removed\&. If no zone is specified, then all zones are synced\&.
 .RE
 .PP
+\fBtcp\-timeouts \fR\fB[\fIinitial\fR \fIidle\fR \fIkeepalive\fR \fIadvertised\fR]\fR
+.RS 4
+When called without arguments, display the current values of the
+\fBtcp\-initial\-timeout\fR,
+\fBtcp\-idle\-timeout\fR,
+\fBtcp\-keepalive\-timeout\fR
+and
+\fBtcp\-advertised\-timeout\fR
+options\&. When called with arguments, update these values\&. This allows an administrator to make rapid adjustments when under a denial of service attack\&. See the descriptions of these options in the BIND 9 Administrator Reference Manual for details of their use\&.
+.RE
+.PP
 \fBthaw \fR\fB[\fIzone\fR [\fIclass\fR [\fIview\fR]]]\fR
 .RS 4
 Enable updates to a frozen dynamic zone\&. If no zone is specified, then all frozen zones are enabled\&. This causes the server to reload the zone from disk, and re\-enables dynamic updates after the load has completed\&. After a zone is thawed, dynamic updates will no longer be refused\&. If the zone has changed and the
@@ -600,6 +615,17 @@ Displays the current status of the given zone, including the master file name an
 See also
 \fBrndc showzone\fR\&.
 .RE
+.PP
+\fBrndc\fR
+commands that specify zone names, such as
+\fBreload\fR,
+\fBretransfer\fR
+or
+\fBzonestatus\fR, can be ambiguous when applied to zones of type
+\fBredirect\fR\&. Redirect zones are always called "\&.", and can be confused with zones of type
+\fBhint\fR
+or with slaved copies of the root zone\&. To specify a redirect zone, use the special zone name
+\fB\-redirect\fR, without a trailing period\&. (With a trailing period, this would specify a zone called "\-redirect"\&.)
 .SH "LIMITATIONS"
 .PP
 There is currently no way to provide the shared secret for a

@@ -134,7 +134,8 @@ check_orderent(const cfg_obj_t *ent, isc_log_t *logctx) {
 			    "compilation time");
 #endif
 	} else if (strcasecmp(cfg_obj_asstring(obj), "random") != 0 &&
-		   strcasecmp(cfg_obj_asstring(obj), "cyclic") != 0) {
+		   strcasecmp(cfg_obj_asstring(obj), "cyclic") != 0 &&
+		   strcasecmp(cfg_obj_asstring(obj), "none") != 0) {
 		cfg_obj_log(obj, logctx, ISC_LOG_ERROR,
 			    "rrset-order: invalid order '%s'",
 			    cfg_obj_asstring(obj));
@@ -1438,6 +1439,59 @@ check_options(const cfg_obj_t *options, isc_log_t *logctx, isc_mem_t *mctx,
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	/* Check that dnstap-ouput values are consistent */
+	obj = NULL;
+	(void) cfg_map_get(options, "dnstap-output", &obj);
+	if (obj != NULL) {
+		const cfg_obj_t *obj2;
+		dns_dtmode_t dmode;
+
+		obj2 = cfg_tuple_get(obj, "mode");
+		if (obj2 == NULL) {
+			cfg_obj_log(obj, logctx, ISC_LOG_ERROR,
+				    "dnstap-output mode not found");
+			return (ISC_R_FAILURE);
+		}
+
+		if (strcasecmp(cfg_obj_asstring(obj2), "file") == 0)
+			dmode = dns_dtmode_file;
+		else
+			dmode = dns_dtmode_unix;
+
+		obj2 = cfg_tuple_get(obj, "size");
+		if (obj2 != NULL && !cfg_obj_isvoid(obj2) &&
+		    dmode == dns_dtmode_unix)
+		{
+			cfg_obj_log(obj, logctx, ISC_LOG_ERROR,
+				    "dnstap-output size "
+				    "cannot be set with mode unix");
+			return (ISC_R_FAILURE);
+		}
+
+		obj2 = cfg_tuple_get(obj, "versions");
+		if (obj2 != NULL && !cfg_obj_isvoid(obj2) &&
+		    dmode == dns_dtmode_unix)
+		{
+			cfg_obj_log(obj, logctx, ISC_LOG_ERROR,
+				    "dnstap-output versions "
+				    "cannot be set with mode unix");
+			return (ISC_R_FAILURE);
+		}
+
+		obj2 = cfg_tuple_get(obj, "suffix");
+		if (obj2 != NULL && !cfg_obj_isvoid(obj2) &&
+		    dmode == dns_dtmode_unix)
+		{
+			cfg_obj_log(obj, logctx, ISC_LOG_ERROR,
+				    "dnstap-output suffix "
+				    "cannot be set with mode unix");
+			return (ISC_R_FAILURE);
+		}
+	}
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 #endif
 
 	obj = NULL;
@@ -1558,23 +1612,23 @@ validate_masters(const cfg_obj_t *obj, const cfg_obj_t *config,
 		}
 		/* Grow stack? */
 		if (stackcount == pushed) {
-			void * new;
+			void * newstack;
 			isc_uint32_t newlen = stackcount + 16;
 			size_t newsize, oldsize;
 
 			newsize = newlen * sizeof(*stack);
 			oldsize = stackcount * sizeof(*stack);
-			new = isc_mem_get(mctx, newsize);
-			if (new == NULL)
+			newstack = isc_mem_get(mctx, newsize);
+			if (newstack == NULL)
 				goto cleanup;
 			if (stackcount != 0) {
 				void *ptr;
 
 				DE_CONST(stack, ptr);
-				memmove(new, stack, oldsize);
+				memmove(newstack, stack, oldsize);
 				isc_mem_put(mctx, ptr, oldsize);
 			}
-			stack = new;
+			stack = newstack;
 			stackcount = newlen;
 		}
 		stack[pushed++] = cfg_list_next(element);

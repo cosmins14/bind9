@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -178,6 +178,14 @@ EXTERN isc_boolean_t		ns_g_notcp		INIT(ISC_FALSE);
 EXTERN isc_boolean_t		ns_g_disable6		INIT(ISC_FALSE);
 EXTERN isc_boolean_t		ns_g_disable4		INIT(ISC_FALSE);
 EXTERN unsigned int		ns_g_tat_interval	INIT(24*3600);
+<<<<<<< HEAD
+=======
+
+EXTERN unsigned int	 	ns_g_initialtimo	INIT(300);
+EXTERN unsigned int	 	ns_g_idletimo		INIT(300);
+EXTERN unsigned int	 	ns_g_keepalivetimo	INIT(300);
+EXTERN unsigned int	 	ns_g_advertisedtimo	INIT(300);
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 
 #ifdef HAVE_GEOIP
 EXTERN dns_geoip_databases_t	*ns_g_geoip		INIT(NULL);

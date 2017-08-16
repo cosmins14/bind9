@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2015, 2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2015-2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -346,10 +346,17 @@ status=`expr $status + $ret`
 
 HAS_PYYAML=0
 if [ -n "$PYTHON" ] ; then
+<<<<<<< HEAD
 	$PYTHON -c "import yaml" && HAS_PYYAML=1
 fi
 
 if [ $HAS_PYYAML ] ; then
+=======
+	$PYTHON -c "import yaml" 2> /dev/null && HAS_PYYAML=1
+fi
+
+if [ $HAS_PYYAML -ne 0 ] ; then
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	echo "I:checking dnstap-read YAML output"
 	ret=0
 	$PYTHON ydump.py "$DNSTAPREAD" "ns3/dnstap.out.save" > /dev/null || ret=1
@@ -357,6 +364,18 @@ if [ $HAS_PYYAML ] ; then
 	status=`expr $status + $ret`
 fi
 
+<<<<<<< HEAD
+=======
+echo "I:checking dnstap-read hex output"
+ret=0
+hex=`$DNSTAPREAD -x ns3/dnstap.out | tail -1`
+echo $hex | $WIRETEST > dnstap.hex
+grep 'status: NOERROR' dnstap.hex > /dev/null 2>&1 || ret=1
+grep 'ANSWER: 3, AUTHORITY: 1' dnstap.hex > /dev/null 2>&1 || ret=1
+if [ $ret != 0 ]; then echo "I: failed"; fi
+status=`expr $status + $ret`
+
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 if [ -n "$FSTRM_CAPTURE" ] ; then
 	$DIG +short @10.53.0.4 -p 5300 a.example > dig.out
 

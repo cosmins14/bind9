@@ -3,7 +3,10 @@
 ./Atffile					X	2011
 ./CHANGES					X	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./COPYRIGHT					TXT	1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./EXCLUDED					X	2017
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./HISTORY					X	2010,2013,2016,2017
 ./HISTORY.md					MKD	2017
 ./LICENSE					X	2016
@@ -84,7 +87,7 @@
 ./bin/delv/Makefile.in				MAKE	2014,2015,2016,2017
 ./bin/delv/delv.1				MAN	DOCBOOK
 ./bin/delv/delv.c				C	2014,2015,2016
-./bin/delv/delv.docbook				SGML	2014,2015,2016
+./bin/delv/delv.docbook				SGML	2014,2015,2016,2017
 ./bin/delv/delv.html				HTML	DOCBOOK
 ./bin/delv/win32/delv.dsp.in			X	2014,2016
 ./bin/delv/win32/delv.dsw			X	2014
@@ -103,7 +106,7 @@
 ./bin/dig/host.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/dig/host.docbook				SGML	2000,2001,2002,2004,2005,2007,2008,2009,2014,2015,2016,2017
 ./bin/dig/host.html				HTML	DOCBOOK
-./bin/dig/include/dig/dig.h			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
+./bin/dig/include/dig/dig.h			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./bin/dig/nslookup.1				MAN	DOCBOOK
 ./bin/dig/nslookup.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/dig/nslookup.docbook			SGML	2004,2005,2006,2007,2010,2013,2014,2015,2016,2017
@@ -134,7 +137,7 @@
 ./bin/dnssec/.gitignore				X	2012,2013
 ./bin/dnssec/Makefile.in			MAKE	2000,2001,2002,2004,2005,2007,2008,2009,2012,2013,2014,2015,2016
 ./bin/dnssec/dnssec-dsfromkey.8			MAN	DOCBOOK
-./bin/dnssec/dnssec-dsfromkey.c			C	2008,2009,2010,2011,2012,2014,2015,2016
+./bin/dnssec/dnssec-dsfromkey.c			C	2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/dnssec/dnssec-dsfromkey.docbook		SGML	2008,2009,2010,2011,2012,2014,2015,2016
 ./bin/dnssec/dnssec-dsfromkey.html		HTML	DOCBOOK
 ./bin/dnssec/dnssec-importkey.8			MAN	DOCBOOK
@@ -142,19 +145,19 @@
 ./bin/dnssec/dnssec-importkey.docbook		SGML	2013,2014,2015,2016
 ./bin/dnssec/dnssec-importkey.html		HTML	DOCBOOK
 ./bin/dnssec/dnssec-keyfromlabel.8		MAN	DOCBOOK
-./bin/dnssec/dnssec-keyfromlabel.c		C	2007,2008,2009,2010,2011,2012,2014,2015,2016
-./bin/dnssec/dnssec-keyfromlabel.docbook	SGML	2008,2009,2010,2011,2012,2014,2015,2016
+./bin/dnssec/dnssec-keyfromlabel.c		C	2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
+./bin/dnssec/dnssec-keyfromlabel.docbook	SGML	2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/dnssec/dnssec-keyfromlabel.html		HTML	DOCBOOK
 ./bin/dnssec/dnssec-keygen.8			MAN	DOCBOOK
-./bin/dnssec/dnssec-keygen.c			C.NAI	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
-./bin/dnssec/dnssec-keygen.docbook		SGML	2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2011,2012,2014,2015,2016
+./bin/dnssec/dnssec-keygen.c			C.NAI	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./bin/dnssec/dnssec-keygen.docbook		SGML	2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/dnssec/dnssec-keygen.html			HTML	DOCBOOK
 ./bin/dnssec/dnssec-revoke.8			MAN	DOCBOOK
-./bin/dnssec/dnssec-revoke.c			C	2009,2010,2011,2012,2014,2015,2016
+./bin/dnssec/dnssec-revoke.c			C	2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/dnssec/dnssec-revoke.docbook		SGML	2009,2011,2014,2015,2016
 ./bin/dnssec/dnssec-revoke.html			HTML	DOCBOOK
 ./bin/dnssec/dnssec-settime.8			MAN	DOCBOOK
-./bin/dnssec/dnssec-settime.c			C	2009,2010,2011,2012,2013,2014,2015,2016
+./bin/dnssec/dnssec-settime.c			C	2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/dnssec/dnssec-settime.docbook		SGML	2009,2010,2011,2014,2015,2016
 ./bin/dnssec/dnssec-settime.html		HTML	DOCBOOK
 ./bin/dnssec/dnssec-signzone.8			MAN	DOCBOOK
@@ -162,11 +165,15 @@
 ./bin/dnssec/dnssec-signzone.docbook		SGML	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./bin/dnssec/dnssec-signzone.html		HTML	DOCBOOK
 ./bin/dnssec/dnssec-verify.8			MAN	DOCBOOK
-./bin/dnssec/dnssec-verify.c			C	2012,2014,2015,2016
+./bin/dnssec/dnssec-verify.c			C	2012,2014,2015,2016,2017
 ./bin/dnssec/dnssec-verify.docbook		SGML	2012,2014,2015,2016
 ./bin/dnssec/dnssec-verify.html			HTML	DOCBOOK
 ./bin/dnssec/dnssectool.c			C	2000,2001,2003,2004,2005,2007,2009,2010,2011,2012,2013,2014,2015,2016
+<<<<<<< HEAD
 ./bin/dnssec/dnssectool.h			C	2000,2001,2003,2004,2007,2008,2009,2010,2011,2012,2014,2015,2016
+=======
+./bin/dnssec/dnssectool.h			C	2000,2001,2003,2004,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/dnssec/win32/dnssectool.dsp.in		X	2006,2009,2013,2014,2016
 ./bin/dnssec/win32/dnssectool.dsw		X	2006,2009
 ./bin/dnssec/win32/dnssectool.vcxproj.filters.in	X	2013,2015
@@ -222,25 +229,29 @@
 ./bin/dnssec/win32/verify.vcxproj.user		X	2013
 ./bin/named/.gitignore				X	2012,2014
 ./bin/named/Makefile.in				MAKE	1998,1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
-./bin/named/bind9.xsl				SGML	2006,2007,2008,2009,2012,2013,2014,2015,2016
-./bin/named/bind9.xsl.h				X	2007,2008,2009,2011,2012,2013,2014,2015,2016
+./bin/named/bind9.xsl				SGML	2006,2007,2008,2009,2012,2013,2014,2015,2016,2017
+./bin/named/bind9.xsl.h				X	2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/builtin.c				C	2001,2002,2003,2004,2005,2007,2009,2010,2011,2012,2013,2014,2015,2016
 ./bin/named/client.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/config.c				C	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./bin/named/control.c				C	2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./bin/named/control.c				C	2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/named/controlconf.c			C	2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2013,2014,2015,2016
 ./bin/named/convertxsl.pl			PERL	2006,2007,2008,2012,2014,2016
-./bin/named/fuzz.c				C	2016
+./bin/named/fuzz.c				C	2016,2017
 ./bin/named/geoip.c				C	2013,2014,2016
 ./bin/named/include/.gitignore			X	2012,2014
 ./bin/named/include/dlz/dlz_dlopen_driver.h	C	2011,2016
 ./bin/named/include/named/builtin.h		C	2001,2004,2005,2007,2016
-./bin/named/include/named/client.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
+./bin/named/include/named/client.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/include/named/config.h		C	2001,2002,2004,2005,2006,2007,2009,2013,2016
-./bin/named/include/named/control.h		C	2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2014,2015,2016
+./bin/named/include/named/control.h		C	2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/named/include/named/fuzz.h		C	2016
 ./bin/named/include/named/geoip.h		C	2013,2016
-./bin/named/include/named/globals.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./bin/named/include/named/globals.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/include/named/interfacemgr.h	C	1999,2000,2001,2002,2004,2005,2007,2011,2013,2014,2016
 ./bin/named/include/named/listenlist.h		C	2000,2001,2004,2005,2007,2013,2016
 ./bin/named/include/named/log.h			C	1999,2000,2001,2002,2004,2005,2007,2009,2015,2016
@@ -254,7 +265,11 @@
 ./bin/named/include/named/ns_smf_globals.h	C	2005,2007,2014,2016
 ./bin/named/include/named/query.h		C	1999,2000,2001,2002,2004,2005,2007,2010,2011,2013,2014,2015,2016
 ./bin/named/include/named/seccomp.h		C	2014,2016,2017
+<<<<<<< HEAD
 ./bin/named/include/named/server.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./bin/named/include/named/server.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/named/include/named/sortlist.h		C	2000,2001,2004,2005,2006,2007,2016
 ./bin/named/include/named/statschannel.h	C	2008,2016
 ./bin/named/include/named/tkeyconf.h		C	1999,2000,2001,2004,2005,2006,2007,2016
@@ -266,7 +281,7 @@
 ./bin/named/interfacemgr.c			C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
 ./bin/named/listenlist.c			C	2000,2001,2004,2005,2007,2013,2016
 ./bin/named/log.c				C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2013,2014,2016
-./bin/named/logconf.c				C	1999,2000,2001,2004,2005,2006,2007,2011,2013,2014,2015,2016
+./bin/named/logconf.c				C	1999,2000,2001,2004,2005,2006,2007,2011,2013,2014,2015,2016,2017
 ./bin/named/lwaddr.c				C	2000,2001,2004,2005,2007,2008,2014,2016
 ./bin/named/lwdclient.c				C	2000,2001,2004,2005,2007,2015,2016
 ./bin/named/lwderror.c				C	2000,2001,2004,2005,2007,2016
@@ -290,7 +305,7 @@
 ./bin/named/query.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/server.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/sortlist.c				C	2000,2001,2004,2005,2006,2007,2016
-./bin/named/statschannel.c			C	2008,2009,2010,2011,2012,2013,2014,2015,2016
+./bin/named/statschannel.c			C	2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/named/tkeyconf.c				C	1999,2000,2001,2004,2005,2006,2007,2009,2010,2012,2014,2016
 ./bin/named/tsigconf.c				C	1999,2000,2001,2004,2005,2006,2007,2009,2011,2012,2016
 ./bin/named/unix/Makefile.in			MAKE	1999,2000,2001,2004,2007,2009,2011,2012,2016
@@ -309,8 +324,13 @@
 ./bin/named/win32/named.vcxproj.user		X	2013
 ./bin/named/win32/ntservice.c			C	1999,2000,2001,2002,2004,2006,2007,2009,2011,2013,2014,2015,2016
 ./bin/named/win32/os.c				C	1999,2000,2001,2002,2004,2005,2007,2008,2009,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./bin/named/xfrout.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./bin/named/zoneconf.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./bin/named/xfrout.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./bin/named/zoneconf.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/nsupdate/.gitignore			X	2012
 ./bin/nsupdate/Makefile.in			MAKE	2000,2001,2002,2004,2006,2007,2008,2009,2012,2013,2014,2015,2016,2017
 ./bin/nsupdate/nsupdate.1			MAN	DOCBOOK
@@ -335,8 +355,8 @@
 ./bin/pkcs11/pkcs11-destroy.docbook		SGML	2009,2014,2015,2016
 ./bin/pkcs11/pkcs11-destroy.html		HTML	DOCBOOK
 ./bin/pkcs11/pkcs11-keygen.8			MAN	DOCBOOK
-./bin/pkcs11/pkcs11-keygen.c			X	2009,2014,2015
-./bin/pkcs11/pkcs11-keygen.docbook		SGML	2009,2014,2015,2016
+./bin/pkcs11/pkcs11-keygen.c			X	2009,2014,2015,2017
+./bin/pkcs11/pkcs11-keygen.docbook		SGML	2009,2014,2015,2016,2017
 ./bin/pkcs11/pkcs11-keygen.html			HTML	DOCBOOK
 ./bin/pkcs11/pkcs11-list.8			MAN	DOCBOOK
 ./bin/pkcs11/pkcs11-list.c			C	2009,2014,2015,2016
@@ -371,7 +391,7 @@
 ./bin/pkcs11/win32/pk11tokens.vcxproj.in	X	2014,2015,2016,2017
 ./bin/pkcs11/win32/pk11tokens.vcxproj.user	X	2014
 ./bin/python/.gitignore				X	2012,2013,2016
-./bin/python/Makefile.in			MAKE	2012,2013,2014,2016
+./bin/python/Makefile.in			MAKE	2012,2013,2014,2016,2017
 ./bin/python/dnssec-checkds.8			MAN	DOCBOOK
 ./bin/python/dnssec-checkds.docbook		SGML	2012,2013,2014,2015,2016
 ./bin/python/dnssec-checkds.html		HTML	DOCBOOK
@@ -381,7 +401,7 @@
 ./bin/python/dnssec-coverage.html		HTML	DOCBOOK
 ./bin/python/dnssec-coverage.py.in		PYTHON-BIN	2013,2014,2015,2016
 ./bin/python/dnssec-keymgr.8			MAN	DOCBOOK
-./bin/python/dnssec-keymgr.docbook		SGML	2016
+./bin/python/dnssec-keymgr.docbook		SGML	2016,2017
 ./bin/python/dnssec-keymgr.html			HTML	DOCBOOK
 ./bin/python/dnssec-keymgr.py.in		PYTHON-BIN	2016
 ./bin/python/isc/.gitignore			X	2016
@@ -389,23 +409,28 @@
 ./bin/python/isc/__init__.py.in			PYTHON	2016
 ./bin/python/isc/checkds.py.in			PYTHON	2012,2013,2014,2015,2016
 ./bin/python/isc/coverage.py.in			PYTHON	2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./bin/python/isc/dnskey.py.in			PYTHON	2013,2014,2015,2016
+=======
+./bin/python/isc/dnskey.py.in			PYTHON	2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/python/isc/eventlist.py.in		PYTHON	2015,2016
 ./bin/python/isc/keydict.py.in			PYTHON	2016
 ./bin/python/isc/keyevent.py.in			PYTHON	2013,2014,2015,2016
 ./bin/python/isc/keymgr.py.in			PYTHON	2016
 ./bin/python/isc/keyseries.py.in		PYTHON	2016
 ./bin/python/isc/keyzone.py.in			PYTHON	2013,2014,2015,2016
-./bin/python/isc/policy.py.in			PYTHON	2016
+./bin/python/isc/policy.py.in			PYTHON	2016,2017
 ./bin/python/isc/rndc.py.in			PYTHON	2016
 ./bin/python/isc/tests/.gitignore		X	2016
 ./bin/python/isc/tests/Makefile.in		MAKE	2016
 ./bin/python/isc/tests/dnskey_test.py.in	PYTHON	2016
-./bin/python/isc/tests/policy_test.py.in	PYTHON	2016
+./bin/python/isc/tests/policy_test.py.in	PYTHON	2016,2017
 ./bin/python/isc/tests/test-policies/01-keysize.pol	CONF-C	2016
 ./bin/python/isc/tests/test-policies/02-prepublish.pol	CONF-C	2016
 ./bin/python/isc/tests/test-policies/03-postpublish.pol	CONF-C	2016
 ./bin/python/isc/tests/test-policies/04-combined-pre-post.pol	CONF-C	2016
+./bin/python/isc/tests/test-policies/05-numeric-zone.pol	CONF-C	2017
 ./bin/python/isc/tests/testdata/Kexample.com.+007+35529.key	X	2016
 ./bin/python/isc/tests/testdata/Kexample.com.+007+35529.private	X	2016
 ./bin/python/isc/utils.py.in			PYTHON	2016
@@ -414,7 +439,7 @@
 ./bin/rndc/Makefile.in				MAKE	2000,2001,2002,2004,2007,2009,2012,2014,2015,2016
 ./bin/rndc/include/rndc/os.h			C	2001,2004,2005,2007,2009,2016
 ./bin/rndc/rndc.8				MAN	DOCBOOK
-./bin/rndc/rndc.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./bin/rndc/rndc.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/rndc/rndc.conf				CONF-C	2000,2001,2004,2007,2013,2014,2016
 ./bin/rndc/rndc.conf.5				MAN	DOCBOOK
 ./bin/rndc/rndc.conf.docbook			SGML	2000,2001,2004,2005,2007,2013,2014,2015,2016
@@ -509,14 +534,18 @@
 ./bin/tests/db/dns_db_newversion_data		X	1999,2000,2001
 ./bin/tests/db/dns_db_origin_1.data		X	1999,2000,2001
 ./bin/tests/db/dns_db_origin_data		X	1999,2000,2001
+<<<<<<< HEAD
 ./bin/tests/db/t_db.c				C	1999,2000,2001,2004,2005,2007,2009,2011,2012,2013,2015,2016
+=======
+./bin/tests/db/t_db.c				C	1999,2000,2001,2004,2005,2007,2009,2011,2012,2013,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/db/win32/t_db.dsp.in		X	2013,2016
 ./bin/tests/db/win32/t_db.dsw			X	2013
 ./bin/tests/db/win32/t_db.mak.in		X	2013,2016
 ./bin/tests/db/win32/t_db.vcxproj.filters.in	X	2013,2015
 ./bin/tests/db/win32/t_db.vcxproj.in		X	2013,2015,2016,2017
 ./bin/tests/db/win32/t_db.vcxproj.user		X	2013
-./bin/tests/db_test.c				C	1999,2000,2001,2004,2005,2007,2008,2009,2011,2012,2013,2015,2016
+./bin/tests/db_test.c				C	1999,2000,2001,2004,2005,2007,2008,2009,2011,2012,2013,2015,2016,2017
 ./bin/tests/dnssec-signzone/Kexample.com.+005+07065.key	X	2009
 ./bin/tests/dnssec-signzone/Kexample.com.+005+07065.private	X	2009
 ./bin/tests/dnssec-signzone/Kexample.com.+005+23362.key	X	2009
@@ -582,7 +611,7 @@
 ./bin/tests/log_test.c				C	1999,2000,2001,2004,2007,2011,2014,2015,2016
 ./bin/tests/lwres_test.c			C	2000,2001,2004,2005,2007,2015,2016
 ./bin/tests/lwresconf_test.c			C	2000,2001,2004,2007,2015,2016
-./bin/tests/makejournal.c			C	2013,2015,2016
+./bin/tests/makejournal.c			C	2013,2015,2016,2017
 ./bin/tests/master/Makefile.in			MAKE	1999,2000,2001,2002,2004,2007,2009,2012,2014,2016
 ./bin/tests/master/dns_master_load_10_data	X	2000,2001
 ./bin/tests/master/dns_master_load_11_data	X	2000,2001
@@ -606,14 +635,18 @@
 ./bin/tests/master/master7.data			X	1999,2000,2001,2003
 ./bin/tests/master/master8.data			X	2000,2001
 ./bin/tests/master/master9.data			X	2000,2001
+<<<<<<< HEAD
 ./bin/tests/master/t_master.c			C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2011,2013,2016
+=======
+./bin/tests/master/t_master.c			C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2011,2013,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/master/win32/t_master.dsp.in	X	2013,2016
 ./bin/tests/master/win32/t_master.dsw		X	2013
 ./bin/tests/master/win32/t_master.mak.in	X	2013,2016
 ./bin/tests/master/win32/t_master.vcxproj.filters.in	X	2013,2015
 ./bin/tests/master/win32/t_master.vcxproj.in	X	2013,2015,2016,2017
 ./bin/tests/master/win32/t_master.vcxproj.user	X	2013
-./bin/tests/master_test.c			C	1999,2000,2001,2004,2007,2009,2015,2016
+./bin/tests/master_test.c			C	1999,2000,2001,2004,2007,2009,2015,2016,2017
 ./bin/tests/mem/Makefile.in			MAKE	1998,1999,2000,2001,2002,2004,2005,2007,2009,2012,2014,2016
 ./bin/tests/mem/t_mem.c				C	1999,2000,2001,2004,2007,2009,2013,2016
 ./bin/tests/mem/win32/t_mem.dsp.in		X	2013
@@ -623,7 +656,7 @@
 ./bin/tests/mem/win32/t_mem.vcxproj.in		X	2013,2015,2016,2017
 ./bin/tests/mem/win32/t_mem.vcxproj.user	X	2013
 ./bin/tests/mempool_test.c			C	1999,2000,2001,2004,2007,2016
-./bin/tests/name_test.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2015,2016
+./bin/tests/name_test.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2015,2016,2017
 ./bin/tests/named.conf				CONF-C	1999,2000,2001,2004,2007,2011,2015,2016
 ./bin/tests/names/Makefile.in			MAKE	1999,2000,2001,2002,2004,2007,2009,2012,2014,2016
 ./bin/tests/names/dns_name_compare_data		X	1999,2000,2001
@@ -668,7 +701,7 @@
 ./bin/tests/ndc.conf				CONF-C	2000,2001,2004,2007,2016
 ./bin/tests/ndc.conf-include			CONF-C	2001,2004,2007,2016
 ./bin/tests/net/Makefile.in			MAKE	2000,2001,2002,2004,2007,2009,2012,2014,2016
-./bin/tests/net/driver.c			C	2000,2001,2004,2007,2015,2016
+./bin/tests/net/driver.c			C	2000,2001,2004,2007,2015,2016,2017
 ./bin/tests/net/driver.h			C	2000,2001,2004,2007,2016
 ./bin/tests/net/netaddr_multicast.c		C	2000,2001,2004,2007,2015,2016
 ./bin/tests/net/sockaddr_multicast.c		C	2000,2001,2004,2007,2016
@@ -725,7 +758,10 @@
 ./bin/tests/rbt_test.c				C	1999,2000,2001,2004,2005,2007,2009,2011,2012,2014,2015,2016
 ./bin/tests/rbt_test.out			X	1999,2000,2001
 ./bin/tests/rbt_test.txt			SH	1999,2000,2001,2004,2007,2012,2016
+<<<<<<< HEAD
 ./bin/tests/rdata_test.c			C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2011,2012,2014,2015,2016,2017
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/resolv.conf.sample			CONF-SH	2000,2001,2004,2007,2012,2016
 ./bin/tests/resolver/Makefile.in		MAKE	2011,2012,2014,2016
 ./bin/tests/resolver/t_resolver.c		C	2011,2012,2013,2014,2016
@@ -771,10 +807,17 @@
 ./bin/tests/system/additional/clean.sh		SH	2013,2014,2016
 ./bin/tests/system/additional/ns1/mx.db		ZONE	2016
 ./bin/tests/system/additional/ns1/named.args	X	2013,2014
+<<<<<<< HEAD
 ./bin/tests/system/additional/ns1/named1.conf	CONF-C	2013,2016
 ./bin/tests/system/additional/ns1/named2.conf	CONF-C	2013,2016
 ./bin/tests/system/additional/ns1/named3.conf	CONF-C	2016
 ./bin/tests/system/additional/ns1/named4.conf	CONF-C	2016
+=======
+./bin/tests/system/additional/ns1/named1.conf	CONF-C	2013,2016,2017
+./bin/tests/system/additional/ns1/named2.conf	CONF-C	2013,2016,2017
+./bin/tests/system/additional/ns1/named3.conf	CONF-C	2016,2017
+./bin/tests/system/additional/ns1/named4.conf	CONF-C	2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/additional/ns1/naptr.db	ZONE	2013,2016
 ./bin/tests/system/additional/ns1/naptr2.db	ZONE	2013,2016
 ./bin/tests/system/additional/ns1/nid.db	ZONE	2013,2016
@@ -783,19 +826,35 @@
 ./bin/tests/system/additional/ns1/srv.db	ZONE	2016
 ./bin/tests/system/additional/setup.sh		SH	2013,2016
 ./bin/tests/system/additional/tests.sh		SH	2013,2016,2017
+<<<<<<< HEAD
 ./bin/tests/system/addzone/clean.sh		SH	2010,2012,2013,2014,2015,2016
+=======
+./bin/tests/system/addzone/clean.sh		SH	2010,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/addzone/ns1/inlineslave.db	ZONE	2013,2016
-./bin/tests/system/addzone/ns1/named.conf	CONF-C	2013,2016
+./bin/tests/system/addzone/ns1/named.conf	CONF-C	2013,2016,2017
+./bin/tests/system/addzone/ns1/redirect.db.1	ZONE	2017
+./bin/tests/system/addzone/ns1/redirect.db.2	ZONE	2017
 ./bin/tests/system/addzone/ns2/added.db		ZONE	2010,2013,2016
 ./bin/tests/system/addzone/ns2/default.nzf.in	X	2010
 ./bin/tests/system/addzone/ns2/hints.db		ZONE	2016
 ./bin/tests/system/addzone/ns2/inline.db	ZONE	2013,2016
 ./bin/tests/system/addzone/ns2/named1.conf	CONF-C	2010,2016
 ./bin/tests/system/addzone/ns2/named2.conf	CONF-C	2010,2011,2016
+./bin/tests/system/addzone/ns2/named3.conf	CONF-C	2017
 ./bin/tests/system/addzone/ns2/normal.db	ZONE	2010,2016
 ./bin/tests/system/addzone/ns2/previous.db	ZONE	2010,2016
+<<<<<<< HEAD
 ./bin/tests/system/addzone/ns2/redirect.db	ZONE	2016
 ./bin/tests/system/addzone/setup.sh		SH	2010,2012,2013,2014,2016
+=======
+./bin/tests/system/addzone/ns2/redirect.db.1	ZONE	2016,2017
+./bin/tests/system/addzone/ns2/redirect.db.2	ZONE	2016,2017
+./bin/tests/system/addzone/ns3/named.conf	CONF-C	2017
+./bin/tests/system/addzone/ns3/redirect.db.1	ZONE	2017
+./bin/tests/system/addzone/ns3/redirect.db.2	ZONE	2017
+./bin/tests/system/addzone/setup.sh		SH	2010,2012,2013,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/addzone/tests.sh		SH	2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/allow_query/clean.sh		SH	2010,2012,2014,2015,2016
 ./bin/tests/system/allow_query/ns2/aclallow.db	ZONE	2010,2016
@@ -846,7 +905,7 @@
 ./bin/tests/system/allow_query/setup.sh		SH	2010,2012,2016
 ./bin/tests/system/allow_query/tests.sh		SH	2010,2012,2013,2016
 ./bin/tests/system/ans.pl			PERL	2011,2012,2014,2016
-./bin/tests/system/autosign/clean.sh		SH	2009,2010,2011,2012,2013,2014,2015,2016
+./bin/tests/system/autosign/clean.sh		SH	2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/autosign/ns1/keygen.sh	SH	2009,2010,2011,2012,2014,2016
 ./bin/tests/system/autosign/ns1/named.conf	CONF-C	2009,2013,2016
 ./bin/tests/system/autosign/ns1/root.db.in	ZONE	2009,2010,2016
@@ -860,7 +919,7 @@
 ./bin/tests/system/autosign/ns2/dst.example.db.in	ZONE	2009,2016
 ./bin/tests/system/autosign/ns2/example.db.in	ZONE	2009,2010,2016
 ./bin/tests/system/autosign/ns2/insecure.secure.example.db	ZONE	2009,2016
-./bin/tests/system/autosign/ns2/keygen.sh	SH	2009,2010,2011,2012,2014,2015,2016
+./bin/tests/system/autosign/ns2/keygen.sh	SH	2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/tests/system/autosign/ns2/named.conf	CONF-C	2009,2010,2011,2013,2016
 ./bin/tests/system/autosign/ns2/private.secure.example.db.in	ZONE	2009,2016
 ./bin/tests/system/autosign/ns3/.gitignore	X	2012
@@ -892,11 +951,16 @@
 ./bin/tests/system/autosign/ns3/ttl2.example.db.in	ZONE	2011,2016
 ./bin/tests/system/autosign/ns3/ttl3.example.db.in	ZONE	2011,2016
 ./bin/tests/system/autosign/ns3/ttl4.example.db.in	ZONE	2011,2016
-./bin/tests/system/autosign/ns4/named.conf	CONF-C	2009,2016
-./bin/tests/system/autosign/ns5/named.conf	CONF-C	2009,2016
+./bin/tests/system/autosign/ns4/named.conf	CONF-C	2009,2016,2017
+./bin/tests/system/autosign/ns5/named.conf	CONF-C	2009,2016,2017
 ./bin/tests/system/autosign/prereq.sh		SH	2009,2010,2012,2014,2016
+<<<<<<< HEAD
 ./bin/tests/system/autosign/setup.sh		SH	2009,2010,2012,2014,2016
 ./bin/tests/system/autosign/tests.sh		SH	2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./bin/tests/system/autosign/setup.sh		SH	2009,2010,2012,2014,2016,2017
+./bin/tests/system/autosign/tests.sh		SH	2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/builtin/clean.sh		SH	2014,2016
 ./bin/tests/system/builtin/ns1/named.conf	CONF-C	2011,2016
 ./bin/tests/system/builtin/ns2/named.conf	CONF-C	2014,2016
@@ -908,23 +972,23 @@
 ./bin/tests/system/cacheclean/ns1/example.db	ZONE	2001,2004,2007,2012,2016
 ./bin/tests/system/cacheclean/ns1/expire-test.db	ZONE	2014,2016
 ./bin/tests/system/cacheclean/ns1/flushtest.db	ZONE	2011,2016
-./bin/tests/system/cacheclean/ns1/named.conf	CONF-C	2001,2004,2005,2007,2011,2014,2016
+./bin/tests/system/cacheclean/ns1/named.conf	CONF-C	2001,2004,2005,2007,2011,2014,2016,2017
 ./bin/tests/system/cacheclean/ns2/named.conf	CONF-C	2001,2004,2005,2007,2011,2013,2014,2015,2016
 ./bin/tests/system/cacheclean/tests.sh		SH	2001,2004,2007,2011,2012,2013,2014,2016
 ./bin/tests/system/case/clean.sh		SH	2013,2014,2015,2016
 ./bin/tests/system/case/dynamic.good		X	2015
 ./bin/tests/system/case/ns1/dynamic.db.in	ZONE	2015,2016
 ./bin/tests/system/case/ns1/example.db		ZONE	2013,2016
-./bin/tests/system/case/ns1/named.conf		CONF-C	2013,2015,2016
-./bin/tests/system/case/ns2/named.conf		CONF-C	2014,2015,2016
+./bin/tests/system/case/ns1/named.conf		CONF-C	2013,2015,2016,2017
+./bin/tests/system/case/ns2/named.conf		CONF-C	2014,2015,2016,2017
 ./bin/tests/system/case/postns1.good		X	2015
 ./bin/tests/system/case/postupdate.good		X	2015
 ./bin/tests/system/case/setup.sh		SH	2015,2016
 ./bin/tests/system/case/tests.sh		SH	2013,2014,2015,2016
 ./bin/tests/system/catz/clean.sh		SH	2016
 ./bin/tests/system/catz/ns1/catalog.example.db.in	ZONE	2016
-./bin/tests/system/catz/ns1/named.conf		CONF-C	2016
-./bin/tests/system/catz/ns2/named.conf.in	CONF-C	2016
+./bin/tests/system/catz/ns1/named.conf		CONF-C	2016,2017
+./bin/tests/system/catz/ns2/named.conf.in	CONF-C	2016,2017
 ./bin/tests/system/catz/ns3/dom5.example.db	ZONE	2016
 ./bin/tests/system/catz/ns3/dom6.example.db	ZONE	2016
 ./bin/tests/system/catz/ns3/named.conf		CONF-C	2016
@@ -952,9 +1016,11 @@
 ./bin/tests/system/chain/tests.sh		SH	2011,2012,2016,2017
 ./bin/tests/system/checkconf/altdb.conf		CONF-C	2014,2016
 ./bin/tests/system/checkconf/altdlz.conf	CONF-C	2014,2016
+./bin/tests/system/checkconf/bad-acl.conf	CONF-C	2016
 ./bin/tests/system/checkconf/bad-also-notify.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/checkconf/bad-catz-zone.conf	CONF-C	2016
 ./bin/tests/system/checkconf/bad-dnssec.conf	CONF-C	2012,2013,2016
+./bin/tests/system/checkconf/bad-glue-cache-bogus.conf	CONF-C	2017
 ./bin/tests/system/checkconf/bad-hint.conf	CONF-C	2014,2016
 ./bin/tests/system/checkconf/bad-inline-slave.conf	CONF-C	2013,2016
 ./bin/tests/system/checkconf/bad-keep-response-order.conf	CONF-C	2015,2016
@@ -968,6 +1034,10 @@
 ./bin/tests/system/checkconf/bad-maxttlmap.conf	CONF-C	2014,2016
 ./bin/tests/system/checkconf/bad-noddns.conf	CONF-C	2014,2016
 ./bin/tests/system/checkconf/bad-options-also-notify.conf	CONF-C	2016
+<<<<<<< HEAD
+=======
+./bin/tests/system/checkconf/bad-printtime.conf	CONF-C	2016
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/checkconf/bad-rate-limit-acl.conf	CONF-C	2016
 ./bin/tests/system/checkconf/bad-rate-limit-all-per-second.conf	CONF-C	2016
 ./bin/tests/system/checkconf/bad-rate-limit-errors-per-second.conf	CONF-C	2016
@@ -1005,13 +1075,22 @@
 ./bin/tests/system/checkconf/dnssec.3		CONF-C	2011,2016
 ./bin/tests/system/checkconf/good-acl.conf	CONF-C	2016
 ./bin/tests/system/checkconf/good-class.conf	CONF-C	2015,2016
+<<<<<<< HEAD
+=======
+./bin/tests/system/checkconf/good-glue-cache.conf	CONF-C	2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/checkconf/good-lmdb-mapsize-largest.conf	CONF-C	2017
 ./bin/tests/system/checkconf/good-lmdb-mapsize-smallest.conf	CONF-C	2017
 ./bin/tests/system/checkconf/good-nested.conf	CONF-C	2015,2016
 ./bin/tests/system/checkconf/good-options-also-notify.conf	CONF-C	2016
+<<<<<<< HEAD
+=======
+./bin/tests/system/checkconf/good-printtime.conf	CONF-C	2016
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/checkconf/good-response-dot.conf	CONF-C	2017
 ./bin/tests/system/checkconf/good-view-also-notify.conf	CONF-C	2016
-./bin/tests/system/checkconf/good.conf		CONF-C	2005,2007,2010,2011,2012,2013,2014,2015,2016
+./bin/tests/system/checkconf/good.conf		CONF-C	2005,2007,2010,2011,2012,2013,2014,2015,2016,2017
+./bin/tests/system/checkconf/good.zonelist	X	2016
 ./bin/tests/system/checkconf/hint-nofile.conf	CONF-C	2013,2016
 ./bin/tests/system/checkconf/in-view-good.conf	CONF-C	2015,2016
 ./bin/tests/system/checkconf/inline-bad.conf	CONF-C	2013,2016
@@ -1059,12 +1138,12 @@
 ./bin/tests/system/checknames/ns1/root.db	ZONE	2004,2007,2016
 ./bin/tests/system/checknames/ns1/warn.example.db.in	ZONE	2004,2007,2016
 ./bin/tests/system/checknames/ns1/warn.update.db.in	ZONE	2004,2007,2016
-./bin/tests/system/checknames/ns2/named.conf	CONF-C	2004,2007,2016
+./bin/tests/system/checknames/ns2/named.conf	CONF-C	2004,2007,2016,2017
 ./bin/tests/system/checknames/ns2/root.hints	ZONE	2004,2007,2016
-./bin/tests/system/checknames/ns3/named.conf	CONF-C	2004,2007,2016
+./bin/tests/system/checknames/ns3/named.conf	CONF-C	2004,2007,2016,2017
 ./bin/tests/system/checknames/ns3/root.hints	ZONE	2004,2007,2016
 ./bin/tests/system/checknames/ns4/master-ignore.update.db.in	ZONE	2014,2016
-./bin/tests/system/checknames/ns4/named.conf	CONF-C	2014,2016
+./bin/tests/system/checknames/ns4/named.conf	CONF-C	2014,2016,2017
 ./bin/tests/system/checknames/ns4/root.hints	ZONE	2014,2016
 ./bin/tests/system/checknames/setup.sh		SH	2004,2007,2012,2014,2016
 ./bin/tests/system/checknames/tests.sh		SH	2004,2007,2012,2013,2014,2015,2016
@@ -1108,17 +1187,21 @@
 ./bin/tests/system/common/rndc.key		CONF-C	2011,2013,2016
 ./bin/tests/system/common/root.hint		ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/conf.sh.in			SH	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./bin/tests/system/conf.sh.win32		SH	2016
+=======
+./bin/tests/system/conf.sh.win32		SH	2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/cookie/.gitignore		X	2014,2015
 ./bin/tests/system/cookie/bad-cookie-badhex.conf	CONF-C	2014,2015,2016
 ./bin/tests/system/cookie/bad-cookie-toolong.conf	CONF-C	2014,2015,2016
 ./bin/tests/system/cookie/clean.sh		SH	2014,2015,2016
 ./bin/tests/system/cookie/ns1/example.db	ZONE	2014,2015,2016
-./bin/tests/system/cookie/ns1/named.conf	CONF-C	2014,2015,2016
+./bin/tests/system/cookie/ns1/named.conf	CONF-C	2014,2015,2016,2017
 ./bin/tests/system/cookie/ns1/root.hint		ZONE	2014,2015,2016
-./bin/tests/system/cookie/ns2/named.conf	CONF-C	2014,2015,2016
+./bin/tests/system/cookie/ns2/named.conf	CONF-C	2014,2015,2016,2017
 ./bin/tests/system/cookie/ns2/root.db		ZONE	2014,2015,2016
-./bin/tests/system/cookie/ns3/named.conf	CONF-C	2015,2016
+./bin/tests/system/cookie/ns3/named.conf	CONF-C	2015,2016,2017
 ./bin/tests/system/cookie/ns3/root.hint		ZONE	2015,2016
 ./bin/tests/system/cookie/tests.sh		SH	2014,2015,2016
 ./bin/tests/system/coverage/01-ksk-inactive/README	X	2013
@@ -1198,23 +1281,23 @@
 ./bin/tests/system/dlv/ns4/hints		ZONE	2004,2007,2016
 ./bin/tests/system/dlv/ns4/named.conf		CONF-C	2004,2007,2016
 ./bin/tests/system/dlv/ns5/hints		ZONE	2004,2007,2016
-./bin/tests/system/dlv/ns5/named.conf		CONF-C	2004,2006,2007,2011,2013,2016
+./bin/tests/system/dlv/ns5/named.conf		CONF-C	2004,2006,2007,2011,2013,2016,2017
 ./bin/tests/system/dlv/ns5/rndc.conf		CONF-C	2004,2007,2013,2016
 ./bin/tests/system/dlv/ns6/child.db.in		ZONE	2010,2016
 ./bin/tests/system/dlv/ns6/hints		ZONE	2010,2016
 ./bin/tests/system/dlv/ns6/named.conf		CONF-C	2010,2011,2016
 ./bin/tests/system/dlv/ns6/sign.sh		SH	2010,2011,2012,2014,2016
 ./bin/tests/system/dlv/prereq.sh		SH	2014,2016
-./bin/tests/system/dlv/setup.sh			SH	2004,2007,2009,2011,2012,2014,2016
+./bin/tests/system/dlv/setup.sh			SH	2004,2007,2009,2011,2012,2014,2016,2017
 ./bin/tests/system/dlv/tests.sh			SH	2004,2007,2010,2011,2012,2016
 ./bin/tests/system/dlvauto/clean.sh		SH	2011,2012,2014,2016
 ./bin/tests/system/dlvauto/ns1/dlv.isc.org.db.in	ZONE	2011,2016
 ./bin/tests/system/dlvauto/ns1/named.conf	CONF-C	2011,2016
 ./bin/tests/system/dlvauto/ns1/root.db.in	ZONE	2011,2016
-./bin/tests/system/dlvauto/ns1/sign.sh		SH	2011,2012,2014,2016
+./bin/tests/system/dlvauto/ns1/sign.sh		SH	2011,2012,2014,2016,2017
 ./bin/tests/system/dlvauto/ns2/named.conf	CONF-C	2011,2013,2016
 ./bin/tests/system/dlvauto/prereq.sh		SH	2014,2016
-./bin/tests/system/dlvauto/setup.sh		SH	2011,2012,2014,2016
+./bin/tests/system/dlvauto/setup.sh		SH	2011,2012,2014,2016,2017
 ./bin/tests/system/dlvauto/tests.sh		SH	2011,2012,2014,2016
 ./bin/tests/system/dlz/.gitignore		X	2012
 ./bin/tests/system/dlz/clean.sh			SH	2010,2012,2014,2016
@@ -1236,7 +1319,7 @@
 ./bin/tests/system/dlzexternal/ns1/named.conf.in	CONF-C	2011,2012,2013,2014,2016
 ./bin/tests/system/dlzexternal/ns1/root.db	ZONE	2014,2016
 ./bin/tests/system/dlzexternal/prereq.sh	SH	2010,2011,2012,2014,2016
-./bin/tests/system/dlzexternal/setup.sh		SH	2010,2012,2014,2016
+./bin/tests/system/dlzexternal/setup.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/dlzexternal/tests.sh		SH	2010,2011,2012,2013,2014,2015,2016
 ./bin/tests/system/dns64/clean.sh		SH	2010,2012,2014,2015,2016
 ./bin/tests/system/dns64/conf/bad1.conf		CONF-C	2010,2016
@@ -1260,14 +1343,14 @@
 ./bin/tests/system/dns64/ns2/named.conf		CONF-C	2010,2011,2013,2016
 ./bin/tests/system/dns64/ns2/rpz.db		ZONE	2013,2016
 ./bin/tests/system/dns64/prereq.sh		SH	2014,2016
-./bin/tests/system/dns64/setup.sh		SH	2010,2012,2014,2016
+./bin/tests/system/dns64/setup.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/dns64/tests.sh		SH	2010,2011,2012,2013,2014,2016
 ./bin/tests/system/dnssec/README		TXT.BRIEF	2000,2001,2002,2004,2011,2016
-./bin/tests/system/dnssec/clean.sh		SH	2000,2001,2002,2004,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./bin/tests/system/dnssec/clean.sh		SH	2000,2001,2002,2004,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/dnssec/dnssec_update_test.pl	PERL	2002,2004,2007,2010,2012,2016
 ./bin/tests/system/dnssec/ns1/named.conf	CONF-C	2000,2001,2004,2006,2007,2016
 ./bin/tests/system/dnssec/ns1/root.db.in	ZONE	2000,2001,2004,2007,2010,2013,2014,2016
-./bin/tests/system/dnssec/ns1/sign.sh		SH	2000,2001,2002,2003,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016
+./bin/tests/system/dnssec/ns1/sign.sh		SH	2000,2001,2002,2003,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016,2017
 ./bin/tests/system/dnssec/ns2/algroll.db.in	ZONE	2010,2016
 ./bin/tests/system/dnssec/ns2/badparam.db.in	ZONE	2010,2016
 ./bin/tests/system/dnssec/ns2/cdnskey-auto.secure.db.in	ZONE	2015,2016
@@ -1283,10 +1366,10 @@
 ./bin/tests/system/dnssec/ns2/example.db.in	ZONE	2000,2001,2002,2004,2007,2008,2009,2010,2011,2012,2013,2014,2016
 ./bin/tests/system/dnssec/ns2/in-addr.arpa.db.in	ZONE	2014,2016
 ./bin/tests/system/dnssec/ns2/insecure.secure.example.db	ZONE	2000,2001,2004,2007,2013,2016
-./bin/tests/system/dnssec/ns2/named.conf	CONF-C	2000,2001,2002,2004,2006,2007,2008,2010,2011,2014,2015,2016
+./bin/tests/system/dnssec/ns2/named.conf	CONF-C	2000,2001,2002,2004,2006,2007,2008,2010,2011,2014,2015,2016,2017
 ./bin/tests/system/dnssec/ns2/private.secure.example.db.in	ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/dnssec/ns2/rfc2335.example.db	X	2004
-./bin/tests/system/dnssec/ns2/sign.sh		SH	2000,2001,2002,2003,2004,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016
+./bin/tests/system/dnssec/ns2/sign.sh		SH	2000,2001,2002,2003,2004,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/tests/system/dnssec/ns2/single-nsec3.db.in	ZONE	2010,2016
 ./bin/tests/system/dnssec/ns3/auto-nsec.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/auto-nsec3.example.db.in	ZONE	2011,2016
@@ -1307,7 +1390,7 @@
 ./bin/tests/system/dnssec/ns3/lower.example.db.in	ZONE	2012,2016
 ./bin/tests/system/dnssec/ns3/managed-future.example.db.in	ZONE	2016
 ./bin/tests/system/dnssec/ns3/multiple.example.db.in	ZONE	2006,2008,2016
-./bin/tests/system/dnssec/ns3/named.conf	CONF-C	2000,2001,2002,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016
+./bin/tests/system/dnssec/ns3/named.conf	CONF-C	2000,2001,2002,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016,2017
 ./bin/tests/system/dnssec/ns3/nosign.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/nsec3-unknown.example.db.in	ZONE	2006,2008,2016
 ./bin/tests/system/dnssec/ns3/nsec3.example.db.in	ZONE	2006,2008,2016
@@ -1327,34 +1410,45 @@
 ./bin/tests/system/dnssec/ns3/siginterval.example.db.in	ZONE	2013,2016
 ./bin/tests/system/dnssec/ns3/siginterval1.conf	CONF-C	2013,2016
 ./bin/tests/system/dnssec/ns3/siginterval2.conf	CONF-C	2013,2016
-./bin/tests/system/dnssec/ns3/sign.sh		SH	2000,2001,2002,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./bin/tests/system/dnssec/ns3/sign.sh		SH	2000,2001,2002,2004,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/dnssec/ns3/split-dnssec.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/split-smart.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/ttlpatch.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/update-nsec3.example.db.in	ZONE	2011,2016
 ./bin/tests/system/dnssec/ns3/upper.example.db.in	ZONE	2012,2016
+<<<<<<< HEAD
 ./bin/tests/system/dnssec/ns4/named1.conf	CONF-C	2011,2013,2014,2016
 ./bin/tests/system/dnssec/ns4/named2.conf	CONF-C	2011,2013,2016
 ./bin/tests/system/dnssec/ns4/named3.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/dnssec/ns4/named4.conf	CONF-C	2013,2016,2017
 ./bin/tests/system/dnssec/ns4/named5.conf	CONF-C	2017
+=======
+./bin/tests/system/dnssec/ns4/named1.conf	CONF-C	2011,2013,2014,2016,2017
+./bin/tests/system/dnssec/ns4/named2.conf	CONF-C	2011,2013,2016,2017
+./bin/tests/system/dnssec/ns4/named3.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/dnssec/ns4/named4.conf	CONF-C	2013,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/dnssec/ns5/.gitignore	X	2015
-./bin/tests/system/dnssec/ns5/named1.conf	CONF-C	2000,2001,2004,2006,2007,2015,2016
+./bin/tests/system/dnssec/ns5/named1.conf	CONF-C	2000,2001,2004,2006,2007,2015,2016,2017
 ./bin/tests/system/dnssec/ns5/named2.conf	CONF-C	2000,2001,2004,2006,2007,2015,2016
 ./bin/tests/system/dnssec/ns5/sign.sh		SH	2015,2016
 ./bin/tests/system/dnssec/ns5/trusted.conf.bad	CONF-C	2000,2001,2004,2007,2016
 ./bin/tests/system/dnssec/ns6/named.args	X	2013,2014,2016
+<<<<<<< HEAD
 ./bin/tests/system/dnssec/ns6/named.conf	CONF-C	2004,2006,2007,2013,2016
+=======
+./bin/tests/system/dnssec/ns6/named.conf	CONF-C	2004,2006,2007,2013,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/dnssec/ns6/optout-tld.db.in	ZONE	2013,2016
-./bin/tests/system/dnssec/ns6/sign.sh		SH	2013,2014,2016
+./bin/tests/system/dnssec/ns6/sign.sh		SH	2013,2014,2016,2017
 ./bin/tests/system/dnssec/ns7/named.conf	CONF-C	2006,2008,2010,2014,2016
 ./bin/tests/system/dnssec/ns7/named.nosoa	TXT.BRIEF	2010,2016
 ./bin/tests/system/dnssec/ns7/nosoa.secure.example.db	ZONE	2010,2016
-./bin/tests/system/dnssec/ns7/sign.sh		SH	2014,2016
+./bin/tests/system/dnssec/ns7/sign.sh		SH	2014,2016,2017
 ./bin/tests/system/dnssec/ns7/split-rrsig.db.in	ZONE	2014,2016
 ./bin/tests/system/dnssec/ntadiff.pl		PERL	2015,2016
 ./bin/tests/system/dnssec/prereq.sh		SH	2000,2001,2002,2004,2006,2007,2009,2012,2014,2015,2016
-./bin/tests/system/dnssec/setup.sh		SH	2000,2001,2004,2007,2009,2011,2012,2013,2014,2015,2016
+./bin/tests/system/dnssec/setup.sh		SH	2000,2001,2004,2007,2009,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/dnssec/signer/example.db.in	ZONE	2010,2016
 ./bin/tests/system/dnssec/signer/remove.db.in	ZONE	2016
 ./bin/tests/system/dnssec/signer/remove2.db.in	ZONE	2016
@@ -1371,7 +1465,12 @@
 ./bin/tests/system/dnstap/bad-fstrm-set-output-queue-size-min.conf	CONF-C	2016
 ./bin/tests/system/dnstap/bad-fstrm-set-reopen-interval-max.conf	CONF-C	2016
 ./bin/tests/system/dnstap/bad-fstrm-set-reopen-interval-min.conf	CONF-C	2016
+<<<<<<< HEAD
 ./bin/tests/system/dnstap/clean.sh		SH	2015,2016
+=======
+./bin/tests/system/dnstap/bad-size-version.conf	CONF-C	2017
+./bin/tests/system/dnstap/clean.sh		SH	2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/dnstap/good-fstrm-set-buffer-hint.conf	CONF-C	2016
 ./bin/tests/system/dnstap/good-fstrm-set-flush-timeout.conf	CONF-C	2016
 ./bin/tests/system/dnstap/good-fstrm-set-input-queue-size.conf	CONF-C	2016
@@ -1380,6 +1479,7 @@
 ./bin/tests/system/dnstap/good-fstrm-set-output-queue-model-spsc.conf	CONF-C	2016
 ./bin/tests/system/dnstap/good-fstrm-set-output-queue-size.conf	CONF-C	2016
 ./bin/tests/system/dnstap/good-fstrm-set-reopen-interval.conf	CONF-C	2016
+<<<<<<< HEAD
 ./bin/tests/system/dnstap/ns1/named.conf	CONF-C	2015,2016
 ./bin/tests/system/dnstap/ns1/root.db		ZONE	2015,2016
 ./bin/tests/system/dnstap/ns2/example.db	ZONE	2015,2016
@@ -1387,6 +1487,17 @@
 ./bin/tests/system/dnstap/ns3/named.conf	CONF-C	2015,2016
 ./bin/tests/system/dnstap/ns4/named.conf	CONF-C	2016
 ./bin/tests/system/dnstap/tests.sh		SH	2015,2016
+=======
+./bin/tests/system/dnstap/good-size-unlimited.conf	CONF-C	2017
+./bin/tests/system/dnstap/good-size-version.conf	CONF-C	2017
+./bin/tests/system/dnstap/ns1/named.conf	CONF-C	2015,2016,2017
+./bin/tests/system/dnstap/ns1/root.db		ZONE	2015,2016
+./bin/tests/system/dnstap/ns2/example.db	ZONE	2015,2016
+./bin/tests/system/dnstap/ns2/named.conf	CONF-C	2015,2016,2017
+./bin/tests/system/dnstap/ns3/named.conf	CONF-C	2015,2016,2017
+./bin/tests/system/dnstap/ns4/named.conf	CONF-C	2016
+./bin/tests/system/dnstap/tests.sh		SH	2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/dnstap/ydump.py		PYTHON	2016,2017
 ./bin/tests/system/dscp/clean.sh		SH	2013,2014,2015,2016
 ./bin/tests/system/dscp/ns1/named.args		X	2013,2014
@@ -1419,7 +1530,7 @@
 ./bin/tests/system/dsdigest/ns3/named.conf	CONF-C	2012,2016
 ./bin/tests/system/dsdigest/ns4/named.conf	CONF-C	2012,2016
 ./bin/tests/system/dsdigest/prereq.sh		SH	2012,2014,2016
-./bin/tests/system/dsdigest/setup.sh		SH	2012,2014,2016
+./bin/tests/system/dsdigest/setup.sh		SH	2012,2014,2016,2017
 ./bin/tests/system/dsdigest/tests.sh		SH	2012,2016
 ./bin/tests/system/dyndb/Makefile.in		MAKE	2015,2016
 ./bin/tests/system/dyndb/clean.sh		SH	2015,2016
@@ -1428,8 +1539,8 @@
 ./bin/tests/system/dyndb/driver/COPYING		X	2015,2016
 ./bin/tests/system/dyndb/driver/Makefile.in	MAKE	2015,2016
 ./bin/tests/system/dyndb/driver/README		X	2015
-./bin/tests/system/dyndb/driver/db.c		X	2015,2016
-./bin/tests/system/dyndb/driver/db.h		X	2015
+./bin/tests/system/dyndb/driver/db.c		X	2015,2016,2017
+./bin/tests/system/dyndb/driver/db.h		X	2015,2016
 ./bin/tests/system/dyndb/driver/driver.c	X	2015,2016
 ./bin/tests/system/dyndb/driver/instance.c	X	2015,2016
 ./bin/tests/system/dyndb/driver/instance.h	X	2015,2016
@@ -1451,16 +1562,30 @@
 ./bin/tests/system/ecdsa/ns1/sign.sh		SH	2012,2014,2016
 ./bin/tests/system/ecdsa/ns2/named.conf		CONF-C	2012,2016
 ./bin/tests/system/ecdsa/prereq.sh		SH	2012,2014,2016
-./bin/tests/system/ecdsa/setup.sh		SH	2012,2014,2016
+./bin/tests/system/ecdsa/setup.sh		SH	2012,2014,2016,2017
 ./bin/tests/system/ecdsa/tests.sh		SH	2012,2013,2015,2016
+./bin/tests/system/eddsa/clean.sh		SH	2017
+./bin/tests/system/eddsa/ns1/named.conf		CONF-C	2017
+./bin/tests/system/eddsa/ns1/root.db.in		ZONE	2017
+./bin/tests/system/eddsa/ns1/sign.sh		SH	2017
+./bin/tests/system/eddsa/ns2/Xexample.com.+015+03613.key	X	2017
+./bin/tests/system/eddsa/ns2/Xexample.com.+015+03613.private	X	2017
+./bin/tests/system/eddsa/ns2/Xexample.com.+015+35217.key	X	2017
+./bin/tests/system/eddsa/ns2/Xexample.com.+015+35217.private	X	2017
+./bin/tests/system/eddsa/ns2/example.com.db	ZONE	2017
+./bin/tests/system/eddsa/ns2/named.conf		CONF-C	2017
+./bin/tests/system/eddsa/ns2/sign.sh		SH	2017
+./bin/tests/system/eddsa/prereq.sh		SH	2017
+./bin/tests/system/eddsa/setup.sh		SH	2017
+./bin/tests/system/eddsa/tests.sh		SH	2017
 ./bin/tests/system/ednscompliance/clean.sh	SH	2014,2015,2016
 ./bin/tests/system/ednscompliance/ns1/named.conf	CONF-C	2014,2016
 ./bin/tests/system/ednscompliance/ns1/root.db	ZONE	2014,2016
 ./bin/tests/system/ednscompliance/tests.sh	SH	2014,2015,2016
 ./bin/tests/system/emptyzones/clean.sh		SH	2014,2015,2016
 ./bin/tests/system/emptyzones/ns1/empty.db	ZONE	2014,2016
-./bin/tests/system/emptyzones/ns1/named1.conf	CONF-C	2014,2016
-./bin/tests/system/emptyzones/ns1/named2.conf	CONF-C	2014,2015,2016
+./bin/tests/system/emptyzones/ns1/named1.conf	CONF-C	2014,2016,2017
+./bin/tests/system/emptyzones/ns1/named2.conf	CONF-C	2014,2015,2016,2017
 ./bin/tests/system/emptyzones/ns1/rfc1918.zones	CONF-C	2014,2016
 ./bin/tests/system/emptyzones/ns1/root.hint	ZONE	2014,2016
 ./bin/tests/system/emptyzones/setup.sh		SH	2014,2016
@@ -1495,28 +1620,34 @@
 ./bin/tests/system/filter-aaaa/conf/good6.conf	CONF-C	2010,2016
 ./bin/tests/system/filter-aaaa/conf/good7.conf	CONF-C	2010,2016
 ./bin/tests/system/filter-aaaa/conf/good8.conf	CONF-C	2010,2016
+<<<<<<< HEAD
 ./bin/tests/system/filter-aaaa/ns1/named1.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/filter-aaaa/ns1/named2.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/filter-aaaa/ns1/root.db	ZONE	2010,2012,2016
+=======
+./bin/tests/system/filter-aaaa/ns1/named1.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns1/named2.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns1/root.db	ZONE	2010,2012,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/filter-aaaa/ns1/sign.sh	SH	2010,2012,2014,2016
-./bin/tests/system/filter-aaaa/ns1/signed.db.in	ZONE	2010,2012,2016
+./bin/tests/system/filter-aaaa/ns1/signed.db.in	ZONE	2010,2012,2016,2017
 ./bin/tests/system/filter-aaaa/ns1/signed.db.presigned	X	2014
-./bin/tests/system/filter-aaaa/ns1/unsigned.db	ZONE	2010,2012,2016
+./bin/tests/system/filter-aaaa/ns1/unsigned.db	ZONE	2010,2012,2016,2017
 ./bin/tests/system/filter-aaaa/ns2/hints	ZONE	2010,2016
-./bin/tests/system/filter-aaaa/ns2/named1.conf	CONF-C	2012,2013,2016
-./bin/tests/system/filter-aaaa/ns2/named2.conf	CONF-C	2012,2013,2016
+./bin/tests/system/filter-aaaa/ns2/named1.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns2/named2.conf	CONF-C	2012,2013,2016,2017
 ./bin/tests/system/filter-aaaa/ns3/hints	ZONE	2010,2016
-./bin/tests/system/filter-aaaa/ns3/named1.conf	CONF-C	2012,2013,2016
-./bin/tests/system/filter-aaaa/ns3/named2.conf	CONF-C	2012,2013,2016
-./bin/tests/system/filter-aaaa/ns4/named1.conf	CONF-C	2012,2013,2016
-./bin/tests/system/filter-aaaa/ns4/named2.conf	CONF-C	2012,2013,2016
-./bin/tests/system/filter-aaaa/ns4/root.db	ZONE	2010,2012,2016
+./bin/tests/system/filter-aaaa/ns3/named1.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns3/named2.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns4/named1.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns4/named2.conf	CONF-C	2012,2013,2016,2017
+./bin/tests/system/filter-aaaa/ns4/root.db	ZONE	2010,2012,2016,2017
 ./bin/tests/system/filter-aaaa/ns4/sign.sh	SH	2010,2012,2014,2016
-./bin/tests/system/filter-aaaa/ns4/signed.db.in	ZONE	2010,2012,2016
+./bin/tests/system/filter-aaaa/ns4/signed.db.in	ZONE	2010,2012,2016,2017
 ./bin/tests/system/filter-aaaa/ns4/signed.db.presigned	X	2014
-./bin/tests/system/filter-aaaa/ns4/unsigned.db	ZONE	2010,2012,2016
+./bin/tests/system/filter-aaaa/ns4/unsigned.db	ZONE	2010,2012,2016,2017
 ./bin/tests/system/filter-aaaa/prereq.sh	SH	2010,2012,2014,2016
-./bin/tests/system/filter-aaaa/setup.sh		SH	2010,2012,2014,2016
+./bin/tests/system/filter-aaaa/setup.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/filter-aaaa/tests.sh		SH	2010,2012,2015,2016
 ./bin/tests/system/formerr/clean.sh		SH	2013,2014,2015,2016
 ./bin/tests/system/formerr/formerr.pl		PERL	2013,2014,2016
@@ -1597,9 +1728,9 @@
 ./bin/tests/system/glue/ns1/named.conf		CONF-C	2000,2001,2004,2005,2007,2009,2016
 ./bin/tests/system/glue/ns1/net.db		ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/glue/ns1/root-servers.nil.db	ZONE	2000,2001,2004,2007,2016
-./bin/tests/system/glue/ns1/root.db		ZONE	2000,2001,2004,2007,2016
+./bin/tests/system/glue/ns1/root.db		ZONE	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/glue/setup.sh		SH	2001,2004,2007,2012,2016
-./bin/tests/system/glue/tests.sh		SH	2000,2001,2003,2004,2007,2012,2013,2016
+./bin/tests/system/glue/tests.sh		SH	2000,2001,2003,2004,2007,2012,2013,2016,2017
 ./bin/tests/system/glue/xx.good			X	2000,2001
 ./bin/tests/system/glue/yy.good			X	2000,2001,2003
 ./bin/tests/system/gost/clean.sh		SH	2010,2012,2014,2016
@@ -1608,7 +1739,7 @@
 ./bin/tests/system/gost/ns1/sign.sh		SH	2010,2012,2014,2016
 ./bin/tests/system/gost/ns2/named.conf		CONF-C	2010,2016
 ./bin/tests/system/gost/prereq.sh		SH	2010,2012,2014,2016
-./bin/tests/system/gost/setup.sh		SH	2010,2012,2014,2016
+./bin/tests/system/gost/setup.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/gost/tests.sh		SH	2010,2012,2013,2016
 ./bin/tests/system/ifconfig.bat			BAT	2016
 ./bin/tests/system/ifconfig.sh			SH	2000,2001,2002,2003,2004,2007,2008,2009,2010,2012,2013,2016
@@ -1617,7 +1748,7 @@
 ./bin/tests/system/inline/clean.sh		SH	2011,2012,2013,2014,2015,2016
 ./bin/tests/system/inline/ns1/named.conf	CONF-C	2011,2016
 ./bin/tests/system/inline/ns1/root.db.in	ZONE	2011,2012,2013,2016
-./bin/tests/system/inline/ns1/sign.sh		SH	2011,2012,2014,2016
+./bin/tests/system/inline/ns1/sign.sh		SH	2011,2012,2014,2016,2017
 ./bin/tests/system/inline/ns2/bits.db.in	ZONE	2011,2016
 ./bin/tests/system/inline/ns2/named.conf	CONF-C	2011,2012,2013,2014,2016
 ./bin/tests/system/inline/ns3/master.db.in	ZONE	2011,2012,2016
@@ -1625,14 +1756,14 @@
 ./bin/tests/system/inline/ns3/master3.db.in	ZONE	2012,2016
 ./bin/tests/system/inline/ns3/master4.db.in	ZONE	2012,2016
 ./bin/tests/system/inline/ns3/named.conf	CONF-C	2011,2012,2013,2015,2016
-./bin/tests/system/inline/ns3/sign.sh		SH	2011,2012,2013,2014,2016
+./bin/tests/system/inline/ns3/sign.sh		SH	2011,2012,2013,2014,2016,2017
 ./bin/tests/system/inline/ns4/named.conf	CONF-C	2011,2016
 ./bin/tests/system/inline/ns4/noixfr.db.in	ZONE	2011,2016
 ./bin/tests/system/inline/ns5/named.conf.post	CONF-C	2011,2014,2016
 ./bin/tests/system/inline/ns5/named.conf.pre	CONF-C	2011,2016
 ./bin/tests/system/inline/ns6/named.conf	CONF-C	2011,2016
 ./bin/tests/system/inline/prereq.sh		SH	2014,2016
-./bin/tests/system/inline/setup.sh		SH	2011,2012,2013,2014,2016
+./bin/tests/system/inline/setup.sh		SH	2011,2012,2013,2014,2016,2017
 ./bin/tests/system/inline/tests.sh		SH	2011,2012,2013,2014,2016
 ./bin/tests/system/integrity/clean.sh		SH	2017
 ./bin/tests/system/integrity/ns1/mx-cname.db	ZONE	2017
@@ -1653,6 +1784,15 @@
 ./bin/tests/system/ixfr/prereq.sh		SH	2001,2004,2007,2012,2014,2016
 ./bin/tests/system/ixfr/setup.sh		SH	2001,2004,2007,2011,2012,2013,2014,2016
 ./bin/tests/system/ixfr/tests.sh		SH	2001,2004,2007,2011,2012,2014,2016
+./bin/tests/system/keepalive/clean.sh		SH	2017
+./bin/tests/system/keepalive/expected		X	2017
+./bin/tests/system/keepalive/ns1/named.conf	CONF-C	2017
+./bin/tests/system/keepalive/ns1/root.db	ZONE	2017
+./bin/tests/system/keepalive/ns2/example.db	ZONE	2017
+./bin/tests/system/keepalive/ns2/named.conf	CONF-C	2017
+./bin/tests/system/keepalive/ns3/named.conf	CONF-C	2017
+./bin/tests/system/keepalive/setup.sh		SH	2017
+./bin/tests/system/keepalive/tests.sh		SH	2017
 ./bin/tests/system/keymgr/01-ksk-inactive/README	TXT.BRIEF	2016
 ./bin/tests/system/keymgr/01-ksk-inactive/expect	X	2016
 ./bin/tests/system/keymgr/02-zsk-inactive/README	TXT.BRIEF	2016
@@ -1693,12 +1833,12 @@
 ./bin/tests/system/keymgr/clean.sh		SH	2016
 ./bin/tests/system/keymgr/policy.conf		CONF-C	2016
 ./bin/tests/system/keymgr/policy.good		X	2016
-./bin/tests/system/keymgr/policy.sample		CONF-C	2016
+./bin/tests/system/keymgr/policy.sample		CONF-C	2016,2017
 ./bin/tests/system/keymgr/prereq.sh		SH	2016
 ./bin/tests/system/keymgr/setup.sh		SH	2016
 ./bin/tests/system/keymgr/testpolicy.py		PYTHON	2016
 ./bin/tests/system/keymgr/tests.sh		SH	2016
-./bin/tests/system/legacy/build.sh		SH	2014,2016
+./bin/tests/system/legacy/build.sh		SH	2014,2016,2017
 ./bin/tests/system/legacy/clean.sh		SH	2014,2016
 ./bin/tests/system/legacy/ns1/named1.conf	CONF-C	2014,2016
 ./bin/tests/system/legacy/ns1/named2.conf	CONF-C	2014,2016
@@ -1738,21 +1878,27 @@
 ./bin/tests/system/limits/knowngood.dig.out.4000	X	2000,2001
 ./bin/tests/system/limits/knowngood.dig.out.a-maximum-rrset	X	2000,2001
 ./bin/tests/system/limits/ns1/example.db	ZONE	2000,2001,2004,2007,2016
-./bin/tests/system/limits/ns1/named.conf	CONF-C	2000,2001,2004,2007,2016
+./bin/tests/system/limits/ns1/named.conf	CONF-C	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/limits/ns1/root.db		ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/limits/tests.sh		SH	2000,2001,2004,2007,2011,2012,2016
-./bin/tests/system/logfileconfig/clean.sh	SH	2011,2012,2014,2015,2016
+./bin/tests/system/logfileconfig/clean.sh	SH	2011,2012,2014,2015,2016,2017
 ./bin/tests/system/logfileconfig/ns1/named.dirconf	CONF-C	2011,2013,2016
+./bin/tests/system/logfileconfig/ns1/named.iso8601	CONF-C	2016
+./bin/tests/system/logfileconfig/ns1/named.iso8601-utc	CONF-C	2016
 ./bin/tests/system/logfileconfig/ns1/named.pipeconf	CONF-C	2011,2013,2016
 ./bin/tests/system/logfileconfig/ns1/named.plain	CONF-C	2011,2013,2014,2016
 ./bin/tests/system/logfileconfig/ns1/named.plainconf	CONF-C	2014,2016
 ./bin/tests/system/logfileconfig/ns1/named.symconf	CONF-C	2011,2013,2016
+<<<<<<< HEAD
+=======
+./bin/tests/system/logfileconfig/ns1/named.tsconf	CONF-C	2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/logfileconfig/ns1/named.unlimited	CONF-C	2016
 ./bin/tests/system/logfileconfig/ns1/named.versconf	CONF-C	2016
 ./bin/tests/system/logfileconfig/ns1/rndc.conf	CONF-C	2011,2013,2016,2017
 ./bin/tests/system/logfileconfig/ns1/root.db	ZONE	2011,2016
 ./bin/tests/system/logfileconfig/setup.sh	SH	2011,2012,2014,2016
-./bin/tests/system/logfileconfig/tests.sh	SH	2011,2012,2013,2014,2016
+./bin/tests/system/logfileconfig/tests.sh	SH	2011,2012,2013,2014,2016,2017
 ./bin/tests/system/lwresd/Makefile.in		MAKE	2000,2001,2002,2004,2007,2009,2012,2014,2015,2016
 ./bin/tests/system/lwresd/clean.sh		SH	2008,2012,2013,2014,2015,2016
 ./bin/tests/system/lwresd/lwresd1/lwresd.conf	CONF-C	2000,2001,2004,2007,2016
@@ -1792,14 +1938,14 @@
 ./bin/tests/system/masterformat/ns2/named.conf	CONF-C	2005,2007,2011,2012,2014,2016
 ./bin/tests/system/masterformat/ns3/named.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/masterformat/prereq.sh	SH	2014,2016
-./bin/tests/system/masterformat/setup.sh	SH	2005,2006,2007,2011,2012,2013,2014,2016
+./bin/tests/system/masterformat/setup.sh	SH	2005,2006,2007,2011,2012,2013,2014,2016,2017
 ./bin/tests/system/masterformat/tests.sh	SH	2005,2007,2011,2012,2013,2014,2016
 ./bin/tests/system/metadata/child.db		ZONE	2009,2016
-./bin/tests/system/metadata/clean.sh		SH	2009,2011,2012,2014,2016
+./bin/tests/system/metadata/clean.sh		SH	2009,2011,2012,2014,2016,2017
 ./bin/tests/system/metadata/parent.db		ZONE	2009,2016
 ./bin/tests/system/metadata/prereq.sh		SH	2009,2012,2014,2016
-./bin/tests/system/metadata/setup.sh		SH	2009,2011,2012,2014,2016
-./bin/tests/system/metadata/tests.sh		SH	2009,2011,2012,2013,2014,2016
+./bin/tests/system/metadata/setup.sh		SH	2009,2011,2012,2014,2016,2017
+./bin/tests/system/metadata/tests.sh		SH	2009,2011,2012,2013,2014,2016,2017
 ./bin/tests/system/mkeys/README			TXT.BRIEF	2015,2016
 ./bin/tests/system/mkeys/clean.sh		SH	2015,2016
 ./bin/tests/system/mkeys/ns1/named1.conf	CONF-C	2015,2016
@@ -1811,7 +1957,11 @@
 ./bin/tests/system/mkeys/ns3/named.args		X	2015,2016
 ./bin/tests/system/mkeys/ns3/named.conf		CONF-C	2015,2016
 ./bin/tests/system/mkeys/prereq.sh		SH	2015,2016
+<<<<<<< HEAD
 ./bin/tests/system/mkeys/setup.sh		SH	2015,2016
+=======
+./bin/tests/system/mkeys/setup.sh		SH	2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/mkeys/tests.sh		SH	2015,2016,2017
 ./bin/tests/system/names/clean.sh		SH	2015,2016
 ./bin/tests/system/names/ns1/example.db		ZONE	2015,2016
@@ -1827,10 +1977,10 @@
 ./bin/tests/system/notify/ns2/example4.db	ZONE	2000,2001,2002,2004,2007,2009,2016
 ./bin/tests/system/notify/ns2/generic.db	ZONE	2014,2016
 ./bin/tests/system/notify/ns2/named.conf	CONF-C	2000,2001,2004,2007,2011,2014,2016
-./bin/tests/system/notify/ns3/named.conf	CONF-C	2000,2001,2004,2007,2016
-./bin/tests/system/notify/ns4/named.conf	CONF-C	2014,2016
+./bin/tests/system/notify/ns3/named.conf	CONF-C	2000,2001,2004,2007,2016,2017
+./bin/tests/system/notify/ns4/named.conf	CONF-C	2014,2016,2017
 ./bin/tests/system/notify/ns4/named.port	X	2014
-./bin/tests/system/notify/ns5/named.conf	CONF-C	2015,2016
+./bin/tests/system/notify/ns5/named.conf	CONF-C	2015,2016,2017
 ./bin/tests/system/notify/ns5/x21.db		ZONE	2015,2016
 ./bin/tests/system/notify/setup.sh		SH	2000,2001,2004,2007,2012,2014,2016
 ./bin/tests/system/notify/tests.sh		SH	2000,2001,2004,2007,2011,2012,2013,2014,2015,2016
@@ -1839,17 +1989,25 @@
 ./bin/tests/system/nslookup/ns1/named.conf	CONF-C	2014,2016
 ./bin/tests/system/nslookup/setup.sh		SH	2014,2016
 ./bin/tests/system/nslookup/tests.sh		SH	2014,2016
-./bin/tests/system/nsupdate/clean.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2014,2015,2016
+./bin/tests/system/nsupdate/ans4/ans.pl		PERL	2017
+./bin/tests/system/nsupdate/clean.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2014,2015,2016,2017
 ./bin/tests/system/nsupdate/commandlist		X	2012
 ./bin/tests/system/nsupdate/knowngood.ns1.after	X	2000,2001,2003,2004,2009
 ./bin/tests/system/nsupdate/knowngood.ns1.afterstop	X	2001,2004
 ./bin/tests/system/nsupdate/knowngood.ns1.before	X	2000,2001,2003,2004,2009
 ./bin/tests/system/nsupdate/ns1/example1.db	ZONE	2000,2001,2002,2004,2007,2009,2016
-./bin/tests/system/nsupdate/ns1/many.test.db.in	ZONE	2014,2016
+./bin/tests/system/nsupdate/ns1/many.test.db.in	ZONE	2014,2016,2017
 ./bin/tests/system/nsupdate/ns1/max-ttl.db	ZONE	2014,2016
+<<<<<<< HEAD
 ./bin/tests/system/nsupdate/ns1/named.conf	CONF-C	2000,2001,2004,2005,2007,2009,2011,2012,2013,2014,2016
 ./bin/tests/system/nsupdate/ns1/sample.db.in	ZONE	2016
 ./bin/tests/system/nsupdate/ns2/named.conf	CONF-C	2000,2001,2004,2007,2011,2013,2016
+=======
+./bin/tests/system/nsupdate/ns1/maxjournal.db.in	ZONE	2017
+./bin/tests/system/nsupdate/ns1/named.conf	CONF-C	2000,2001,2004,2005,2007,2009,2011,2012,2013,2014,2016,2017
+./bin/tests/system/nsupdate/ns1/sample.db.in	ZONE	2016
+./bin/tests/system/nsupdate/ns2/named.conf	CONF-C	2000,2001,2004,2007,2011,2013,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/nsupdate/ns2/sample.db.in	ZONE	2016
 ./bin/tests/system/nsupdate/ns3/delegation.test.db.in	ZONE	2016
 ./bin/tests/system/nsupdate/ns3/dnskey.test.db.in	ZONE	2011,2016
@@ -1859,7 +2017,11 @@
 ./bin/tests/system/nsupdate/ns3/sign.sh		SH	2010,2011,2012,2014,2016
 ./bin/tests/system/nsupdate/ns3/too-big.test.db.in	ZONE	2016
 ./bin/tests/system/nsupdate/prereq.sh		SH	2014,2015,2016
+<<<<<<< HEAD
 ./bin/tests/system/nsupdate/setup.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2014,2016
+=======
+./bin/tests/system/nsupdate/setup.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/nsupdate/tests.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/nsupdate/update_test.pl	PERL	2000,2001,2004,2007,2012,2016
 ./bin/tests/system/nsupdate/verylarge		X	2013
@@ -1872,6 +2034,15 @@
 ./bin/tests/system/org.isc.bind.system		SH	2010,2012,2013,2016
 ./bin/tests/system/org.isc.bind.system.plist	X	2010
 ./bin/tests/system/packet.pl			PERL	2011,2012,2016
+./bin/tests/system/padding/clean.sh		SH	2017
+./bin/tests/system/padding/ns1/named.conf	CONF-C	2017
+./bin/tests/system/padding/ns1/root.db		ZONE	2017
+./bin/tests/system/padding/ns2/example.db	ZONE	2017
+./bin/tests/system/padding/ns2/named.conf	CONF-C	2017
+./bin/tests/system/padding/ns3/named.conf	CONF-C	2017
+./bin/tests/system/padding/ns4/named.conf	CONF-C	2017
+./bin/tests/system/padding/setup.sh		SH	2017
+./bin/tests/system/padding/tests.sh		SH	2017
 ./bin/tests/system/pending/clean.sh		SH	2009,2012,2014,2016
 ./bin/tests/system/pending/ns1/named.conf	CONF-C	2009,2016
 ./bin/tests/system/pending/ns1/root.db.in	ZONE	2009,2010,2016
@@ -1880,13 +2051,13 @@
 ./bin/tests/system/pending/ns2/example.db.in	ZONE	2009,2010,2016
 ./bin/tests/system/pending/ns2/forgery.db	ZONE	2010,2016
 ./bin/tests/system/pending/ns2/named.conf	CONF-C	2009,2010,2016
-./bin/tests/system/pending/ns2/sign.sh		SH	2009,2010,2012,2014,2016
+./bin/tests/system/pending/ns2/sign.sh		SH	2009,2010,2012,2014,2016,2017
 ./bin/tests/system/pending/ns3/hostile.db	ZONE	2009,2016
 ./bin/tests/system/pending/ns3/mail.example.db	ZONE	2009,2016
 ./bin/tests/system/pending/ns3/named.conf	CONF-C	2009,2016
 ./bin/tests/system/pending/ns4/named.conf	CONF-C	2009,2016
 ./bin/tests/system/pending/prereq.sh		SH	2009,2012,2014,2016
-./bin/tests/system/pending/setup.sh		SH	2009,2012,2014,2016
+./bin/tests/system/pending/setup.sh		SH	2009,2012,2014,2016,2017
 ./bin/tests/system/pending/tests.sh		SH	2009,2010,2012,2015,2016
 ./bin/tests/system/pipelined/.gitignore		X	2015
 ./bin/tests/system/pipelined/Makefile.in	MAKE	2014,2015,2016
@@ -1904,13 +2075,19 @@
 ./bin/tests/system/pipelined/pipequeries.c	C	2014,2015,2015,2016
 ./bin/tests/system/pipelined/ref		X	2014,2015
 ./bin/tests/system/pipelined/refb		X	2014,2015
-./bin/tests/system/pipelined/setup.sh		SH	2014,2015,2016
+./bin/tests/system/pipelined/setup.sh		SH	2014,2015,2016,2017
 ./bin/tests/system/pipelined/tests.sh		SH	2014,2015,2016
 ./bin/tests/system/pkcs11/clean.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/pkcs11/ns1/example.db.in	ZONE	2010,2016
+<<<<<<< HEAD
 ./bin/tests/system/pkcs11/ns1/named.conf	CONF-C	2010,2013,2014,2016
 ./bin/tests/system/pkcs11/prereq.sh		SH	2010,2012,2014,2016
 ./bin/tests/system/pkcs11/setup.sh		SH	2010,2012,2013,2014,2016
+=======
+./bin/tests/system/pkcs11/ns1/named.conf	CONF-C	2010,2013,2014,2016,2017
+./bin/tests/system/pkcs11/prereq.sh		SH	2010,2012,2014,2016,2017
+./bin/tests/system/pkcs11/setup.sh		SH	2010,2012,2013,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/pkcs11/tests.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/pkcs11/usepkcs11		X	2010
 ./bin/tests/system/pkcs11ssl/clean.sh		SH	2014,2016
@@ -1961,12 +2138,16 @@
 ./bin/tests/system/redirect/ns4/named.conf	CONF-C	2015,2016
 ./bin/tests/system/redirect/ns4/root.hint	ZONE	2015,2016
 ./bin/tests/system/redirect/prereq.sh		SH	2014,2016
-./bin/tests/system/redirect/setup.sh		SH	2011,2012,2013,2014,2015,2016
+./bin/tests/system/redirect/setup.sh		SH	2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/redirect/tests.sh		SH	2011,2012,2013,2014,2015,2016
 ./bin/tests/system/resolver/ans2/ans.pl		PERL	2000,2001,2004,2007,2009,2010,2012,2016
 ./bin/tests/system/resolver/ans3/ans.pl		PERL	2000,2001,2004,2007,2009,2012,2016
 ./bin/tests/system/resolver/clean.sh		SH	2008,2009,2010,2011,2012,2013,2014,2015,2016
+<<<<<<< HEAD
 ./bin/tests/system/resolver/ns1/named.conf	CONF-C	2000,2001,2004,2007,2009,2013,2014,2015,2016
+=======
+./bin/tests/system/resolver/ns1/named.conf	CONF-C	2000,2001,2004,2007,2009,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/resolver/ns1/root.hint	ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/resolver/ns4/broken.db	ZONE	2012,2016
 ./bin/tests/system/resolver/ns4/child.server.db	ZONE	2011,2016
@@ -1998,7 +2179,11 @@
 ./bin/tests/system/resolver/ns7/root.hint	ZONE	2010,2016
 ./bin/tests/system/resolver/ns7/server.db.in	ZONE	2011,2016
 ./bin/tests/system/resolver/prereq.sh		SH	2000,2001,2004,2007,2012,2014,2016
+<<<<<<< HEAD
 ./bin/tests/system/resolver/setup.sh		SH	2010,2011,2012,2013,2014,2016
+=======
+./bin/tests/system/resolver/setup.sh		SH	2010,2011,2012,2013,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/resolver/tests.sh		SH	2000,2001,2004,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/rndc/.gitignore		X	2014
 ./bin/tests/system/rndc/Makefile.in		MAKE	2014,2015,2016
@@ -2013,38 +2198,46 @@
 ./bin/tests/system/rndc/ns5/named.conf		CONF-C	2015,2016
 ./bin/tests/system/rndc/ns6/named.args		X	2016
 ./bin/tests/system/rndc/ns6/named.conf.in	CONF-C	2016
+<<<<<<< HEAD
 ./bin/tests/system/rndc/setup.sh		SH	2011,2012,2013,2014,2016
+=======
+./bin/tests/system/rndc/setup.sh		SH	2011,2012,2013,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/rndc/tests.sh		SH	2011,2012,2013,2014,2015,2016,2017
 ./bin/tests/system/rpz/clean.sh			SH	2011,2012,2013,2014,2016
-./bin/tests/system/rpz/ns1/named.conf		CONF-C	2011,2013,2016
+./bin/tests/system/rpz/ns1/named.conf		CONF-C	2011,2013,2016,2017
 ./bin/tests/system/rpz/ns1/root.db		ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/ns2/base-tld2s.db	ZONE	2012,2013,2016
 ./bin/tests/system/rpz/ns2/bl.tld2.db.in	ZONE	2013,2016
 ./bin/tests/system/rpz/ns2/blv2.tld2.db.in	ZONE	2013,2016
 ./bin/tests/system/rpz/ns2/blv3.tld2.db.in	ZONE	2013,2016
 ./bin/tests/system/rpz/ns2/hints		ZONE	2011,2013,2016
-./bin/tests/system/rpz/ns2/named.conf		CONF-C	2011,2012,2013,2016
+./bin/tests/system/rpz/ns2/named.conf		CONF-C	2011,2012,2013,2016,2017
 ./bin/tests/system/rpz/ns2/tld2.db		ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/ns3/base.db		ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/ns3/crash1		X	2011,2013
 ./bin/tests/system/rpz/ns3/crash2		X	2011,2012,2013
 ./bin/tests/system/rpz/ns3/hints		ZONE	2011,2013,2016
-./bin/tests/system/rpz/ns3/named.conf		CONF-C	2011,2012,2013,2016
+./bin/tests/system/rpz/ns3/named.conf		CONF-C	2011,2012,2013,2016,2017
 ./bin/tests/system/rpz/ns4/hints		ZONE	2011,2013,2016
-./bin/tests/system/rpz/ns4/named.conf		CONF-C	2011,2012,2013,2016
+./bin/tests/system/rpz/ns4/named.conf		CONF-C	2011,2012,2013,2016,2017
 ./bin/tests/system/rpz/ns4/tld4.db		ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/ns5/empty.db.in		ZONE	2014,2016
 ./bin/tests/system/rpz/ns5/hints		ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/ns5/named.args		X	2013,2014
-./bin/tests/system/rpz/ns5/named.conf		CONF-C	2012,2013,2014,2016
+./bin/tests/system/rpz/ns5/named.conf		CONF-C	2012,2013,2014,2016,2017
 ./bin/tests/system/rpz/ns5/tld5.db		ZONE	2013,2016
 ./bin/tests/system/rpz/ns6/hints		ZONE	2014,2016
-./bin/tests/system/rpz/ns6/named.conf		CONF-C	2014,2016
+./bin/tests/system/rpz/ns6/named.conf		CONF-C	2014,2016,2017
 ./bin/tests/system/rpz/ns7/hints		ZONE	2014,2016
-./bin/tests/system/rpz/ns7/named.conf		CONF-C	2014,2016
+./bin/tests/system/rpz/ns7/named.conf		CONF-C	2014,2016,2017
 ./bin/tests/system/rpz/prereq.sh		SH	2014,2016
 ./bin/tests/system/rpz/qperf.sh			SH	2012,2013,2016
+<<<<<<< HEAD
 ./bin/tests/system/rpz/setup.sh			SH	2011,2012,2013,2014,2016
+=======
+./bin/tests/system/rpz/setup.sh			SH	2011,2012,2013,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/rpz/test1			ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/test2			ZONE	2011,2012,2013,2016
 ./bin/tests/system/rpz/test3			ZONE	2011,2013,2016
@@ -2094,29 +2287,29 @@
 ./bin/tests/system/rpzrecurse/prereq.sh		SH	2015,2016
 ./bin/tests/system/rpzrecurse/setup.sh		SH	2015,2016
 ./bin/tests/system/rpzrecurse/testgen.pl	PERL	2015,2016
-./bin/tests/system/rpzrecurse/tests.sh		SH	2015,2016
+./bin/tests/system/rpzrecurse/tests.sh		SH	2015,2016,2017
 ./bin/tests/system/rrchecker/classlist.good	X	2013
-./bin/tests/system/rrchecker/clean.sh		SH	2013,2014,2016
+./bin/tests/system/rrchecker/clean.sh		SH	2013,2014,2016,2017
 ./bin/tests/system/rrchecker/privatelist.good	X	2013
-./bin/tests/system/rrchecker/tests.sh		SH	2013,2014,2015,2016
+./bin/tests/system/rrchecker/tests.sh		SH	2013,2014,2015,2016,2017
 ./bin/tests/system/rrchecker/typelist.good	X	2013,2014,2015,2016
 ./bin/tests/system/rrl/.gitignore		X	2013,2014
-./bin/tests/system/rrl/broken.conf		CONF-C	2016
+./bin/tests/system/rrl/broken.conf		CONF-C	2016,2017
 ./bin/tests/system/rrl/clean.sh			SH	2012,2013,2014,2016
 ./bin/tests/system/rrl/ns1/named.conf		CONF-C	2012,2013,2016
 ./bin/tests/system/rrl/ns1/root.db		ZONE	2012,2013,2016
 ./bin/tests/system/rrl/ns2/hints		ZONE	2012,2013,2016
-./bin/tests/system/rrl/ns2/named.conf		CONF-C	2012,2013,2016
+./bin/tests/system/rrl/ns2/named.conf		CONF-C	2012,2013,2016,2017
 ./bin/tests/system/rrl/ns2/tld2.db		ZONE	2012,2013,2016
 ./bin/tests/system/rrl/ns3/hints		ZONE	2012,2013,2016
 ./bin/tests/system/rrl/ns3/named.conf		CONF-C	2012,2013,2016
 ./bin/tests/system/rrl/ns3/tld3.db		ZONE	2012,2013,2016
 ./bin/tests/system/rrl/ns4/hints		ZONE	2016
-./bin/tests/system/rrl/ns4/named.conf		CONF-C	2016
+./bin/tests/system/rrl/ns4/named.conf		CONF-C	2016,2017
 ./bin/tests/system/rrl/ns4/tld4.db		ZONE	2016
 ./bin/tests/system/rrl/setup.sh			SH	2012,2013,2016
 ./bin/tests/system/rrl/tests.sh			SH	2012,2013,2015,2016
-./bin/tests/system/rrsetorder/clean.sh		SH	2006,2007,2008,2011,2012,2014,2016
+./bin/tests/system/rrsetorder/clean.sh		SH	2006,2007,2008,2011,2012,2014,2016,2017
 ./bin/tests/system/rrsetorder/dig.out.fixed.good	X	2006
 ./bin/tests/system/rrsetorder/dig.out.random.good1	X	2006
 ./bin/tests/system/rrsetorder/dig.out.random.good10	X	2006
@@ -2143,11 +2336,11 @@
 ./bin/tests/system/rrsetorder/dig.out.random.good8	X	2006
 ./bin/tests/system/rrsetorder/dig.out.random.good9	X	2006
 ./bin/tests/system/rrsetorder/ns1/named.conf	CONF-C	2006,2007,2013,2016
-./bin/tests/system/rrsetorder/ns1/root.db	ZONE	2006,2007,2012,2016
+./bin/tests/system/rrsetorder/ns1/root.db	ZONE	2006,2007,2012,2016,2017
 ./bin/tests/system/rrsetorder/ns2/named.conf	CONF-C	2006,2007,2016
-./bin/tests/system/rrsetorder/ns3/named.conf	CONF-C	2006,2007,2016
-./bin/tests/system/rrsetorder/ns4/named.conf	CONF-C	2015,2016
-./bin/tests/system/rrsetorder/tests.sh		SH	2006,2007,2008,2011,2012,2014,2015,2016
+./bin/tests/system/rrsetorder/ns3/named.conf	CONF-C	2006,2007,2016,2017
+./bin/tests/system/rrsetorder/ns4/named.conf	CONF-C	2015,2016,2017
+./bin/tests/system/rrsetorder/tests.sh		SH	2006,2007,2008,2011,2012,2014,2015,2016,2017
 ./bin/tests/system/rsabigexponent/.gitignore	X	2013
 ./bin/tests/system/rsabigexponent/Makefile.in	MAKE	2012,2014,2015,2016
 ./bin/tests/system/rsabigexponent/bigkey.c	C	2012,2014,2015,2016
@@ -2171,8 +2364,8 @@
 ./bin/tests/system/rsabigexponent/ns2/named.conf	CONF-C	2012,2016
 ./bin/tests/system/rsabigexponent/ns2/sign.sh	SH	2012,2014,2016
 ./bin/tests/system/rsabigexponent/ns3/named.conf	CONF-C	2012,2016
-./bin/tests/system/rsabigexponent/prereq.sh	SH	2012,2014,2016
-./bin/tests/system/rsabigexponent/setup.sh	SH	2012,2014,2016
+./bin/tests/system/rsabigexponent/prereq.sh	SH	2012,2014,2016,2017
+./bin/tests/system/rsabigexponent/setup.sh	SH	2012,2014,2016,2017
 ./bin/tests/system/rsabigexponent/tests.sh	SH	2012,2016
 ./bin/tests/system/run.sh			SH	2000,2001,2004,2007,2010,2012,2014,2015,2016
 ./bin/tests/system/runall.sh			SH	2000,2001,2004,2007,2010,2011,2012,2014,2015,2016
@@ -2190,20 +2383,24 @@
 ./bin/tests/system/sfcache/clean.sh		SH	2014,2015,2016
 ./bin/tests/system/sfcache/ns1/named.conf	CONF-C	2014,2016
 ./bin/tests/system/sfcache/ns1/root.db.in	ZONE	2014,2016
-./bin/tests/system/sfcache/ns1/sign.sh		SH	2014,2016
+./bin/tests/system/sfcache/ns1/sign.sh		SH	2014,2016,2017
 ./bin/tests/system/sfcache/ns2/example.db.in	ZONE	2014,2016
 ./bin/tests/system/sfcache/ns2/named.conf	CONF-C	2014,2016
 ./bin/tests/system/sfcache/ns2/sign.sh		SH	2014,2016
-./bin/tests/system/sfcache/ns5/named.conf	CONF-C	2014,2016
+./bin/tests/system/sfcache/ns5/named.conf	CONF-C	2014,2016,2017
 ./bin/tests/system/sfcache/ns5/trusted.conf.bad	CONF-C	2014,2016
-./bin/tests/system/sfcache/prereq.sh		SH	2014,2016
-./bin/tests/system/sfcache/setup.sh		SH	2014,2016
+./bin/tests/system/sfcache/prereq.sh		SH	2014,2016,2017
+./bin/tests/system/sfcache/setup.sh		SH	2014,2016,2017
 ./bin/tests/system/sfcache/tests.sh		SH	2014,2016
 ./bin/tests/system/smartsign/child.db		ZONE	2010,2016
 ./bin/tests/system/smartsign/clean.sh		SH	2010,2012,2014,2016
 ./bin/tests/system/smartsign/parent.db		ZONE	2010,2016
 ./bin/tests/system/smartsign/prereq.sh		SH	2010,2012,2014,2016
+<<<<<<< HEAD
 ./bin/tests/system/smartsign/setup.sh		SH	2010,2012,2014,2016
+=======
+./bin/tests/system/smartsign/setup.sh		SH	2010,2012,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/smartsign/tests.sh		SH	2010,2011,2012,2014,2016,2017
 ./bin/tests/system/sortlist/clean.sh		SH	2000,2001,2004,2007,2009,2012,2014,2015,2016
 ./bin/tests/system/sortlist/ns1/example.db	ZONE	2000,2001,2004,2007,2016
@@ -2246,10 +2443,10 @@
 ./bin/tests/system/staticstub/ns4/example.info.db	ZONE	2010,2016
 ./bin/tests/system/staticstub/ns4/example.org.db	ZONE	2010,2016
 ./bin/tests/system/staticstub/ns4/named.conf	CONF-C	2010,2016
-./bin/tests/system/staticstub/ns4/sign.sh	SH	2010,2012,2014,2016
+./bin/tests/system/staticstub/ns4/sign.sh	SH	2010,2012,2014,2016,2017
 ./bin/tests/system/staticstub/ns4/sub.example.db.in	ZONE	2010,2016
 ./bin/tests/system/staticstub/prereq.sh		SH	2014,2016
-./bin/tests/system/staticstub/setup.sh		SH	2010,2012,2014,2016
+./bin/tests/system/staticstub/setup.sh		SH	2010,2012,2014,2016,2017
 ./bin/tests/system/staticstub/tests.sh		SH	2010,2011,2012,2013,2015,2016
 ./bin/tests/system/statistics/ans4/ans.pl	PERL	2012,2016
 ./bin/tests/system/statistics/clean.sh		SH	2012,2014,2015,2016
@@ -2264,14 +2461,23 @@
 ./bin/tests/system/statistics/ns3/root.hint	ZONE	2012,2016
 ./bin/tests/system/statistics/prereq.sh		SH	2012,2014,2016
 ./bin/tests/system/statistics/tests.sh		SH	2012,2015,2016
+<<<<<<< HEAD
 ./bin/tests/system/statschannel/clean.sh	SH	2015,2016
+=======
+./bin/tests/system/statschannel/clean.sh	SH	2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/statschannel/fetch.pl	PERL	2015,2016
+./bin/tests/system/statschannel/mem-xml.pl	PERL	2017
 ./bin/tests/system/statschannel/ns2/example.db	ZONE	2015,2016
-./bin/tests/system/statschannel/ns2/named.conf	CONF-C	2015,2016
+./bin/tests/system/statschannel/ns2/named.conf	CONF-C	2015,2016,2017
 ./bin/tests/system/statschannel/prereq.sh	SH	2015,2016
 ./bin/tests/system/statschannel/server-json.pl	PERL	2015,2016,2017
 ./bin/tests/system/statschannel/server-xml.pl	PERL	2015,2016,2017
+<<<<<<< HEAD
 ./bin/tests/system/statschannel/tests.sh	SH	2015,2016
+=======
+./bin/tests/system/statschannel/tests.sh	SH	2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./bin/tests/system/statschannel/traffic-json.pl	PERL	2015,2016,2017
 ./bin/tests/system/statschannel/traffic-xml.pl	PERL	2015,2016,2017
 ./bin/tests/system/statschannel/traffic.expect.1	X	2015
@@ -2284,8 +2490,8 @@
 ./bin/tests/system/stress/clean.sh		SH	2000,2001,2004,2007,2012,2014,2016
 ./bin/tests/system/stress/ns1/named.conf	CONF-C	2000,2001,2004,2007,2016
 ./bin/tests/system/stress/ns2/named.conf	CONF-C	2000,2001,2004,2007,2016
-./bin/tests/system/stress/ns3/named.conf	CONF-C	2000,2001,2004,2007,2013,2016
-./bin/tests/system/stress/ns4/named.conf	CONF-C	2000,2001,2004,2007,2016
+./bin/tests/system/stress/ns3/named.conf	CONF-C	2000,2001,2004,2007,2013,2016,2017
+./bin/tests/system/stress/ns4/named.conf	CONF-C	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/stress/prereq.sh		SH	2015,2016
 ./bin/tests/system/stress/setup.pl		PERL	2000,2001,2004,2007,2012,2016
 ./bin/tests/system/stress/setup.sh		SH	2000,2001,2004,2007,2012,2016
@@ -2294,12 +2500,12 @@
 ./bin/tests/system/stub/clean.sh		SH	2000,2001,2004,2007,2012,2014,2015,2016
 ./bin/tests/system/stub/knowngood.dig.out.norec	X	2000,2001
 ./bin/tests/system/stub/knowngood.dig.out.rec	X	2000,2001,2013
-./bin/tests/system/stub/ns1/named.conf		CONF-C	2000,2001,2004,2007,2016
+./bin/tests/system/stub/ns1/named.conf		CONF-C	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/stub/ns1/root.db		ZONE	2000,2001,2004,2007,2016
 ./bin/tests/system/stub/ns2/child.example.db	ZONE	2000,2001,2004,2007,2016
-./bin/tests/system/stub/ns2/named.conf		CONF-C	2000,2001,2004,2007,2016
+./bin/tests/system/stub/ns2/named.conf		CONF-C	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/stub/ns3/example.db		ZONE	2000,2001,2004,2007,2016
-./bin/tests/system/stub/ns3/named.conf		CONF-C	2000,2001,2004,2007,2016
+./bin/tests/system/stub/ns3/named.conf		CONF-C	2000,2001,2004,2007,2016,2017
 ./bin/tests/system/stub/tests.sh		SH	2000,2001,2004,2007,2011,2012,2013,2016
 ./bin/tests/system/tcp/clean.sh			SH	2014,2016
 ./bin/tests/system/tcp/ns1/named.conf		CONF-C	2014,2016
@@ -2309,7 +2515,7 @@
 ./bin/tests/system/tcp/ns3/named.conf		CONF-C	2014,2016
 ./bin/tests/system/tcp/ns4/named.conf		CONF-C	2014,2016
 ./bin/tests/system/tcp/tests.sh			SH	2014,2016
-./bin/tests/system/testcrypto.sh		SH	2014,2016
+./bin/tests/system/testcrypto.sh		SH	2014,2016,2017
 ./bin/tests/system/testsock.pl			PERL	2000,2001,2004,2007,2010,2011,2012,2013,2016
 ./bin/tests/system/testsock6.pl			PERL	2010,2012,2014,2016
 ./bin/tests/system/tkey/Makefile.in		MAKE	2001,2002,2004,2007,2009,2012,2014,2015,2016
@@ -2317,15 +2523,17 @@
 ./bin/tests/system/tkey/keycreate.c		C	2001,2004,2005,2007,2009,2011,2012,2014,2015,2016
 ./bin/tests/system/tkey/keydelete.c		C	2001,2004,2005,2007,2009,2010,2011,2014,2015,2016
 ./bin/tests/system/tkey/ns1/example.db		ZONE	2013,2016
-./bin/tests/system/tkey/ns1/named.conf.in	CONF-C	2001,2004,2007,2009,2011,2013,2014,2016
+./bin/tests/system/tkey/ns1/named.conf.in	CONF-C	2001,2004,2007,2009,2011,2013,2014,2016,2017
 ./bin/tests/system/tkey/ns1/setup.sh		SH	2001,2004,2007,2009,2012,2014,2016
 ./bin/tests/system/tkey/prereq.sh		SH	2001,2004,2006,2007,2009,2012,2014,2016
-./bin/tests/system/tkey/setup.sh		SH	2001,2004,2007,2009,2012,2013,2014,2016
-./bin/tests/system/tkey/tests.sh		SH	2001,2004,2007,2009,2011,2012,2013,2014,2016
+./bin/tests/system/tkey/setup.sh		SH	2001,2004,2007,2009,2012,2013,2014,2016,2017
+./bin/tests/system/tkey/tests.sh		SH	2001,2004,2007,2009,2011,2012,2013,2014,2016,2017
+./bin/tests/system/tools/clean.sh		SH	2017
+./bin/tests/system/tools/tests.sh		SH	2017
 ./bin/tests/system/tsig/clean.sh		SH	2005,2006,2007,2012,2014,2016
 ./bin/tests/system/tsig/ns1/example.db		ZONE	2005,2006,2007,2009,2012,2016
 ./bin/tests/system/tsig/ns1/named.conf		CONF-C	2005,2006,2007,2016
-./bin/tests/system/tsig/setup.sh		SH	2016
+./bin/tests/system/tsig/setup.sh		SH	2016,2017
 ./bin/tests/system/tsig/tests.sh		SH	2005,2006,2007,2011,2012,2016
 ./bin/tests/system/tsiggss/authsock.pl		PERL	2011,2012,2016
 ./bin/tests/system/tsiggss/clean.sh		SH	2010,2011,2014,2015,2016
@@ -2335,7 +2543,7 @@
 ./bin/tests/system/tsiggss/ns1/named.conf	CONF-C	2010,2011,2013,2016
 ./bin/tests/system/tsiggss/ns1/testdenied.ccache	X	2010
 ./bin/tests/system/tsiggss/prereq.sh		SH	2010,2011,2012,2014,2016
-./bin/tests/system/tsiggss/setup.sh		SH	2010,2011,2012,2014,2016
+./bin/tests/system/tsiggss/setup.sh		SH	2010,2011,2012,2014,2016,2017
 ./bin/tests/system/tsiggss/tests.sh		SH	2010,2011,2014,2016
 ./bin/tests/system/unknown/clean.sh		SH	2000,2001,2004,2007,2012,2013,2014,2015,2016
 ./bin/tests/system/unknown/large.out		X	2012
@@ -2351,9 +2559,9 @@
 ./bin/tests/system/unknown/ns1/named.conf	CONF-C	2000,2001,2004,2007,2016
 ./bin/tests/system/unknown/ns2/named.conf	CONF-C	2012,2016
 ./bin/tests/system/unknown/ns3/named.conf	CONF-C	2012,2016
-./bin/tests/system/unknown/ns3/sign.sh		SH	2012,2014,2016
+./bin/tests/system/unknown/ns3/sign.sh		SH	2012,2014,2016,2017
 ./bin/tests/system/unknown/prereq.sh		SH	2014,2016
-./bin/tests/system/unknown/setup.sh		SH	2012,2014,2016
+./bin/tests/system/unknown/setup.sh		SH	2012,2014,2016,2017
 ./bin/tests/system/unknown/tests.sh		SH	2000,2001,2004,2007,2011,2012,2013,2016
 ./bin/tests/system/unknown/zones/nan.bad	ZONE	2013,2016
 ./bin/tests/system/upforwd/ans4/ans.pl		PERL	2011,2012,2016
@@ -2363,12 +2571,12 @@
 ./bin/tests/system/upforwd/knowngood.before	X	2000,2001
 ./bin/tests/system/upforwd/knowngood.ns2.before	X	2000,2001
 ./bin/tests/system/upforwd/ns1/example1.db	ZONE	2000,2001,2004,2007,2016
-./bin/tests/system/upforwd/ns1/named.conf	CONF-C	2000,2001,2004,2007,2014,2016
-./bin/tests/system/upforwd/ns2/named.conf	CONF-C	2000,2001,2004,2007,2014,2016
-./bin/tests/system/upforwd/ns3/named.conf	CONF-C	2000,2001,2004,2007,2011,2014,2016
+./bin/tests/system/upforwd/ns1/named.conf	CONF-C	2000,2001,2004,2007,2014,2016,2017
+./bin/tests/system/upforwd/ns2/named.conf	CONF-C	2000,2001,2004,2007,2014,2016,2017
+./bin/tests/system/upforwd/ns3/named.conf	CONF-C	2000,2001,2004,2007,2011,2014,2016,2017
 ./bin/tests/system/upforwd/ns3/nomaster.db	ZONE	2011,2016
 ./bin/tests/system/upforwd/prereq.sh		SH	2012,2014,2016
-./bin/tests/system/upforwd/setup.sh		SH	2000,2001,2004,2007,2011,2012,2014,2016
+./bin/tests/system/upforwd/setup.sh		SH	2000,2001,2004,2007,2011,2012,2014,2016,2017
 ./bin/tests/system/upforwd/tests.sh		SH	2000,2001,2004,2007,2011,2012,2013,2014,2016
 ./bin/tests/system/v6synth/clean.sh		SH	2001,2004,2007,2012,2014,2016
 ./bin/tests/system/v6synth/ns1/named.conf	CONF-C	2001,2004,2007,2016
@@ -2376,14 +2584,14 @@
 ./bin/tests/system/v6synth/ns2/example.db	ZONE	2001,2004,2007,2016
 ./bin/tests/system/v6synth/ns2/ip6.arpa.db	ZONE	2001,2002,2004,2007,2016
 ./bin/tests/system/v6synth/ns2/ip6.int.db	ZONE	2001,2004,2007,2016
-./bin/tests/system/v6synth/ns2/named.conf	CONF-C	2001,2004,2007,2016
-./bin/tests/system/v6synth/ns3/named.conf	CONF-C	2001,2004,2007,2016
+./bin/tests/system/v6synth/ns2/named.conf	CONF-C	2001,2004,2007,2016,2017
+./bin/tests/system/v6synth/ns3/named.conf	CONF-C	2001,2004,2007,2016,2017
 ./bin/tests/system/v6synth/tests.sh		SH	2001,2004,2007,2012,2016
 ./bin/tests/system/verify/.gitignore		X	2012,2016
 ./bin/tests/system/verify/clean.sh		SH	2012,2014,2016
 ./bin/tests/system/verify/prereq.sh		SH	2014,2016
-./bin/tests/system/verify/setup.sh		SH	2012,2014,2016
-./bin/tests/system/verify/tests.sh		SH	2012,2013,2016
+./bin/tests/system/verify/setup.sh		SH	2012,2014,2016,2017
+./bin/tests/system/verify/tests.sh		SH	2012,2013,2016,2017
 ./bin/tests/system/verify/zones/genzones.sh	SH	2012,2013,2014,2016
 ./bin/tests/system/verify/zones/unsigned.db	ZONE	2012,2016
 ./bin/tests/system/views/clean.sh		SH	2000,2001,2004,2005,2007,2012,2013,2014,2015,2016
@@ -2406,7 +2614,7 @@
 ./bin/tests/system/views/ns3/named2.conf	CONF-C	2000,2001,2004,2007,2013,2016
 ./bin/tests/system/views/ns5/child.clone.db	ZONE	2013,2016
 ./bin/tests/system/views/ns5/named.conf		CONF-C	2013,2016
-./bin/tests/system/views/setup.sh		SH	2000,2001,2004,2007,2012,2014,2016
+./bin/tests/system/views/setup.sh		SH	2000,2001,2004,2007,2012,2014,2016,2017
 ./bin/tests/system/views/tests.sh		SH	2000,2001,2004,2007,2012,2013,2014,2016
 ./bin/tests/system/wildcard/clean.sh		SH	2012,2013,2014,2016
 ./bin/tests/system/wildcard/ns1/dlv.db.in	ZONE	2013,2016
@@ -2425,7 +2633,7 @@
 ./bin/tests/system/wildcard/ns5/hints		ZONE	2013,2016
 ./bin/tests/system/wildcard/ns5/named.conf	CONF-C	2013,2016
 ./bin/tests/system/wildcard/prereq.sh		SH	2014,2016
-./bin/tests/system/wildcard/setup.sh		SH	2012,2014,2016
+./bin/tests/system/wildcard/setup.sh		SH	2012,2014,2016,2017
 ./bin/tests/system/wildcard/tests.sh		SH	2012,2013,2016
 ./bin/tests/system/win32/bigkey.dsp.in		X	2016
 ./bin/tests/system/win32/bigkey.dsw		X	2016
@@ -2486,7 +2694,7 @@
 ./bin/tests/system/xfer/ns2/mapped.db.in	ZONE	2016
 ./bin/tests/system/xfer/ns2/named.conf		CONF-C	2000,2001,2004,2005,2007,2013,2016
 ./bin/tests/system/xfer/ns2/slave.db.in		ZONE	2013,2016
-./bin/tests/system/xfer/ns3/named.conf		CONF-C	2000,2001,2004,2007,2011,2013,2016
+./bin/tests/system/xfer/ns3/named.conf		CONF-C	2000,2001,2004,2007,2011,2013,2016,2017
 ./bin/tests/system/xfer/ns4/named.conf.base	CONF-C	2011,2013,2016
 ./bin/tests/system/xfer/ns4/root.db.in		ZONE	2011,2016
 ./bin/tests/system/xfer/ns6/named.conf		CONF-C	2011,2014,2016
@@ -2509,13 +2717,13 @@
 ./bin/tests/system/xferquota/tests.sh		SH	2000,2001,2004,2007,2012,2016
 ./bin/tests/system/zero/ans5/ans.pl		PERL	2016
 ./bin/tests/system/zero/clean.sh		SH	2013,2014,2015,2016
-./bin/tests/system/zero/ns1/named.conf		CONF-C	2013,2016
+./bin/tests/system/zero/ns1/named.conf		CONF-C	2013,2016,2017
 ./bin/tests/system/zero/ns1/root.db		ZONE	2013,2016
-./bin/tests/system/zero/ns2/named.conf		CONF-C	2013,2016
+./bin/tests/system/zero/ns2/named.conf		CONF-C	2013,2016,2017
 ./bin/tests/system/zero/ns2/tld.db		ZONE	2016
-./bin/tests/system/zero/ns3/named.conf		CONF-C	2013,2016
+./bin/tests/system/zero/ns3/named.conf		CONF-C	2013,2016,2017
 ./bin/tests/system/zero/ns3/root.hint		ZONE	2013,2016
-./bin/tests/system/zero/ns4/named.conf		CONF-C	2013,2016
+./bin/tests/system/zero/ns4/named.conf		CONF-C	2013,2016,2017
 ./bin/tests/system/zero/ns4/one.tld.db		ZONE	2016
 ./bin/tests/system/zero/setup.sh		SH	2013,2014,2016
 ./bin/tests/system/zero/tests.sh		SH	2013,2016
@@ -2530,7 +2738,7 @@
 ./bin/tests/system/zonechecks/ns2/named.conf	CONF-C	2012,2013,2016
 ./bin/tests/system/zonechecks/nxdomain.db	ZONE	2004,2007,2016
 ./bin/tests/system/zonechecks/prereq.sh		SH	2014,2016
-./bin/tests/system/zonechecks/setup.sh		SH	2012,2013,2014,2015,2016
+./bin/tests/system/zonechecks/setup.sh		SH	2012,2013,2014,2015,2016,2017
 ./bin/tests/system/zonechecks/tests.sh		SH	2004,2007,2009,2012,2013,2014,2015,2016
 ./bin/tests/t_api.pl				PERL	1999,2000,2001,2004,2007,2012,2016
 ./bin/tests/task_test.c				C	1998,1999,2000,2001,2004,2007,2013,2014,2015,2016
@@ -2651,8 +2859,8 @@
 ./bin/tools/arpaname.docbook			SGML	2009,2014,2015,2016
 ./bin/tools/arpaname.html			HTML	DOCBOOK
 ./bin/tools/dnstap-read.1			MAN	DOCBOOK
-./bin/tools/dnstap-read.c			C	2015,2016
-./bin/tools/dnstap-read.docbook			SGML	2015,2016
+./bin/tools/dnstap-read.c			C	2015,2016,2017
+./bin/tools/dnstap-read.docbook			SGML	2015,2016,2017
 ./bin/tools/dnstap-read.html			HTML	DOCBOOK
 ./bin/tools/genrandom.8				MAN	DOCBOOK
 ./bin/tools/genrandom.c				C	2000,2001,2002,2003,2004,2005,2007,2009,2010,2012,2014,2016
@@ -2675,12 +2883,12 @@
 ./bin/tools/named-nzd2nzf.docbook		SGML	2016
 ./bin/tools/named-nzd2nzf.html			HTML	DOCBOOK
 ./bin/tools/named-rrchecker.1			MAN	DOCBOOK
-./bin/tools/named-rrchecker.c			C	2013,2015,2016
+./bin/tools/named-rrchecker.c			C	2013,2015,2016,2017
 ./bin/tools/named-rrchecker.docbook		SGML	2013,2014,2015,2016
 ./bin/tools/named-rrchecker.html		HTML	DOCBOOK
 ./bin/tools/nsec3hash.8				MAN	DOCBOOK
-./bin/tools/nsec3hash.c				C	2006,2008,2009,2011,2014,2016
-./bin/tools/nsec3hash.docbook			SGML	2009,2014,2015,2016
+./bin/tools/nsec3hash.c				C	2006,2008,2009,2011,2014,2016,2017
+./bin/tools/nsec3hash.docbook			SGML	2009,2014,2015,2016,2017
 ./bin/tools/nsec3hash.html			HTML	DOCBOOK
 ./bin/tools/win32/arpaname.dsp.in		X	2009,2013
 ./bin/tools/win32/arpaname.dsw			X	2009
@@ -2750,7 +2958,11 @@
 ./bind.keys.h					X	2009,2010,2011,2012,2014,2017
 ./config.guess					X	1998,1999,2000,2001,2004,2009,2013
 ./config.h.in					X	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./config.h.win32				C	1999,2000,2001,2004,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
+=======
+./config.h.win32				C	1999,2000,2001,2004,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./config.sub					X	1998,1999,2000,2001,2004,2013
 ./config.threads.in				X	2005,2006,2010,2011,2012,2013
 ./configure					X	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
@@ -2889,6 +3101,7 @@
 ./contrib/dnsperf-2.1.0.0-1/resperf.c		X	2016
 ./contrib/dnsperf-2.1.0.0-1/util.h		X	2016
 ./contrib/dnsperf-2.1.0.0-1/version.h		X	2016
+./contrib/dnsperf-patches/0001-Add-support-for-sending-EDNS-CLIENT-SUBNET-option-in.patch	X	2016
 ./contrib/idn/README.idnkit			X	2005,2009
 ./contrib/idn/idnkit-1.0-src/.gitignore		X	2014
 ./contrib/idn/idnkit-1.0-src/ChangeLog		X	2003
@@ -3321,7 +3534,11 @@
 ./doc/arm/Bv9ARM.ch13.html			X	2015,2016,2017
 ./doc/arm/Bv9ARM.conf				X	2015
 ./doc/arm/Bv9ARM.html				X	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./doc/arm/Bv9ARM.pdf				X	2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+=======
+./doc/arm/Bv9ARM.pdf				X	2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./doc/arm/Makefile.in				MAKE	2001,2002,2004,2005,2006,2007,2009,2012,2014,2015,2016
 ./doc/arm/README-SGML				TXT.BRIEF	2000,2001,2004,2015,2016
 ./doc/arm/catz.xml				SGML	2016
@@ -3374,7 +3591,11 @@
 ./doc/arm/notes-wrapper.xml			SGML	2014,2015,2016
 ./doc/arm/notes.conf				X	2015
 ./doc/arm/notes.html				X	2014,2015,2016,2017
+<<<<<<< HEAD
 ./doc/arm/notes.pdf				X	2014,2015,2016,2017
+=======
+./doc/arm/notes.pdf				X	2014,2015,2016
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./doc/arm/notes.xml				SGML	2014,2015,2016,2017
 ./doc/arm/noteversion.xml.in			SGML	2015,2016
 ./doc/arm/pkcs11.xml				SGML	2010,2012,2013,2014,2015,2016
@@ -3475,7 +3696,11 @@
 ./lib/bind9/Makefile.in				MAKE	2001,2004,2007,2009,2012,2014,2015,2016,2017
 ./lib/bind9/api					X	2001,2006,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/bind9/check.c				C	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/bind9/getaddresses.c			C	2001,2002,2004,2005,2007,2014,2015,2016
+=======
+./lib/bind9/getaddresses.c			C	2001,2002,2004,2005,2007,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/bind9/include/Makefile.in			MAKE	2001,2004,2007,2012,2016
 ./lib/bind9/include/bind9/Makefile.in		MAKE	2001,2004,2007,2012,2015,2016
 ./lib/bind9/include/bind9/check.h		C	2001,2004,2005,2006,2007,2016
@@ -3494,7 +3719,10 @@
 ./lib/dns/.gitignore				X	2012,2013,2016
 ./lib/dns/Atffile				X	2011
 ./lib/dns/Makefile.in				MAKE	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/acache.c				C	2004,2005,2006,2007,2008,2012,2013,2015,2016
+=======
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/acl.c					C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2011,2013,2014,2016
 ./lib/dns/adb.c					C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/api					X	1999,2000,2001,2006,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
@@ -3505,29 +3733,42 @@
 ./lib/dns/catz.c				C	2016,2017
 ./lib/dns/client.c				C	2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/clientinfo.c				C	2011,2014,2016
-./lib/dns/compress.c				C	1999,2000,2001,2004,2005,2006,2007,2015,2016
-./lib/dns/db.c					C	1999,2000,2001,2003,2004,2005,2007,2008,2009,2011,2012,2013,2015,2016
+./lib/dns/compress.c				C	1999,2000,2001,2004,2005,2006,2007,2015,2016,2017
+./lib/dns/db.c					C	1999,2000,2001,2003,2004,2005,2007,2008,2009,2011,2012,2013,2015,2016,2017
 ./lib/dns/dbiterator.c				C	1999,2000,2001,2004,2005,2007,2016
 ./lib/dns/dbtable.c				C	1999,2000,2001,2004,2005,2007,2013,2016
 ./lib/dns/diff.c				C	2000,2001,2002,2003,2004,2005,2007,2008,2009,2011,2013,2014,2015,2016
 ./lib/dns/dispatch.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/dlz.c					C.PORTION	1999,2000,2001,2005,2007,2009,2010,2011,2012,2013,2015,2016
+<<<<<<< HEAD
 ./lib/dns/dns64.c				C	2010,2011,2014,2016
+=======
+./lib/dns/dns64.c				C	2010,2011,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/dnssec.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/dnstap.c				C	2015,2016,2017
 ./lib/dns/dnstap.proto				X	2015
 ./lib/dns/ds.c					C	2002,2003,2004,2005,2006,2007,2010,2012,2014,2016
-./lib/dns/dst_api.c				C.NAI	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./lib/dns/dst_api.c				C.NAI	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/dst_gost.h				C	2014,2016
-./lib/dns/dst_internal.h			C.NAI	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016
+./lib/dns/dst_internal.h			C.NAI	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2016,2017
 ./lib/dns/dst_lib.c				C	1999,2000,2001,2004,2005,2007,2016
 ./lib/dns/dst_openssl.h				C	2002,2004,2005,2007,2008,2009,2011,2012,2015,2016
 ./lib/dns/dst_parse.c				C.NAI	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/dst_parse.h				C.NAI	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2012,2014,2016
 ./lib/dns/dst_pkcs11.h				C	2014,2016
 ./lib/dns/dst_result.c				C	1999,2000,2001,2004,2005,2007,2008,2012,2013,2014,2015,2016
 ./lib/dns/dyndb.c				C	2015,2016,2017
 ./lib/dns/ecdb.c				C	2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/dst_parse.h				C.NAI	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2012,2014,2016,2017
+./lib/dns/dst_pkcs11.h				C	2014,2016
+./lib/dns/dst_result.c				C	1999,2000,2001,2004,2005,2007,2008,2012,2013,2014,2015,2016
+./lib/dns/dyndb.c				C	2015,2016,2017
+./lib/dns/ecdb.c				C	2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/ecs.c					C	2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/forward.c				C	2000,2001,2004,2005,2007,2009,2013,2016
 ./lib/dns/gen-unix.h				C	1999,2000,2001,2004,2005,2007,2009,2016
 ./lib/dns/gen-win32.h				C	1999,2000,2001,2004,2005,2006,2007,2009,2014,2016
@@ -3537,8 +3778,7 @@
 ./lib/dns/gssapictx.c				C	2000,2001,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/hmac_link.c				C.NAI	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/include/Makefile.in			MAKE	1998,1999,2000,2001,2004,2007,2012,2016
-./lib/dns/include/dns/Makefile.in		MAKE	1998,1999,2000,2001,2002,2003,2004,2007,2008,2009,2011,2012,2013,2014,2015,2016
-./lib/dns/include/dns/acache.h			C	2004,2006,2007,2013,2016
+./lib/dns/include/dns/Makefile.in		MAKE	1998,1999,2000,2001,2002,2003,2004,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/acl.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2011,2013,2014,2016
 ./lib/dns/include/dns/adb.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2013,2014,2015,2016
 ./lib/dns/include/dns/badcache.h		C	2014,2016
@@ -3548,10 +3788,10 @@
 ./lib/dns/include/dns/callbacks.h		C	1999,2000,2001,2002,2004,2005,2006,2007,2011,2012,2013,2016
 ./lib/dns/include/dns/catz.h			C	2016
 ./lib/dns/include/dns/cert.h			C	1999,2000,2001,2004,2005,2006,2007,2016
-./lib/dns/include/dns/client.h			C	2009,2013,2014,2016
+./lib/dns/include/dns/client.h			C	2009,2013,2014,2016,2017
 ./lib/dns/include/dns/clientinfo.h		C	2011,2014,2016
-./lib/dns/include/dns/compress.h		C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2015,2016
-./lib/dns/include/dns/db.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
+./lib/dns/include/dns/compress.h		C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2015,2016,2017
+./lib/dns/include/dns/db.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/dbiterator.h		C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/dbtable.h			C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/diff.h			C	2000,2001,2004,2005,2006,2007,2008,2009,2010,2013,2016
@@ -3565,6 +3805,7 @@
 ./lib/dns/include/dns/dsdigest.h		C	2012,2016
 ./lib/dns/include/dns/dyndb.h			C	2015,2016
 ./lib/dns/include/dns/ecdb.h			C	2009,2012,2016
+./lib/dns/include/dns/ecs.h			C	2017
 ./lib/dns/include/dns/edns.h			C	2014,2015,2016
 ./lib/dns/include/dns/events.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2010,2011,2014,2016,2017
 ./lib/dns/include/dns/fixedname.h		C	1999,2000,2001,2004,2005,2006,2007,2016
@@ -3572,17 +3813,21 @@
 ./lib/dns/include/dns/geoip.h			C	2013,2014,2016
 ./lib/dns/include/dns/ipkeylist.h		C	2016
 ./lib/dns/include/dns/iptable.h			C	2007,2012,2014,2016
-./lib/dns/include/dns/journal.h			C	1999,2000,2001,2004,2005,2006,2007,2008,2009,2011,2013,2016
+./lib/dns/include/dns/journal.h			C	1999,2000,2001,2004,2005,2006,2007,2008,2009,2011,2013,2016,2017
 ./lib/dns/include/dns/keydata.h			C	2009,2016
 ./lib/dns/include/dns/keyflags.h		C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/keytable.h		C	2000,2001,2004,2005,2007,2009,2010,2014,2015,2016
-./lib/dns/include/dns/keyvalues.h		C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2012,2016
+./lib/dns/include/dns/keyvalues.h		C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2012,2016,2017
 ./lib/dns/include/dns/lib.h			C	1999,2000,2001,2004,2005,2006,2007,2009,2016
-./lib/dns/include/dns/log.h			C	1999,2000,2001,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2015,2016
+./lib/dns/include/dns/log.h			C	1999,2000,2001,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/lookup.h			C	2000,2001,2004,2005,2006,2007,2009,2016
 ./lib/dns/include/dns/master.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2016
 ./lib/dns/include/dns/masterdump.h		C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2011,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/include/dns/message.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016
+=======
+./lib/dns/include/dns/message.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/include/dns/name.h			C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2015,2016,2017
 ./lib/dns/include/dns/ncache.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2013,2016
 ./lib/dns/include/dns/nsec.h			C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2011,2012,2016
@@ -3590,7 +3835,7 @@
 ./lib/dns/include/dns/nta.h			C	2014,2015,2016
 ./lib/dns/include/dns/opcode.h			C	2002,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/order.h			C	2002,2004,2005,2006,2007,2016
-./lib/dns/include/dns/peer.h			C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2013,2014,2015,2016
+./lib/dns/include/dns/peer.h			C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/portlist.h		C	2003,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/private.h			C	2009,2011,2012,2016
 ./lib/dns/include/dns/rbt.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2012,2013,2014,2015,2016
@@ -3598,7 +3843,7 @@
 ./lib/dns/include/dns/rdata.h			C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2016,2017
 ./lib/dns/include/dns/rdataclass.h		C	1998,1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/rdatalist.h		C	1999,2000,2001,2004,2005,2006,2007,2008,2015,2016
-./lib/dns/include/dns/rdataset.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016
+./lib/dns/include/dns/rdataset.h		C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./lib/dns/include/dns/rdatasetiter.h		C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/rdataslab.h		C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2016
 ./lib/dns/include/dns/rdatatype.h		C	1998,1999,2000,2001,2004,2005,2006,2007,2008,2016
@@ -3606,7 +3851,7 @@
 ./lib/dns/include/dns/resolver.h		C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/include/dns/result.h			C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/include/dns/rootns.h			C	1999,2000,2001,2004,2005,2006,2007,2016
-./lib/dns/include/dns/rpz.h			C	2011,2012,2013,2015,2016
+./lib/dns/include/dns/rpz.h			C	2011,2012,2013,2015,2016,2017
 ./lib/dns/include/dns/rriterator.h		C	2009,2011,2016
 ./lib/dns/include/dns/rrl.h			C	2013,2015,2016,2017
 ./lib/dns/include/dns/sdb.h			C	2000,2001,2004,2005,2006,2007,2009,2011,2012,2016
@@ -3629,24 +3874,25 @@
 ./lib/dns/include/dns/version.h			C	2001,2004,2005,2006,2007,2012,2013,2016
 ./lib/dns/include/dns/view.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/xfrin.h			C	1999,2000,2001,2003,2004,2005,2006,2007,2009,2013,2016
-./lib/dns/include/dns/zone.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./lib/dns/include/dns/zone.h			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dns/zonekey.h			C	2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dns/zt.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2011,2016
 ./lib/dns/include/dst/Makefile.in		MAKE	1998,1999,2000,2001,2004,2007,2012,2015,2016
-./lib/dns/include/dst/dst.h			C	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./lib/dns/include/dst/dst.h			C	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/include/dst/gssapi.h			C	2000,2001,2004,2005,2006,2007,2009,2010,2011,2013,2016
 ./lib/dns/include/dst/lib.h			C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/dns/include/dst/result.h			C	1999,2000,2001,2004,2005,2006,2007,2008,2012,2014,2016
 ./lib/dns/ipkeylist.c				C	2016
 ./lib/dns/iptable.c				C	2007,2008,2009,2013,2014,2016
-./lib/dns/journal.c				C	1999,2000,2001,2002,2004,2005,2007,2008,2009,2010,2011,2013,2014,2015,2016
+./lib/dns/journal.c				C	1999,2000,2001,2002,2004,2005,2007,2008,2009,2010,2011,2013,2014,2015,2016,2017
 ./lib/dns/key.c					C	2001,2004,2005,2006,2007,2011,2016
 ./lib/dns/keydata.c				C	2009,2014,2016
 ./lib/dns/keytable.c				C	2000,2001,2004,2005,2007,2009,2010,2013,2014,2015,2016
 ./lib/dns/lib.c					C	1999,2000,2001,2004,2005,2007,2009,2013,2014,2015,2016
-./lib/dns/log.c					C	1999,2000,2001,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2015,2016
+./lib/dns/log.c					C	1999,2000,2001,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/lookup.c				C	2000,2001,2003,2004,2005,2007,2013,2016
 ./lib/dns/mapapi				X	2013
+<<<<<<< HEAD
 ./lib/dns/master.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
 ./lib/dns/masterdump.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/message.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
@@ -3655,28 +3901,57 @@
 ./lib/dns/nsec.c				C	1999,2000,2001,2003,2004,2005,2007,2008,2009,2011,2012,2013,2014,2015,2016
 ./lib/dns/nsec3.c				C	2006,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/nta.c					C	2014,2015,2016
+=======
+./lib/dns/master.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/masterdump.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/message.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/name.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/ncache.c				C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/nsec.c				C	1999,2000,2001,2003,2004,2005,2007,2008,2009,2011,2012,2013,2014,2015,2016
+./lib/dns/nsec3.c				C	2006,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/nta.c					C	2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/openssl_link.c			C.NAI	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./lib/dns/openssldh_link.c			C.NAI	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
 ./lib/dns/openssldsa_link.c			C.NAI	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016
 ./lib/dns/opensslecdsa_link.c			C	2012,2013,2014,2015,2016
+./lib/dns/openssleddsa_link.c			C	2017
 ./lib/dns/opensslgost_link.c			C	2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/opensslrsa_link.c			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/order.c				C	2002,2004,2005,2007,2015,2016
 ./lib/dns/peer.c				C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2012,2013,2014,2015,2016
+=======
+./lib/dns/order.c				C	2002,2004,2005,2007,2015,2016,2017
+./lib/dns/peer.c				C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/pkcs11.c				C	2014,2016
 ./lib/dns/pkcs11dh_link.c			C	2014,2015,2016,2017
 ./lib/dns/pkcs11dsa_link.c			C	2014,2015,2016,2017
 ./lib/dns/pkcs11ecdsa_link.c			C	2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/pkcs11gost_link.c			C	2014,2015,2016,2017
 ./lib/dns/pkcs11rsa_link.c			C	2014,2015,2016,2017
 ./lib/dns/portlist.c				C	2003,2004,2005,2006,2007,2014,2016
 ./lib/dns/private.c				C	2009,2011,2012,2015,2016
 ./lib/dns/rbt.c					C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/pkcs11eddsa_link.c			C	2017
+./lib/dns/pkcs11gost_link.c			C	2014,2015,2016,2017
+./lib/dns/pkcs11rsa_link.c			C	2014,2015,2016,2017
+./lib/dns/portlist.c				C	2003,2004,2005,2006,2007,2014,2016
+./lib/dns/private.c				C	2009,2011,2012,2015,2016,2017
+./lib/dns/rbt.c					C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/rbtdb.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/rbtdb.h				C	1999,2000,2001,2004,2005,2007,2011,2012,2016
 ./lib/dns/rbtdb64.c				C	1999,2000,2001,2004,2005,2007,2016
 ./lib/dns/rbtdb64.h				C	1999,2000,2001,2004,2005,2007,2016
+<<<<<<< HEAD
 ./lib/dns/rcode.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/rcode.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/rdata.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/rdata/any_255/tsig_250.c		C	1999,2000,2001,2002,2003,2004,2005,2007,2009,2011,2012,2015,2016
 ./lib/dns/rdata/any_255/tsig_250.h		C	1999,2000,2001,2004,2005,2007,2016
@@ -3722,7 +3997,7 @@
 ./lib/dns/rdata/generic/isdn_20.h		C	1999,2000,2001,2004,2005,2007,2016
 ./lib/dns/rdata/generic/key_25.c		C	1999,2000,2001,2002,2003,2004,2005,2007,2009,2011,2012,2013,2015,2016
 ./lib/dns/rdata/generic/key_25.h		C	1999,2000,2001,2004,2005,2007,2015,2016
-./lib/dns/rdata/generic/keydata_65533.c		C	2009,2011,2012,2013,2015,2016
+./lib/dns/rdata/generic/keydata_65533.c		C	2009,2011,2012,2013,2015,2016,2017
 ./lib/dns/rdata/generic/keydata_65533.h		C	2009,2016
 ./lib/dns/rdata/generic/l32_105.c		C	2013,2014,2015,2016
 ./lib/dns/rdata/generic/l32_105.h		C	2013,2016
@@ -3834,19 +4109,28 @@
 ./lib/dns/rdata/in_1/wks_11.h			C	1999,2000,2001,2004,2007,2016
 ./lib/dns/rdata/rdatastructpre.h		C	1999,2000,2001,2004,2007,2016
 ./lib/dns/rdata/rdatastructsuf.h		C	1999,2000,2001,2004,2007,2016
-./lib/dns/rdatalist.c				C	1999,2000,2001,2003,2004,2005,2007,2008,2010,2011,2012,2014,2015,2016
+./lib/dns/rdatalist.c				C	1999,2000,2001,2003,2004,2005,2007,2008,2010,2011,2012,2014,2015,2016,2017
 ./lib/dns/rdatalist_p.h				C	2000,2001,2004,2005,2007,2008,2015,2016
 ./lib/dns/rdataset.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2014,2015,2016,2017
 ./lib/dns/rdatasetiter.c			C	1999,2000,2001,2004,2005,2007,2016
-./lib/dns/rdataslab.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./lib/dns/rdataslab.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/request.c				C	2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/resolver.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/result.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/rootns.c				C	1999,2000,2001,2002,2004,2005,2007,2008,2010,2012,2013,2014,2015,2016,2017
 ./lib/dns/rpz.c					C	2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/rriterator.c				C	2009,2011,2012,2015,2016
 ./lib/dns/rrl.c					C	2012,2013,2014,2015,2016
 ./lib/dns/sdb.c					C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/result.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/rootns.c				C	1999,2000,2001,2002,2004,2005,2007,2008,2010,2012,2013,2014,2015,2016,2017
+./lib/dns/rpz.c					C	2011,2012,2013,2014,2015,2016,2017
+./lib/dns/rriterator.c				C	2009,2011,2012,2015,2016
+./lib/dns/rrl.c					C	2012,2013,2014,2015,2016,2017
+./lib/dns/sdb.c					C	2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/sdlz.c				C.PORTION	1999,2000,2001,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/soa.c					C	2000,2001,2004,2005,2007,2009,2016
 ./lib/dns/spnego.asn1				X	2006
@@ -3855,7 +4139,7 @@
 ./lib/dns/spnego_asn1.c				C	2006,2007,2012,2013,2015,2016
 ./lib/dns/spnego_asn1.pl			PERL	2006,2007,2012,2016
 ./lib/dns/ssu.c					C	2000,2001,2003,2004,2005,2006,2007,2008,2010,2011,2013,2014,2016
-./lib/dns/ssu_external.c			C	2011,2012,2013,2016
+./lib/dns/ssu_external.c			C	2011,2012,2013,2016,2017
 ./lib/dns/stats.c				C	2000,2001,2004,2005,2007,2008,2009,2012,2016
 ./lib/dns/tcpmsg.c				C	1999,2000,2001,2004,2005,2006,2007,2015,2016
 ./lib/dns/tests/Atffile				X	2011
@@ -3864,14 +4148,19 @@
 ./lib/dns/tests/Makefile.in			MAKE	2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/tests/acl_test.c			C	2016
 ./lib/dns/tests/db_test.c			C	2013,2015,2016
-./lib/dns/tests/dbdiff_test.c			C	2011,2012,2016
+./lib/dns/tests/dbdiff_test.c			C	2011,2012,2016,2017
 ./lib/dns/tests/dbiterator_test.c		C	2011,2012,2016
 ./lib/dns/tests/dbversion_test.c		C	2011,2012,2014,2015,2016
 ./lib/dns/tests/dh_test.c			C	2014,2016
 ./lib/dns/tests/dispatch_test.c			C	2012,2014,2016
 ./lib/dns/tests/dnstap_test.c			C	2015,2016,2017
+<<<<<<< HEAD
 ./lib/dns/tests/dnstest.c			C	2011,2012,2013,2014,2015,2016
 ./lib/dns/tests/dnstest.h			C	2011,2012,2014,2015,2016
+=======
+./lib/dns/tests/dnstest.c			C	2011,2012,2013,2014,2015,2016,2017
+./lib/dns/tests/dnstest.h			C	2011,2012,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/tests/geoip_test.c			C	2013,2014,2015,2016
 ./lib/dns/tests/gost_test.c			C	2014,2015,2016
 ./lib/dns/tests/keytable_test.c			C	2014,2015,2016
@@ -3883,7 +4172,7 @@
 ./lib/dns/tests/private_test.c			C	2011,2012,2016
 ./lib/dns/tests/rbt_serialize_test.c		C	2014,2015,2016
 ./lib/dns/tests/rbt_test.c			C	2012,2013,2014,2015,2016
-./lib/dns/tests/rdata_test.c			C	2012,2013,2015,2016
+./lib/dns/tests/rdata_test.c			C	2012,2013,2015,2016,2017
 ./lib/dns/tests/rdataset_test.c			C	2012,2016
 ./lib/dns/tests/rdatasetstats_test.c		C	2012,2015,2016
 ./lib/dns/tests/rsa_test.c			C	2016
@@ -3924,16 +4213,24 @@
 ./lib/dns/tests/testdata/zt/zone1.db		ZONE	2011,2012,2016
 ./lib/dns/tests/time_test.c			C	2011,2012,2016
 ./lib/dns/tests/tsig_test.c			C	2017
+<<<<<<< HEAD
 ./lib/dns/tests/update_test.c			C	2011,2012,2014,2016
+=======
+./lib/dns/tests/update_test.c			C	2011,2012,2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/tests/zonemgr_test.c			C	2011,2012,2013,2015,2016
 ./lib/dns/tests/zt_test.c			C	2011,2012,2016
-./lib/dns/time.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2007,2009,2010,2011,2012,2014,2016
+./lib/dns/time.c				C	1998,1999,2000,2001,2002,2003,2004,2005,2007,2009,2010,2011,2012,2014,2016,2017
 ./lib/dns/timer.c				C	2000,2001,2004,2005,2007,2016
 ./lib/dns/tkey.c				C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
 ./lib/dns/tsec.c				C	2009,2010,2016
 ./lib/dns/tsig.c				C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/ttl.c					C	1999,2000,2001,2004,2005,2007,2011,2012,2013,2014,2016
+<<<<<<< HEAD
 ./lib/dns/update.c				C	2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/update.c				C	2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/validator.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/version.c				C	1998,1999,2000,2001,2004,2005,2007,2012,2013,2016
 ./lib/dns/view.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
@@ -3944,15 +4241,24 @@
 ./lib/dns/win32/gen.vcxproj.filters.in		X	2013,2015
 ./lib/dns/win32/gen.vcxproj.in			X	2013,2015,2016,2017
 ./lib/dns/win32/gen.vcxproj.user		X	2013
-./lib/dns/win32/libdns.def.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
-./lib/dns/win32/libdns.dsp.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2013,2014,2015,2016
+./lib/dns/win32/libdns.def.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+./lib/dns/win32/libdns.dsp.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2013,2014,2015,2016,2017
 ./lib/dns/win32/libdns.dsw			X	2001
+<<<<<<< HEAD
 ./lib/dns/win32/libdns.mak.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2013,2014,2015,2016
 ./lib/dns/win32/libdns.vcxproj.filters.in	X	2013,2014,2015,2016
 ./lib/dns/win32/libdns.vcxproj.in		X	2013,2014,2015,2016,2017
 ./lib/dns/win32/libdns.vcxproj.user		X	2013
 ./lib/dns/win32/version.c			C	1998,1999,2000,2001,2004,2007,2013,2016
 ./lib/dns/xfrin.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2013,2014,2015,2016
+=======
+./lib/dns/win32/libdns.mak.in			X	2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2013,2014,2015,2016,2017
+./lib/dns/win32/libdns.vcxproj.filters.in	X	2013,2014,2015,2016,2017
+./lib/dns/win32/libdns.vcxproj.in		X	2013,2014,2015,2016,2017
+./lib/dns/win32/libdns.vcxproj.user		X	2013
+./lib/dns/win32/version.c			C	1998,1999,2000,2001,2004,2007,2013,2016
+./lib/dns/xfrin.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/dns/zone.c				C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/dns/zonekey.c				C	2001,2003,2004,2005,2007,2016
 ./lib/dns/zt.c					C	1999,2000,2001,2002,2004,2005,2006,2007,2011,2012,2013,2014,2015,2016
@@ -4029,16 +4335,16 @@
 ./lib/isc/commandline.c				C.PORTION	1999,2000,2001,2004,2005,2007,2008,2014,2015,2016
 ./lib/isc/counter.c				C	2014,2016
 ./lib/isc/crc64.c				C	2013,2016
-./lib/isc/entropy.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2009,2010,2014,2015,2016
+./lib/isc/entropy.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2009,2010,2014,2015,2016,2017
 ./lib/isc/error.c				C	1998,1999,2000,2001,2004,2005,2007,2015,2016
 ./lib/isc/event.c				C	1998,1999,2000,2001,2004,2005,2007,2014,2016
 ./lib/isc/fsaccess.c				C	2000,2001,2004,2005,2007,2016
-./lib/isc/hash.c				C	2003,2004,2005,2006,2007,2009,2013,2014,2015,2016
+./lib/isc/hash.c				C	2003,2004,2005,2006,2007,2009,2013,2014,2015,2016,2017
 ./lib/isc/heap.c				C	1997,1998,1999,2000,2001,2004,2005,2006,2007,2010,2011,2012,2013,2014,2015,2016
 ./lib/isc/hex.c					C	2000,2001,2002,2003,2004,2005,2007,2008,2013,2014,2015,2016
-./lib/isc/hmacmd5.c				C	2000,2001,2004,2005,2006,2007,2009,2013,2014,2015,2016
-./lib/isc/hmacsha.c				C	2005,2006,2007,2009,2011,2012,2013,2014,2015,2016
-./lib/isc/ht.c					C	2016
+./lib/isc/hmacmd5.c				C	2000,2001,2004,2005,2006,2007,2009,2013,2014,2015,2016,2017
+./lib/isc/hmacsha.c				C	2005,2006,2007,2009,2011,2012,2013,2014,2015,2016,2017
+./lib/isc/ht.c					C	2016,2017
 ./lib/isc/httpd.c				C	2006,2007,2008,2010,2011,2012,2013,2014,2015,2016
 ./lib/isc/ia64/Makefile.in			MAKE	2007,2012,2016
 ./lib/isc/ia64/include/Makefile.in		MAKE	2007,2012,2016
@@ -4072,7 +4378,7 @@
 ./lib/isc/include/isc/hex.h			C	2000,2001,2004,2005,2006,2007,2008,2016
 ./lib/isc/include/isc/hmacmd5.h			C	2000,2001,2004,2005,2006,2007,2009,2014,2016
 ./lib/isc/include/isc/hmacsha.h			C	2005,2006,2007,2009,2014,2016
-./lib/isc/include/isc/ht.h			C	2016
+./lib/isc/include/isc/ht.h			C	2016,2017
 ./lib/isc/include/isc/httpd.h			C	2006,2007,2008,2014,2016
 ./lib/isc/include/isc/interfaceiter.h		C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/isc/include/isc/ipv6.h			C	1999,2000,2001,2002,2004,2005,2007,2016
@@ -4083,15 +4389,15 @@
 ./lib/isc/include/isc/lfsr.h			C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/isc/include/isc/lib.h			C	1999,2000,2001,2004,2005,2006,2007,2009,2016
 ./lib/isc/include/isc/list.h			C	1997,1998,1999,2000,2001,2002,2004,2006,2007,2011,2012,2013,2016
-./lib/isc/include/isc/log.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2014,2016
+./lib/isc/include/isc/log.h			C	1999,2000,2001,2002,2004,2005,2006,2007,2009,2014,2016,2017
 ./lib/isc/include/isc/magic.h			C	1999,2000,2001,2004,2005,2006,2007,2016
 ./lib/isc/include/isc/md5.h			C	2000,2001,2004,2005,2006,2007,2009,2010,2014,2016
 ./lib/isc/include/isc/mem.h			C	1997,1998,1999,2000,2001,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2015,2016
 ./lib/isc/include/isc/meminfo.h			C	2015,2016
 ./lib/isc/include/isc/msgcat.h			C	1999,2000,2001,2004,2005,2007,2016
-./lib/isc/include/isc/msgs.h			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2016
+./lib/isc/include/isc/msgs.h			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2016,2017
 ./lib/isc/include/isc/mutexblock.h		C	1999,2000,2001,2004,2005,2006,2007,2016
-./lib/isc/include/isc/netaddr.h			C	1998,1999,2000,2001,2002,2004,2005,2006,2007,2009,2015,2016
+./lib/isc/include/isc/netaddr.h			C	1998,1999,2000,2001,2002,2004,2005,2006,2007,2009,2015,2016,2017
 ./lib/isc/include/isc/netscope.h		C	2002,2004,2005,2006,2007,2009,2016
 ./lib/isc/include/isc/ondestroy.h		C	2000,2001,2004,2005,2006,2007,2016
 ./lib/isc/include/isc/os.h			C	2000,2001,2004,2005,2006,2007,2016
@@ -4109,7 +4415,7 @@
 ./lib/isc/include/isc/regex.h			C	2013,2016
 ./lib/isc/include/isc/region.h			C	1998,1999,2000,2001,2002,2004,2005,2006,2007,2013,2016
 ./lib/isc/include/isc/resource.h		C	2000,2001,2004,2005,2006,2007,2008,2016
-./lib/isc/include/isc/result.h			C	1998,1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2012,2014,2015,2016
+./lib/isc/include/isc/result.h			C	1998,1999,2000,2001,2003,2004,2005,2006,2007,2008,2009,2012,2014,2015,2016,2017
 ./lib/isc/include/isc/resultclass.h		C	1999,2000,2001,2004,2005,2006,2007,2009,2014,2016
 ./lib/isc/include/isc/rwlock.h			C	1998,1999,2000,2001,2003,2004,2005,2006,2007,2016
 ./lib/isc/include/isc/safe.h			C	2013,2015,2016
@@ -4133,31 +4439,40 @@
 ./lib/isc/include/isc/xml.h			C	2006,2007,2016
 ./lib/isc/include/pk11/Makefile.in		MAKE	2014,2015,2016
 ./lib/isc/include/pk11/README.site		TXT.BRIEF	2016,2017
+<<<<<<< HEAD
 ./lib/isc/include/pk11/constants.h		C	2014,2016
+=======
+./lib/isc/include/pk11/constants.h		C	2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/include/pk11/internal.h		C	2014,2016
 ./lib/isc/include/pk11/pk11.h			C	2014,2016
 ./lib/isc/include/pk11/result.h			C	2014,2016
 ./lib/isc/include/pk11/site.h			C	2016,2017
+<<<<<<< HEAD
 ./lib/isc/include/pkcs11/Makefile.in		MAKE	2014,2015,2016
+=======
+./lib/isc/include/pkcs11/Makefile.in		MAKE	2014,2015,2016,2017
+./lib/isc/include/pkcs11/eddsa.h		C	2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/include/pkcs11/pkcs11.h		X	2014,2016
 ./lib/isc/include/pkcs11/pkcs11f.h		X	2014,2016
 ./lib/isc/include/pkcs11/pkcs11t.h		X	2014,2016
 ./lib/isc/inet_aton.c				C.PORTION	1996,1997,1998,1999,2000,2001,2004,2005,2007,2008,2012,2013,2014,2016
 ./lib/isc/inet_ntop.c				C	1996,1997,1998,1999,2000,2001,2004,2005,2007,2009,2016
-./lib/isc/inet_pton.c				C	1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2007,2013,2014,2016
+./lib/isc/inet_pton.c				C	1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2007,2013,2014,2016,2017
 ./lib/isc/iterated_hash.c			C	2006,2008,2009,2016
 ./lib/isc/lex.c					C	1998,1999,2000,2001,2002,2003,2004,2005,2007,2013,2014,2015,2016,2017
 ./lib/isc/lfsr.c				C	1999,2000,2001,2002,2004,2005,2007,2016
 ./lib/isc/lib.c					C	1999,2000,2001,2004,2005,2007,2009,2013,2014,2015,2016
-./lib/isc/log.c					C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2016
+./lib/isc/log.c					C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2009,2011,2012,2013,2014,2016,2017
 ./lib/isc/md5.c					C	2000,2001,2004,2005,2007,2009,2014,2015,2016
-./lib/isc/mem.c					C	1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016
+./lib/isc/mem.c					C	1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016,2017
 ./lib/isc/mips/Makefile.in			MAKE	2007,2012,2016
 ./lib/isc/mips/include/Makefile.in		MAKE	2007,2012,2016
 ./lib/isc/mips/include/isc/Makefile.in		MAKE	2007,2012,2015,2016
 ./lib/isc/mips/include/isc/atomic.h		C	2005,2007,2016
 ./lib/isc/mutexblock.c				C	1999,2000,2001,2004,2005,2007,2011,2012,2016
-./lib/isc/netaddr.c				C	1999,2000,2001,2002,2004,2005,2007,2010,2011,2012,2014,2015,2016
+./lib/isc/netaddr.c				C	1999,2000,2001,2002,2004,2005,2007,2010,2011,2012,2014,2015,2016,2017
 ./lib/isc/netscope.c				C	2002,2004,2005,2006,2007,2016
 ./lib/isc/nls/Makefile.in			MAKE	1999,2000,2001,2004,2007,2009,2012,2016
 ./lib/isc/nls/msgcat.c				C	1999,2000,2001,2004,2005,2007,2016
@@ -4184,8 +4499,8 @@
 ./lib/isc/powerpc/Makefile.in			MAKE	2007,2012,2016
 ./lib/isc/powerpc/include/Makefile.in		MAKE	2007,2012,2016
 ./lib/isc/powerpc/include/isc/Makefile.in	MAKE	2007,2012,2015,2016
-./lib/isc/powerpc/include/isc/atomic.h		C	2005,2007,2009,2011,2012,2016
-./lib/isc/print.c				C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2010,2014,2015,2016
+./lib/isc/powerpc/include/isc/atomic.h		C	2005,2007,2009,2011,2012,2016,2017
+./lib/isc/print.c				C	1999,2000,2001,2003,2004,2005,2006,2007,2008,2010,2014,2015,2016,2017
 ./lib/isc/pthreads/Makefile.in			MAKE	1998,1999,2000,2001,2004,2007,2009,2012,2016
 ./lib/isc/pthreads/condition.c			C	1998,1999,2000,2001,2004,2005,2007,2012,2016
 ./lib/isc/pthreads/include/Makefile.in		MAKE	1998,1999,2000,2001,2004,2007,2012,2016
@@ -4203,8 +4518,8 @@
 ./lib/isc/refcount.c				C	2005,2007,2016
 ./lib/isc/regex.c				C	2013,2014.2015,2015,2016
 ./lib/isc/region.c				C	2002,2004,2005,2007,2016
-./lib/isc/result.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2008,2012,2014,2015,2016
-./lib/isc/rwlock.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2011,2012,2015,2016
+./lib/isc/result.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2008,2012,2014,2015,2016,2017
+./lib/isc/rwlock.c				C	1998,1999,2000,2001,2003,2004,2005,2007,2009,2011,2012,2015,2016,2017
 ./lib/isc/safe.c				C	2013,2015,2016
 ./lib/isc/serial.c				C	1999,2000,2001,2004,2005,2007,2016
 ./lib/isc/sha1.c				C	2000,2001,2003,2004,2005,2007,2009,2011,2012,2014,2016
@@ -4228,7 +4543,11 @@
 ./lib/isc/tests/buffer_test.c			C	2014,2015,2016
 ./lib/isc/tests/counter_test.c			C	2014,2016
 ./lib/isc/tests/errno_test.c			C	2016
+<<<<<<< HEAD
 ./lib/isc/tests/file_test.c			C	2014,2016
+=======
+./lib/isc/tests/file_test.c			C	2014,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/tests/hash_test.c			C	2011,2012,2013,2014,2015,2016
 ./lib/isc/tests/ht_test.c			C	2016
 ./lib/isc/tests/isctest.c			C	2011,2012,2013,2014,2016,2017
@@ -4258,11 +4577,15 @@
 ./lib/isc/unix/Makefile.in			MAKE	1998,1999,2000,2001,2004,2007,2009,2012,2014,2015,2016,2017
 ./lib/isc/unix/app.c				C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2013,2014,2015,2016,2017
 ./lib/isc/unix/dir.c				C	1999,2000,2001,2004,2005,2007,2008,2009,2011,2012,2016,2017
+<<<<<<< HEAD
 ./lib/isc/unix/entropy.c			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2012,2016
+=======
+./lib/isc/unix/entropy.c			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2012,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/unix/errno.c				C	2016
 ./lib/isc/unix/errno2result.c			C	2000,2001,2002,2004,2005,2007,2011,2012,2013,2016
 ./lib/isc/unix/errno2result.h			C	2000,2001,2004,2005,2007,2011,2012,2016
-./lib/isc/unix/file.c				C	2000,2001,2002,2004,2005,2007,2009,2011,2012,2013,2014,2015,2016
+./lib/isc/unix/file.c				C	2000,2001,2002,2004,2005,2007,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/isc/unix/fsaccess.c			C	2000,2001,2004,2005,2006,2007,2016
 ./lib/isc/unix/ifiter_getifaddrs.c		C	2003,2004,2005,2007,2008,2009,2014,2016
 ./lib/isc/unix/ifiter_ioctl.c			C	1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2014,2015,2016
@@ -4279,7 +4602,7 @@
 ./lib/isc/unix/include/isc/stdtime.h		C	1999,2000,2001,2004,2005,2007,2011,2012,2016
 ./lib/isc/unix/include/isc/strerror.h		C	2001,2004,2005,2007,2008,2016
 ./lib/isc/unix/include/isc/syslog.h		C	1999,2000,2001,2004,2005,2007,2016
-./lib/isc/unix/include/isc/time.h		C	1998,1999,2000,2001,2004,2005,2006,2007,2008,2009,2012,2014,2015,2016
+./lib/isc/unix/include/isc/time.h		C	1998,1999,2000,2001,2004,2005,2006,2007,2008,2009,2012,2014,2015,2016,2017
 ./lib/isc/unix/include/pkcs11/Makefile.in	MAKE	2014,2016
 ./lib/isc/unix/include/pkcs11/cryptoki.h	X	2014
 ./lib/isc/unix/interfaceiter.c			C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2014,2016
@@ -4296,7 +4619,7 @@
 ./lib/isc/unix/stdtime.c			C	1999,2000,2001,2004,2005,2007,2016
 ./lib/isc/unix/strerror.c			C	2001,2004,2005,2007,2009,2016
 ./lib/isc/unix/syslog.c				C	2001,2004,2005,2007,2016
-./lib/isc/unix/time.c				C	1998,1999,2000,2001,2003,2004,2005,2006,2007,2008,2011,2012,2014,2015,2016
+./lib/isc/unix/time.c				C	1998,1999,2000,2001,2003,2004,2005,2006,2007,2008,2011,2012,2014,2015,2016,2017
 ./lib/isc/version.c				C	1998,1999,2000,2001,2004,2005,2007,2016
 ./lib/isc/win32/DLLMain.c			C	2001,2004,2007,2016
 ./lib/isc/win32/Makefile.in			MAKE	1999,2000,2001,2004,2007,2009,2012,2014,2015,2016
@@ -4307,7 +4630,7 @@
 ./lib/isc/win32/errno.c				C	2016
 ./lib/isc/win32/errno2result.c			C	2000,2001,2002,2004,2005,2007,2008,2013,2016
 ./lib/isc/win32/errno2result.h			C	2000,2001,2004,2005,2007,2016
-./lib/isc/win32/file.c				C	2000,2001,2002,2004,2007,2009,2011,2012,2013,2014,2015,2016
+./lib/isc/win32/file.c				C	2000,2001,2002,2004,2007,2009,2011,2012,2013,2014,2015,2016,2017
 ./lib/isc/win32/fsaccess.c			C	2000,2001,2002,2004,2007,2013,2016
 ./lib/isc/win32/include/Makefile.in		MAKE	1999,2000,2001,2004,2007,2012,2014,2016
 ./lib/isc/win32/include/isc/Makefile.in		MAKE	1999,2000,2001,2004,2007,2012,2013,2014,2015,2016
@@ -4332,7 +4655,11 @@
 ./lib/isc/win32/include/isc/strerror.h		C	2001,2004,2007,2016
 ./lib/isc/win32/include/isc/syslog.h		C	1999,2000,2001,2004,2007,2016
 ./lib/isc/win32/include/isc/thread.h		C	1998,1999,2000,2001,2004,2005,2007,2009,2013,2016,2017
+<<<<<<< HEAD
 ./lib/isc/win32/include/isc/time.h		C	1998,1999,2000,2001,2004,2006,2007,2008,2009,2012,2014,2015,2016
+=======
+./lib/isc/win32/include/isc/time.h		C	1998,1999,2000,2001,2004,2006,2007,2008,2009,2012,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/win32/include/isc/win32os.h		C	2002,2004,2007,2009,2015,2016
 ./lib/isc/win32/include/pkcs11/Makefile.in	MAKE	2014,2016
 ./lib/isc/win32/include/pkcs11/cryptoki.h	X	2014
@@ -4357,14 +4684,18 @@
 ./lib/isc/win32/os.c				C	2000,2001,2002,2004,2007,2013,2016
 ./lib/isc/win32/pk11_api.c			C	2014,2016
 ./lib/isc/win32/resource.c			C	2000,2001,2004,2007,2008,2016
-./lib/isc/win32/socket.c			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+./lib/isc/win32/socket.c			C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/isc/win32/stdio.c				C	2000,2001,2004,2007,2013,2016
 ./lib/isc/win32/stdtime.c			C	1999,2000,2001,2004,2007,2013,2016
 ./lib/isc/win32/strerror.c			C	2001,2002,2004,2007,2016
 ./lib/isc/win32/syslog.c			C	2001,2002,2003,2004,2007,2014,2016
 ./lib/isc/win32/syslog.h			C	2001,2002,2004,2007,2016
 ./lib/isc/win32/thread.c			C	1998,1999,2000,2001,2004,2005,2007,2016,2017
+<<<<<<< HEAD
 ./lib/isc/win32/time.c				C	1998,1999,2000,2001,2003,2004,2006,2007,2008,2009,2012,2013,2014,2015,2016
+=======
+./lib/isc/win32/time.c				C	1998,1999,2000,2001,2003,2004,2006,2007,2008,2009,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isc/win32/unistd.h			C	2000,2001,2004,2007,2008,2009,2016
 ./lib/isc/win32/version.c			C	1998,1999,2000,2001,2004,2007,2016
 ./lib/isc/win32/win32os.c			C	2002,2004,2007,2013,2014,2015,2016
@@ -4413,7 +4744,11 @@
 ./lib/isccc/win32/version.c			C	2001,2004,2007,2016
 ./lib/isccfg/Atffile				X	2016
 ./lib/isccfg/Makefile.in			MAKE	2001,2002,2003,2004,2005,2007,2009,2011,2012,2013,2014,2015,2016,2017
+<<<<<<< HEAD
 ./lib/isccfg/aclconf.c				C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016
+=======
+./lib/isccfg/aclconf.c				C	1999,2000,2001,2002,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 ./lib/isccfg/api				X	2001,2006,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./lib/isccfg/dnsconf.c				C	2009,2016
 ./lib/isccfg/include/Makefile.in		MAKE	2001,2004,2007,2012,2016
@@ -4475,7 +4810,7 @@
 ./lib/lwres/lwconfig.c				C	2000,2001,2002,2003,2004,2005,2006,2007,2008,2011,2012,2014,2016
 ./lib/lwres/lwinetaton.c			C.PORTION	1996,1997,1998,1999,2000,2001,2003,2004,2005,2007,2012,2013,2014,2016
 ./lib/lwres/lwinetntop.c			C	1996,1997,1998,1999,2000,2001,2003,2004,2005,2007,2016
-./lib/lwres/lwinetpton.c			C	1996,1997,1998,1999,2000,2001,2004,2005,2007,2011,2012,2013,2014,2016
+./lib/lwres/lwinetpton.c			C	1996,1997,1998,1999,2000,2001,2004,2005,2007,2011,2012,2013,2014,2016,2017
 ./lib/lwres/lwpacket.c				C	2000,2001,2004,2005,2007,2016
 ./lib/lwres/lwres_gabn.c			C	2000,2001,2004,2005,2007,2013,2015,2016
 ./lib/lwres/lwres_gnba.c			C	2000,2001,2002,2004,2005,2007,2013,2016
@@ -4535,7 +4870,7 @@
 ./lib/lwres/man/lwres_resutil.docbook		SGML	2000,2001,2004,2005,2007,2014,2015,2016
 ./lib/lwres/man/lwres_resutil.html		HTML	DOCBOOK
 ./lib/lwres/man/resolver.5			MAN	2000,2001,2004,2007,2016
-./lib/lwres/print.c				C	1999,2000,2001,2003,2004,2005,2007,2011,2012,2014,2015,2016
+./lib/lwres/print.c				C	1999,2000,2001,2003,2004,2005,2007,2011,2012,2014,2015,2016,2017
 ./lib/lwres/print_p.h				C	1999,2000,2001,2003,2004,2007,2010,2016
 ./lib/lwres/tests/Atffile			X	2014
 ./lib/lwres/tests/Makefile.in			MAKE	2014,2015,2016
@@ -4569,7 +4904,7 @@
 ./lib/samples/Makefile-postinstall.in		MAKE	2009,2012,2013,2014,2016
 ./lib/samples/Makefile.in			MAKE	2009,2012,2013,2014,2015,2016,2017
 ./lib/samples/nsprobe.c				C	2009,2010,2011,2012,2013,2014,2015,2016
-./lib/samples/resolve.c				C	2009,2012,2013,2014,2015,2016
+./lib/samples/resolve.c				C	2009,2012,2013,2014,2015,2016,2017
 ./lib/samples/rootkey.sh			SH	2013,2016
 ./lib/samples/sample-async.c			C	2009,2013,2014,2015,2016
 ./lib/samples/sample-gai.c			C	2009,2012,2013,2014,2015,2016
@@ -4615,8 +4950,8 @@
 ./lib/tests/T_testlist.imp			X	2004
 ./lib/tests/include/Makefile.in			MAKE	1998,1999,2000,2001,2004,2007,2012,2016
 ./lib/tests/include/tests/Makefile.in		MAKE	1999,2000,2001,2004,2007,2012,2015,2016
-./lib/tests/include/tests/t_api.h		C	1999,2000,2001,2004,2005,2006,2007,2010,2013,2014,2016
-./lib/tests/t_api.c				C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2013,2014,2016
+./lib/tests/include/tests/t_api.h		C	1999,2000,2001,2004,2005,2006,2007,2010,2013,2014,2016,2017
+./lib/tests/t_api.c				C	1999,2000,2001,2002,2003,2004,2005,2007,2008,2009,2010,2013,2014,2016,2017
 ./lib/tests/win32/DLLMain.c			C	2013,2016
 ./lib/tests/win32/libtests.def			X	2013
 ./lib/tests/win32/libtests.dsp.in		X	2013
@@ -4975,9 +5310,9 @@
 ./util/mandoc2docbook.pl			PERL	2001,2004,2007,2012,2016
 ./util/mdnbuildtest.sh				SH	2000,2001,2004,2007,2012,2016
 ./util/memleak.pl				PERL	1999,2000,2001,2004,2007,2012,2016
-./util/merge_copyrights				PERL	1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2014,2015,2016
+./util/merge_copyrights				PERL	1998,1999,2000,2001,2003,2004,2005,2006,2007,2009,2010,2011,2012,2013,2014,2015,2016,2017
 ./util/mksymtbl.pl				PERL	2009,2012,2016
-./util/models.c					C	2015,2016
+./util/models.c					C	2015,2016,2017
 ./util/nanny.pl					PERL	2000,2001,2004,2007,2012,2016
 ./util/new-func					PERL	2005,2007,2012,2016
 ./util/nt-kit					SH	1999,2000,2001,2004,2007,2012,2016

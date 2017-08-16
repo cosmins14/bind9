@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2015-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -90,4 +90,8 @@ void *isc__mempool_get(void *mem FLARG) {
 void isc__mempool_put(void *mem, void *ptr FLARG) {
 	if (!mem) __coverity_panic__();
 	__coverity_free__(ptr);
+}
+
+void atf_tc_fail_requirement(const char *, const size_t, const char *, ...) {
+	__coverity_panic__();
 }

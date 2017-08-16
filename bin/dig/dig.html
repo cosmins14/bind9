@@ -68,8 +68,12 @@
   <div class="refsection">
 <a name="id-1.7"></a><h2>DESCRIPTION</h2>
 
+<<<<<<< HEAD
     <p><span class="command"><strong>dig</strong></span>
       (domain information groper) is a flexible tool
+=======
+    <p><span class="command"><strong>dig</strong></span> is a flexible tool
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
       for interrogating DNS name servers.  It performs DNS lookups and
       displays the answers that are returned from the name server(s) that
       were queried.  Most DNS administrators use <span class="command"><strong>dig</strong></span> to
@@ -700,6 +704,23 @@
 	      value.  The default value is QUERY (0).
 	    </p>
 	  </dd>
+<<<<<<< HEAD
+=======
+<dt><span class="term"><code class="option">+padding=value</code></span></dt>
+<dd>
+	    <p>
+	      Pad the size of the query packet using the EDNS Padding option
+	      to blocks of <em class="parameter"><code>value</code></em> bytes. For example,
+	      <code class="option">+padding=32</code> would cause a 48-byte query to
+	      be padded to 64 bytes.  The default block size is 0, which
+	      disables padding. The maximum is 512. Values are
+	      ordinarily expected to be powers of two, such as 128;
+	      however, this is not mandatory.  Responses to
+	      padded queries may also be padded, but only if the query
+	      uses TCP or DNS COOKIE.
+	    </p>
+	  </dd>
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 <dt><span class="term"><code class="option">+[no]qr</code></span></dt>
 <dd>
 	    <p>
@@ -783,9 +804,14 @@
 <dt><span class="term"><code class="option">+[no]sigchase</code></span></dt>
 <dd>
 	    <p>
+<<<<<<< HEAD
 	      Chase DNSSEC signature chains. Requires dig be compiled
 	      with -DDIG_SIGCHASE. This feature is deprecated.
 	      Use <span class="command"><strong>delv</strong></span> instead.
+=======
+	      This feature is now obsolete and has been removed;
+              use <span class="command"><strong>delv</strong></span> instead.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    </p>
 	  </dd>
 <dt><span class="term"><code class="option">+split=W</code></span></dt>
@@ -817,6 +843,7 @@
 	      specified IP address or network prefix.
 	    </p>
 	    <p>
+<<<<<<< HEAD
               <span class="command"><strong>dig +subnet=0.0.0.0/0</strong></span>, or simply
               <span class="command"><strong>dig +subnet=0</strong></span> for short, sends an EDNS
               CLIENT-SUBNET option with an empty address and a source
@@ -824,6 +851,15 @@
               the client's address information must
               <span class="emphasis"><em>not</em></span> be used when resolving
               this query.
+=======
+	      <span class="command"><strong>dig +subnet=0.0.0.0/0</strong></span>, or simply
+	      <span class="command"><strong>dig +subnet=0</strong></span> for short, sends an EDNS
+	      CLIENT-SUBNET option with an empty address and a source
+	      prefix-length of zero, which signals a resolver that
+	      the client's address information must
+	      <span class="emphasis"><em>not</em></span> be used when resolving
+	      this query.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    </p>
 	  </dd>
 <dt><span class="term"><code class="option">+[no]tcp</code></span></dt>
@@ -851,9 +887,15 @@
 <dt><span class="term"><code class="option">+[no]topdown</code></span></dt>
 <dd>
 	    <p>
+<<<<<<< HEAD
 	      When chasing DNSSEC signature chains perform a top-down
 	      validation.  Requires dig be compiled with -DDIG_SIGCHASE.
 	      This feature is deprecated. Use <span class="command"><strong>delv</strong></span> instead.
+=======
+	      This feature is related to <span class="command"><strong>dig +sigchase</strong></span>,
+              which is obsolete and has been removed. Use
+              <span class="command"><strong>delv</strong></span> instead.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    </p>
 	  </dd>
 <dt><span class="term"><code class="option">+[no]trace</code></span></dt>
@@ -888,6 +930,7 @@
 <dt><span class="term"><code class="option">+trusted-key=####</code></span></dt>
 <dd>
 	    <p>
+<<<<<<< HEAD
 	      Specifies a file containing trusted keys to be used
 	      with <code class="option">+sigchase</code>.  Each DNSKEY record
 	      must be on its own line.
@@ -899,6 +942,12 @@
 	    </p> <p>
 	      Requires dig be compiled with -DDIG_SIGCHASE.
 	      This feature is deprecated. Use <span class="command"><strong>delv</strong></span> instead.
+=======
+	      Formerly specified trusted keys for use with
+              <span class="command"><strong>dig +sigchase</strong></span>.  This feature is now
+              obsolete and has been removed; use
+              <span class="command"><strong>delv</strong></span> instead.
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 	    </p>
 	  </dd>
 <dt><span class="term"><code class="option">+[no]ttlid</code></span></dt>
@@ -973,8 +1022,9 @@
       can also be supplied.  These global query options must precede the
       first tuple of name, class, type, options, flags, and query options
       supplied on the command line.  Any global query options (except
-      the <code class="option">+[no]cmd</code> option) can be
-      overridden by a query-specific set of query options.  For example:
+      <code class="option">+[no]cmd</code> and <code class="option">+[no]short</code> options)
+      can be overridden by a query-specific set of query options.
+      For example:
       </p>
 <pre class="programlisting">
 dig +qr www.isc.org any -x 127.0.0.1 isc.org ns +noqr

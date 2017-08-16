@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2015, 2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2015-2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,6 +24,7 @@ run_server() {
     echo "I:starting resolver using named.$TESTNAME.conf"
     cp -f ns2/named.$TESTNAME.conf ns2/named.conf
     $PERL $SYSTEMTESTTOP/start.pl --noclean --restart . ns2
+    sleep 3
 }
 
 run_query() {

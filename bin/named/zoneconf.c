@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,6 +20,7 @@
 #include <dns/db.h>
 #include <dns/ipkeylist.h>
 #include <dns/fixedname.h>
+#include <dns/journal.h>
 #include <dns/log.h>
 #include <dns/name.h>
 #include <dns/masterdump.h>
@@ -1211,12 +1212,16 @@ ns_zone_configure(const cfg_obj_t *config, const cfg_obj_t *vconfig,
 		dns_zone_setjournalsize(zone, -1);
 		if (cfg_obj_isstring(obj)) {
 			const char *str = cfg_obj_asstring(obj);
-			INSIST(strcasecmp(str, "unlimited") == 0);
-			journal_size = ISC_UINT32_MAX / 2;
+			if (strcasecmp(str, "unlimited") == 0) {
+				journal_size = DNS_JOURNAL_SIZE_MAX;
+			} else {
+				INSIST(strcasecmp(str, "default") == 0);
+				journal_size = -1;
+			}
 		} else {
 			isc_resourcevalue_t value;
 			value = cfg_obj_asuint64(obj);
-			if (value > ISC_UINT32_MAX / 2) {
+			if (value > DNS_JOURNAL_SIZE_MAX) {
 				cfg_obj_log(obj, ns_g_lctx,
 					    ISC_LOG_ERROR,
 					    "'max-journal-size "
@@ -1331,12 +1336,16 @@ ns_zone_configure(const cfg_obj_t *config, const cfg_obj_t *vconfig,
 		dns_zone_setjournalsize(zone, -1);
 		if (cfg_obj_isstring(obj)) {
 			const char *str = cfg_obj_asstring(obj);
-			INSIST(strcasecmp(str, "unlimited") == 0);
-			journal_size = ISC_UINT32_MAX / 2;
+			if (strcasecmp(str, "unlimited") == 0) {
+				journal_size = DNS_JOURNAL_SIZE_MAX;
+			} else {
+				INSIST(strcasecmp(str, "default") == 0);
+				journal_size = -1;
+			}
 		} else {
 			isc_resourcevalue_t value;
 			value = cfg_obj_asuint64(obj);
-			if (value > ISC_UINT32_MAX / 2) {
+			if (value > DNS_JOURNAL_SIZE_MAX) {
 				cfg_obj_log(obj, ns_g_lctx,
 					    ISC_LOG_ERROR,
 					    "'max-journal-size "

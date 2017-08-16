@@ -3,21 +3,6 @@ LIBRARY libdns
 ; Exported Functions
 EXPORTS
 
-dns_acache_attach
-dns_acache_attachentry
-dns_acache_cancelentry
-dns_acache_countquerymiss
-dns_acache_create
-dns_acache_createentry
-dns_acache_detach
-dns_acache_detachentry
-dns_acache_getentry
-dns_acache_putdb
-dns_acache_setcachesize
-dns_acache_setcleaninginterval
-dns_acache_setdb
-dns_acache_setentry
-dns_acache_shutdown
 dns_acl_any
 dns_acl_attach
 dns_acl_create
@@ -372,6 +357,10 @@ dns_dt_parse
 dns_dt_reopen
 dns_dt_send
 dns_dt_setidentity
+<<<<<<< HEAD
+=======
+dns_dt_setupfile
+>>>>>>> 1fe9f65dbb6a094dc43e1bedbc9062790d76e971
 dns_dt_setversion
 dns_dt_shutdown
 dns_dtdata_free
@@ -387,6 +376,8 @@ dns_dyndb_createctx
 dns_dyndb_destroyctx
 dns_ecdb_register
 dns_ecdb_unregister
+dns_ecs_init
+dns_ecs_format
 dns_fwdtable_add
 dns_fwdtable_addfwd
 dns_fwdtable_create
@@ -417,6 +408,7 @@ dns_journal_commit
 dns_journal_compact
 dns_journal_current_rr
 dns_journal_destroy
+dns_journal_empty
 dns_journal_first_rr
 dns_journal_first_serial
 dns_journal_get_sourceserial
@@ -555,6 +547,7 @@ dns_message_resetsig
 dns_message_sectiontotext
 dns_message_setclass
 dns_message_setopt
+dns_message_setpadding
 dns_message_setquerytsig
 dns_message_setsig0key
 dns_message_setsortorder
@@ -675,6 +668,7 @@ dns_peer_getkey
 dns_peer_getmaxudp
 dns_peer_getnotifydscp
 dns_peer_getnotifysource
+dns_peer_getpadding
 dns_peer_getprovideixfr
 dns_peer_getquerydscp
 dns_peer_getquerysource
@@ -683,6 +677,7 @@ dns_peer_getrequestixfr
 dns_peer_getrequestnsid
 dns_peer_getsendcookie
 dns_peer_getsupportedns
+dns_peer_gettcpkeepalive
 dns_peer_gettransferdscp
 dns_peer_gettransferformat
 dns_peer_gettransfers
@@ -698,6 +693,7 @@ dns_peer_setkeybycharp
 dns_peer_setmaxudp
 dns_peer_setnotifydscp
 dns_peer_setnotifysource
+dns_peer_setpadding
 dns_peer_setprovideixfr
 dns_peer_setquerydscp
 dns_peer_setquerysource
@@ -706,6 +702,7 @@ dns_peer_setrequestixfr
 dns_peer_setrequestnsid
 dns_peer_setsendcookie
 dns_peer_setsupportedns
+dns_peer_settcpkeepalive
 dns_peer_settransferdscp
 dns_peer_settransferformat
 dns_peer_settransfers
@@ -810,6 +807,7 @@ dns_rdatalist_fromrdataset
 dns_rdatalist_init
 dns_rdatalist_tordataset
 dns_rdataset_addclosest
+dns_rdataset_addglue
 dns_rdataset_additionaldata
 dns_rdataset_addnoqname
 dns_rdataset_clearprefetch
@@ -819,7 +817,6 @@ dns_rdataset_current
 dns_rdataset_disassociate
 dns_rdataset_expire
 dns_rdataset_first
-dns_rdataset_getadditional
 dns_rdataset_getclosest
 dns_rdataset_getnoqname
 dns_rdataset_getownercase
@@ -828,8 +825,6 @@ dns_rdataset_invalidate
 dns_rdataset_isassociated
 dns_rdataset_makequestion
 dns_rdataset_next
-dns_rdataset_putadditional
-dns_rdataset_setadditional
 dns_rdataset_setownercase
 dns_rdataset_settrust
 dns_rdataset_totext
@@ -952,11 +947,13 @@ dns_rootns_create
 dns_rpz_add
 dns_rpz_attach_rpzs
 dns_rpz_beginload
+dns_rpz_dbupdate_callback
 dns_rpz_decode_cname
 dns_rpz_delete
 dns_rpz_detach_rpzs
 dns_rpz_find_ip
 dns_rpz_find_name
+dns_rpz_new_zone
 dns_rpz_new_zones
 dns_rpz_policy2str
 dns_rpz_ready
@@ -1091,6 +1088,7 @@ dns_view_freezezones
 dns_view_getadbstats
 dns_view_getdynamickeyring
 dns_view_getfailttl
+dns_view_getnewzonedir
 dns_view_getntatable
 dns_view_getpeertsig
 dns_view_getresquerystats
@@ -1118,6 +1116,7 @@ dns_view_setdynamickeyring
 dns_view_setfailttl
 dns_view_sethints
 dns_view_setkeyring
+dns_view_setnewzonedir
 dns_view_setnewzones
 dns_view_setresquerystats
 dns_view_setresstats
@@ -1205,6 +1204,7 @@ dns_zone_getqueryacl
 dns_zone_getqueryonacl
 dns_zone_getraw
 dns_zone_getrcvquerystats
+dns_zone_getredirecttype
 dns_zone_getrefreshkeytime
 dns_zone_getrefreshtime
 dns_zone_getrequestexpire
@@ -1255,7 +1255,6 @@ dns_zone_replacedb
 dns_zone_rpz_enable
 dns_zone_rpz_enable_db
 dns_zone_set_parentcatz
-dns_zone_setacache
 dns_zone_setadded
 dns_zone_setalsonotify
 dns_zone_setalsonotifydscpkeys

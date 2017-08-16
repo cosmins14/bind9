@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# Copyright (C) 2000-2004, 2006-2012, 2014-2016  Internet Systems Consortium, Inc. ("ISC")
+# Copyright (C) 2000-2004, 2006-2012, 2014-2017  Internet Systems Consortium, Inc. ("ISC")
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -98,7 +98,7 @@ privzone=private.secure.example.
 privinfile=private.secure.example.db.in
 privzonefile=private.secure.example.db
 
-privkeyname=`$KEYGEN -q -r $RANDFILE -a RSAMD5 -b 768 -n zone $privzone`
+privkeyname=`$KEYGEN -q -r $RANDFILE -a RSAMD5 -b 1024 -n zone $privzone`
 
 cat $privinfile $privkeyname.key >$privzonefile
 
@@ -112,7 +112,7 @@ dlvinfile=dlv.db.in
 dlvzonefile=dlv.db
 dlvsetfile=dlvset-`echo $privzone |sed -e "s/\.$//g"`$TP
 
-dlvkeyname=`$KEYGEN -q -r $RANDFILE -a RSAMD5 -b 768 -n zone $dlvzone`
+dlvkeyname=`$KEYGEN -q -r $RANDFILE -a RSAMD5 -b 1024 -n zone $dlvzone`
 
 cat $dlvinfile $dlvkeyname.key $dlvsetfile > $dlvzonefile
 

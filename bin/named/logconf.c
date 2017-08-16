@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2004-2007, 2011, 2013-2016  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 1999-2001, 2004-2007, 2011, 2013-2017  Internet Systems Consortium, Inc. ("ISC")
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -87,8 +87,7 @@ category_fromconf(const cfg_obj_t *ccat, isc_logconfig_t *logconfig) {
  * in 'cchan' and add it to 'logconfig'.
  */
 static isc_result_t
-channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig)
-{
+channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig) {
 	isc_result_t result;
 	isc_logdestination_t dest;
 	unsigned int type;
@@ -133,7 +132,10 @@ channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig)
 		const cfg_obj_t *sizeobj = cfg_tuple_get(fileobj, "size");
 		const cfg_obj_t *versionsobj =
 				 cfg_tuple_get(fileobj, "versions");
+		const cfg_obj_t *suffixobj =
+				 cfg_tuple_get(fileobj, "suffix");
 		isc_int32_t versions = ISC_LOG_ROLLNEVER;
+		isc_log_rollsuffix_t suffix = isc_log_rollsuffix_increment;
 		isc_offset_t size = 0;
 		isc_uint64_t maxoffset;
 
@@ -156,16 +158,21 @@ channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig)
 
 		if (versionsobj != NULL && cfg_obj_isuint32(versionsobj))
 			versions = cfg_obj_asuint32(versionsobj);
-		if (versionsobj != NULL && cfg_obj_isstring(versionsobj) &&
+		else if (versionsobj != NULL && cfg_obj_isstring(versionsobj) &&
 		    strcasecmp(cfg_obj_asstring(versionsobj), "unlimited") == 0)
 			versions = ISC_LOG_ROLLINFINITE;
 		if (sizeobj != NULL &&
 		    cfg_obj_isuint64(sizeobj) &&
 		    cfg_obj_asuint64(sizeobj) < maxoffset)
 			size = (isc_offset_t)cfg_obj_asuint64(sizeobj);
+		if (suffixobj != NULL && cfg_obj_isstring(suffixobj) &&
+		    strcasecmp(cfg_obj_asstring(suffixobj), "timestamp") == 0)
+			suffix = isc_log_rollsuffix_timestamp;
+
 		dest.file.stream = NULL;
 		dest.file.name = cfg_obj_asstring(pathobj);
 		dest.file.versions = versions;
+		dest.file.suffix = suffix;
 		dest.file.maximum_size = size;
 	} else if (syslogobj != NULL) {
 		int facility = LOG_DAEMON;
@@ -183,6 +190,7 @@ channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig)
 		dest.file.stream = stderr;
 		dest.file.name = NULL;
 		dest.file.versions = ISC_LOG_ROLLNEVER;
+		dest.file.suffix = isc_log_rollsuffix_increment;
 		dest.file.maximum_size = 0;
 	}
 
@@ -202,12 +210,21 @@ channel_fromconf(const cfg_obj_t *channel, isc_logconfig_t *logconfig)
 
 		if (printcat != NULL && cfg_obj_asboolean(printcat))
 			flags |= ISC_LOG_PRINTCATEGORY;
-		if (printtime != NULL && cfg_obj_asboolean(printtime))
-			flags |= ISC_LOG_PRINTTIME;
 		if (printsev != NULL && cfg_obj_asboolean(printsev))
 			flags |= ISC_LOG_PRINTLEVEL;
 		if (buffered != NULL && cfg_obj_asboolean(buffered))
 			flags |= ISC_LOG_BUFFERED;
+		if (printtime != NULL && cfg_obj_isboolean(printtime)) {
+			if (cfg_obj_asboolean(printtime))
+				flags |= ISC_LOG_PRINTTIME;
+		} else if (printtime != NULL) {	/* local/iso8601/iso8601-utc */
+			const char *s = cfg_obj_asstring(printtime);
+			flags |= ISC_LOG_PRINTTIME;
+			if (strcasecmp(s, "iso8601") == 0)
+				flags |= ISC_LOG_ISO8601;
+			else if (strcasecmp(s, "iso8601-utc") == 0)
+				flags |= ISC_LOG_ISO8601 | ISC_LOG_UTC;
+		}
 	}
 
 	level = ISC_LOG_INFO;
